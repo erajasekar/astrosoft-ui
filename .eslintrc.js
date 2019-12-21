@@ -5,10 +5,13 @@ module.exports = {
     node: true
   },
   parserOptions: {
-    parser: 'babel-eslint'
+    parser: 'babel-eslint',
+    ecmaFeatures: {
+      legacyDecorators: true
+    }
   },
   extends: [
-    '@nuxtjs',
+    '@nuxtjs/eslint-config-typescript',
     'plugin:nuxt/recommended'
   ],
   // add your custom rules here

@@ -27,7 +27,7 @@ export default {
   /*
   ** Plugins to load before mounting the App
   */
-  plugins: [
+  plugins: ['~/plugins/global-components.ts'
   ],
   /*
   ** Nuxt.js dev-modules
@@ -36,7 +36,8 @@ export default {
     // Doc: https://github.com/nuxt-community/eslint-module
     '@nuxtjs/eslint-module',
     // Doc: https://github.com/nuxt-community/nuxt-tailwindcss
-    '@nuxtjs/tailwindcss'
+    '@nuxtjs/tailwindcss',
+    '@nuxt/typescript-build'
   ],
   /*
   ** Nuxt.js modules
