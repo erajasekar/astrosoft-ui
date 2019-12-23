@@ -8,14 +8,29 @@
             <label
               class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
               for="inline-full-name"
-            >Date and time</label>
+            >Date</label>
           </div>
           <div class="md:w-2/3">
             <datetime
-              v-model="dateTime"
-              :phrases="{ok: 'Continue', cancel: 'Exit'}"
+              v-model="date"
+              type="date"
+              input-class="bg-gray-200 appearance-none border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+            />
+          </div>
+        </div>
+
+        <div class="md:flex md:items-center mb-6">
+          <div class="md:w-1/3">
+            <label
+              class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
+              for="inline-full-name"
+            >Time</label>
+          </div>
+          <div class="md:w-2/3">
+            <datetime
+              v-model="time"
               use12-hour
-              type="datetime"
+              type="time"
               input-class="bg-gray-200 appearance-none border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
             />
           </div>
@@ -33,7 +48,8 @@
               id="inline-full-name"
               class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
               type="text"
-              value="Tampa"
+              value="Chennai, India"
+              disabled
             >
           </div>
         </div>
@@ -44,7 +60,9 @@
               v-on:click="calculate"
               class="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
               type="button"
-            >Calculate</button>
+            >
+              Calculate
+            </button>
           </div>
         </div>
       </form>
@@ -55,7 +73,7 @@
       </h1>
       <table class="table-auto text-left w-full border-collapse">
         <thead>
-          <tr >
+          <tr>
             <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">
               Planet
             </th>
@@ -97,44 +115,47 @@ interface Ephemeris {
   }
 })
 export default class Index extends Vue {
-  dateTime: string = '';
+  date: string = '';
+  time: string = '';
   ephData: Array<Ephemeris> = [];
 
   calculate () {
-    this.fetchData().then((data) => {
+    this.fetchData(new Date(this.date), new Date(this.time)).then((data) => {
       this.ephData = data
     })
-    console.log(this.dateTime, this.ephData)
   }
 
-  async fetchData () {
+  async fetchData (date: Date, time: Date) {
     // TODO
     this.$axios.setHeader('x-api-key', '')
     this.$axios.setHeader('Content-Type', 'application/json')
-    const resp = await this.$axios.$post('https://api.innovativeastrosolutions.com/v0/horoscope', {
-      name: 'Your Name',
+    const body = {
+      name: 'Astrosoft UI',
       place: {
-        name: 'Sydney, AU',
-        longitude: 151.209296,
-        latitude: -33.86882,
-        timeZoneId: 'Australia/Sydney'
+        name: 'Chennai, India',
+        longitude: 80.237617,
+        latitude: 13.067439,
+        timeZoneId: 'IST'
       },
-      year: 1967,
-      month: 2,
-      date: 26,
-      hour: 0,
-      minutes: 1,
-      seconds: 0,
+      year: date.getFullYear(),
+      month: date.getMonth() + 1,
+      date: date.getDate(),
+      hour: time.getHours(),
+      minutes: time.getMinutes(),
+      seconds: time.getSeconds(),
       options: {
         Ayanamsa: 'LAHARI'
       }
-    })
+    }
+    console.log(body)
+    const resp = await this.$axios.$post('https://api.innovativeastrosolutions.com/v0/horoscope', body)
     return this.parseData(resp)
   }
 
   parseData (resp: any): Array<Ephemeris> {
     const result: Array<Ephemeris> = []
-    for (const value of Object.values(resp.planetaryInfo)) {
+    let value: any
+    for (value of Object.values(resp.planetaryInfo)) {
       result.push({ planet: value.planet, position: value.position, isRetro: value.isRetro })
     }
     return result
