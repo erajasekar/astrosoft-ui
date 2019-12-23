@@ -87,7 +87,7 @@ import Logo from '@/components/Logo.vue'
 interface Ephemeris {
   planet: string;
   position: string;
-  retro: boolean;
+  isRetro: boolean;
 }
 
 @Component({
@@ -101,11 +101,43 @@ export default class Index extends Vue {
   ephData: Array<Ephemeris> = [];
 
   calculate () {
-    this.ephData = [
-      { planet: 'Sun', position: '180:09:10', retro: false },
-      { planet: 'Moon', position: '010:10:55', retro: false }
-    ]
+    this.fetchData().then((data) => {
+      this.ephData = data
+    })
     console.log(this.dateTime, this.ephData)
+  }
+
+  async fetchData () {
+    // TODO
+    this.$axios.setHeader('x-api-key', '')
+    this.$axios.setHeader('Content-Type', 'application/json')
+    const resp = await this.$axios.$post('https://api.innovativeastrosolutions.com/v0/horoscope', {
+      name: 'Your Name',
+      place: {
+        name: 'Sydney, AU',
+        longitude: 151.209296,
+        latitude: -33.86882,
+        timeZoneId: 'Australia/Sydney'
+      },
+      year: 1967,
+      month: 2,
+      date: 26,
+      hour: 0,
+      minutes: 1,
+      seconds: 0,
+      options: {
+        Ayanamsa: 'LAHARI'
+      }
+    })
+    return this.parseData(resp)
+  }
+
+  parseData (resp: any): Array<Ephemeris> {
+    const result: Array<Ephemeris> = []
+    for (const value of Object.values(resp.planetaryInfo)) {
+      result.push({ planet: value.planet, position: value.position, isRetro: value.isRetro })
+    }
+    return result
   }
 }
 </script>
