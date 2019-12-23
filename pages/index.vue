@@ -2,43 +2,79 @@
   <div class="container mx-auto">
     <div>
       <logo />
-      <h1 class="text-3xl mt-10">
-        Planetary Positions
-      </h1>
       <form class="mt-10 w-full max-w-sm">
         <div class="md:flex md:items-center mb-6">
           <div class="md:w-1/3">
-            <label class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4" for="inline-full-name">
-              Date and time
-            </label>
+            <label
+              class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
+              for="inline-full-name"
+            >Date and time</label>
           </div>
           <div class="md:w-2/3">
-            <datetime v-model="dateTime" :phrases="{ok: 'Continue', cancel: 'Exit'}" use12-hour type="datetime" input-class="bg-gray-200 appearance-none border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" />
+            <datetime
+              v-model="dateTime"
+              :phrases="{ok: 'Continue', cancel: 'Exit'}"
+              use12-hour
+              type="datetime"
+              input-class="bg-gray-200 appearance-none border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+            />
           </div>
         </div>
 
         <div class="md:flex md:items-center mb-6">
           <div class="md:w-1/3">
-            <label class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4" for="inline-full-name">
-              Place
-            </label>
+            <label
+              class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
+              for="inline-full-name"
+            >Place</label>
           </div>
           <div class="md:w-2/3">
-            <input id="inline-full-name" class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500" type="text" value="Tampa">
+            <input
+              id="inline-full-name"
+              class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+              type="text"
+              value="Tampa"
+            >
           </div>
         </div>
         <div class="md:flex md:items-center">
           <div class="md:w-1/3" />
           <div class="md:w-2/3">
-            <button v-on:click="calculate" class="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" type="button">
-              Calculate
-            </button>
+            <button
+              v-on:click="calculate"
+              class="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
+              type="button"
+            >Calculate</button>
           </div>
         </div>
       </form>
     </div>
-    <div>
-      {{ephData}}
+    <div v-if="ephData.length > 0">
+      <h1 class="text-3xl mt-10">
+        Planetary Ephemeris
+      </h1>
+      <table class="table-auto text-left w-full border-collapse">
+        <thead>
+          <tr >
+            <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">
+              Planet
+            </th>
+            <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">
+              Position
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(eph, index) in ephData" v-bind:key="index" class="hover:bg-grey-lighter">
+            <td class="py-4 px-6 border-b border-grey-light">
+              {{ eph.planet }}
+            </td>
+            <td class="py-4 px-6 border-b border-grey-light">
+              {{ eph.position }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </template>
@@ -61,7 +97,7 @@ interface Ephemeris {
   }
 })
 export default class Index extends Vue {
-  dateTime: string = ''
+  dateTime: string = '';
   ephData: Array<Ephemeris> = [];
 
   calculate () {
@@ -75,5 +111,4 @@ export default class Index extends Vue {
 </script>
 
 <style>
-
 </style>
