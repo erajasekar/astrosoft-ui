@@ -51,6 +51,14 @@ export default {
   ** See https://axios.nuxtjs.org/options
   */
   axios: {
+    headers: {
+      common: {
+        'x-api-key': ''
+      },
+      post: {
+        'Content-Type': 'application/json'
+      }
+    }
   },
   /*
   ** Build configuration

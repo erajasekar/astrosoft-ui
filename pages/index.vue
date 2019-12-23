@@ -126,9 +126,6 @@ export default class Index extends Vue {
   }
 
   async fetchData (date: Date, time: Date) {
-    // TODO
-    this.$axios.setHeader('x-api-key', '')
-    this.$axios.setHeader('Content-Type', 'application/json')
     const body = {
       name: 'Astrosoft UI',
       place: {
