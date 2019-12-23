@@ -119,6 +119,10 @@ export default class Index extends Vue {
   time: string = '';
   ephData: Array<Ephemeris> = [];
 
+  mounted () {
+    console.log('RAJA', process.env)
+  }
+
   calculate () {
     this.fetchData(new Date(this.date), new Date(this.time)).then((data) => {
       this.ephData = data
@@ -126,6 +130,7 @@ export default class Index extends Vue {
   }
 
   async fetchData (date: Date, time: Date) {
+    // TODO
     const body = {
       name: 'Astrosoft UI',
       place: {

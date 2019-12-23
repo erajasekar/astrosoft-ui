@@ -37,14 +37,21 @@ export default {
     '@nuxtjs/eslint-module',
     // Doc: https://github.com/nuxt-community/nuxt-tailwindcss
     '@nuxtjs/tailwindcss',
-    '@nuxt/typescript-build'
+    '@nuxt/typescript-build',
+    '@nuxtjs/dotenv'
   ],
   /*
   ** Nuxt.js modules
   */
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    ['nuxt-env', {
+      keys: [
+        { key: 'OTHER_ENV_VAR', default: 'defaultValue' }, // Specify a default value
+        { key: 'INNOVATIVE_API_KEY', secret: true } // Only inject the var server side
+      ]
+    }]
   ],
   /*
   ** Axios module configuration
