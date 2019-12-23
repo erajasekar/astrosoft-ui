@@ -37,6 +37,9 @@
         </div>
       </form>
     </div>
+    <div>
+      {{ephData}}
+    </div>
   </div>
 </template>
 
@@ -44,6 +47,12 @@
 import { Component, Vue } from 'nuxt-property-decorator'
 import { Datetime } from 'vue-datetime'
 import Logo from '@/components/Logo.vue'
+
+interface Ephemeris {
+  planet: string;
+  position: string;
+  retro: boolean;
+}
 
 @Component({
   components: {
@@ -53,9 +62,14 @@ import Logo from '@/components/Logo.vue'
 })
 export default class Index extends Vue {
   dateTime: string = ''
+  ephData: Array<Ephemeris> = [];
 
   calculate () {
-    console.log(this.dateTime)
+    this.ephData = [
+      { planet: 'Sun', position: '180:09:10', retro: false },
+      { planet: 'Moon', position: '010:10:55', retro: false }
+    ]
+    console.log(this.dateTime, this.ephData)
   }
 }
 </script>
