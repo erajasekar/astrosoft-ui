@@ -145,7 +145,7 @@ export default class Index extends Vue {
         Ayanamsa: 'LAHARI'
       }
     }
-    console.log('RAJA', process.env)
+    console.log(body)
     const resp = await this.$axios.$post('https://api.innovativeastrosolutions.com/v0/horoscope', body)
     return this.parseData(resp)
   }
