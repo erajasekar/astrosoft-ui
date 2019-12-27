@@ -119,10 +119,6 @@ export default class Index extends Vue {
   time: string = '';
   ephData: Array<Ephemeris> = [];
 
-  mounted () {
-    console.log('RAJA', process.env)
-  }
-
   calculate () {
     this.fetchData(new Date(this.date), new Date(this.time)).then((data) => {
       this.ephData = data
@@ -149,7 +145,7 @@ export default class Index extends Vue {
         Ayanamsa: 'LAHARI'
       }
     }
-    console.log(body)
+    console.log('RAJA', process.env)
     const resp = await this.$axios.$post('https://api.innovativeastrosolutions.com/v0/horoscope', body)
     return this.parseData(resp)
   }

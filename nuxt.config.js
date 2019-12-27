@@ -1,6 +1,9 @@
+const env = require('dotenv').config()
+console.log('RAJA2', env)
 
 export default {
   mode: 'universal',
+  env: env.parsed,
   /*
   ** Headers of the page
   */
@@ -46,12 +49,7 @@ export default {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
-    ['nuxt-env', {
-      keys: [
-        { key: 'OTHER_ENV_VAR', default: 'defaultValue' }, // Specify a default value
-        { key: 'INNOVATIVE_API_KEY', secret: true } // Only inject the var server side
-      ]
-    }]
+    '@nuxtjs/dotenv'
   ],
   /*
   ** Axios module configuration
@@ -59,10 +57,8 @@ export default {
   */
   axios: {
     headers: {
-      common: {
-        'x-api-key': ''
-      },
       post: {
+        'x-api-key': process.env.INNOVATIVE_API_KEY,
         'Content-Type': 'application/json'
       }
     }
