@@ -49,7 +49,7 @@ export default {
     '@nuxtjs/axios',
     ['nuxt-google-maps-module', {
       /* module options */
-      key: 'AIzaSyA4zE8lyMGrf2YG44Zj3CM6SAl1yKTzb8c' // Default
+      key: 'YOUR KEY' // Default
     }]
   ],
   /*
@@ -65,7 +65,7 @@ export default {
     }
   },
  /* maps: {
-    key: 'AIzaSyA4zE8lyMGrf2YG44Zj3CM6SAl1yKTzb8c'
+    key: 'your key'
   },
   /*
   ** Build configuration
