@@ -54,7 +54,7 @@
               disabled
             >-->
             <google-places-autocomplete
-              @resultChanged="placeDetail => place = placeDetail"
+              @resultChanged="placeDetail => updatePlace(placeDetail)"
               @resultCleared="() => place = null"
             >
               <div slot="input" slot-scope="{ context, events, actions }">
@@ -161,6 +161,11 @@ export default class Index extends Vue {
     })
   }
 
+  updatePlace (placeDetail: any) {
+    console.log('PLACE ==> ', placeDetail.formatted_address, placeDetail.geometry.location.lat(), placeDetail.geometry.location.lng())
+    this.place = placeDetail
+  }
+
   async fetchData (date: Date, time: Date) {
     // TODO
     const body = {
@@ -198,4 +203,9 @@ export default class Index extends Vue {
 </script>
 
 <style>
+@import 'assets/css/tailwind.css'
+
+.vbga-results {
+  @apply .list-reset w-full max-w-sm p-4 bg-white border-t rounded-b-lg;
+}
 </style>
