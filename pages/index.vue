@@ -53,7 +53,37 @@
               value="Chennai, India"
               disabled
             >-->
-            <google-places-autocomplete />
+            <google-places-autocomplete
+              @resultChanged="placeDetail => place = placeDetail"
+              @resultCleared="() => place = null"
+            >
+              <div slot="input" slot-scope="{ context, events, actions }">
+                <label for="locationInput" class="block my-4 text-xl text-grey-dark">Address Search</label>
+                <input
+                  id="locationInput"
+                  v-model="context.input"
+                  @focus="events.inputHasReceivedFocus"
+                  @input="events.inputHasChanged"
+                  @keydown.enter.prevent="actions.selectItemFromList"
+                  @keydown.down.prevent="actions.shiftResultsSelection"
+                  @keydown.up.prevent="actions.unshiftResultsSelection"
+                  type="search"
+                  class="p-4 w-full max-w-sm outline-none rounded-t-lg"
+                  placeholder="Type something ..."
+                  autocomplete="off"
+                >
+              </div>
+
+              <span slot="item" slot-scope="{ place }" class="block p-2">
+                {{ place.description }}
+              </span>
+              <span slot="activeItem" slot-scope="{ place }" class="block p-2 rounded bg-green-lightest font-bold">
+                {{ place.description }}
+              </span>
+            </google-places-autocomplete>
+
+            <h3 class="mt-8 text-grey-dark" v-if="place">Result</h3>
+            <pre v-html="place" class="text-xs" />
           </div>
         </div>
         <div class="md:flex md:items-center">
@@ -122,6 +152,7 @@ interface Ephemeris {
 export default class Index extends Vue {
   date: string = '';
   time: string = '';
+  place: string = '';
   ephData: Array<Ephemeris> = [];
 
   calculate () {
