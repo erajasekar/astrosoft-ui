@@ -46,13 +46,14 @@
             >Place</label>
           </div>
           <div class="md:w-2/3">
-            <input
+            <!-- <input
               id="inline-full-name"
               class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
               type="text"
               value="Chennai, India"
               disabled
-            >
+            >-->
+            <google-places-autocomplete />
           </div>
         </div>
         <div class="md:flex md:items-center">
@@ -102,6 +103,7 @@
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
 import { Datetime } from 'vue-datetime'
+import { GooglePlacesAutocomplete } from 'vue-better-google-places-autocomplete'
 import Logo from '@/components/Logo.vue'
 
 interface Ephemeris {
@@ -113,7 +115,8 @@ interface Ephemeris {
 @Component({
   components: {
     Logo,
-    Datetime
+    Datetime,
+    GooglePlacesAutocomplete
   }
 })
 export default class Index extends Vue {
