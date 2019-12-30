@@ -46,7 +46,11 @@ export default {
   */
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    ['nuxt-google-maps-module', {
+      /* module options */
+      key: 'AIzaSyA4zE8lyMGrf2YG44Zj3CM6SAl1yKTzb8c' // Default
+    }]
   ],
   /*
   ** Axios module configuration
@@ -59,6 +63,9 @@ export default {
         'Content-Type': 'application/json'
       }
     }
+  },
+ /* maps: {
+    key: 'AIzaSyA4zE8lyMGrf2YG44Zj3CM6SAl1yKTzb8c'
   },
   /*
   ** Build configuration

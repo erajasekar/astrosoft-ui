@@ -17,6 +17,7 @@
     "@nuxtjs/axios": "^5.3.6",
     "luxon": "^1.21.3",
     "nuxt": "^2.11.0",
+    "nuxt-google-maps-module": "^1.6.0",
     "nuxt-property-decorator": "^2.5.0",
     "vue-datetime": "^1.0.0-beta.11",
     "weekstart": "^1.0.1"
