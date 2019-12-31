@@ -17,31 +17,19 @@
               type="datetime"
               input-class="bg-gray-200 appearance-none border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
               auto
+              use12-hour
             />
           </div>
         </div>
 
         <div class="md:flex md:items-center mb-6">
-          <!--  <div class="md:w-1/3">
-            <label
-              class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
-              for="inline-full-name"
-            >Place</label>
-          </div> -->
-          <div class="md:w-2/3">
-            <!-- <input
-              id="inline-full-name"
-              class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-              type="text"
-              value="Chennai, India"
-              disabled
-            >-->
+          <div  class="md:w-2/3">
             <google-places-autocomplete
               @resultChanged="placeDetail => updatePlace(placeDetail)"
               @resultCleared="() => place = null"
             >
               <div slot="input" slot-scope="{ context, events, actions }">
-                <label for="locationInput" class="block my-4 text-xl text-grey-dark">Place</label>
+                <label for="locationInput" class="md:w-1/3 block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4">Place</label>
                 <input
                   id="locationInput"
                   v-model="context.input"
@@ -52,8 +40,8 @@
                   @keydown.up.prevent="actions.unshiftResultsSelection"
                   type="search"
                   class="p-4 w-full max-w-sm outline-none rounded-t-lg"
-                  placeholder="Type something ..."
-                  autocomplete="off"
+                  placeholder="Type city name to search ..."
+                  autocomplete="of"
                 >
               </div>
 
@@ -66,11 +54,27 @@
             </google-places-autocomplete>
           </div>
         </div>
-        <div>
-          {{ location }}
+        <div class="md:flex md:items-center mb-6">
+          <div class="md:w-1/3">
+              <label
+                class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
+                for="inline-full-name"
+              >Location</label>
+          </div>
+          <div class="md:w-2/3">
+            {{ location }}
+          </div>
         </div>
-         <div>
-          {{ timeZoneFormatted }}
+        <div class="md:flex md:items-center mb-6">
+          <div class="md:w-1/3">
+              <label
+                class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
+                for="inline-full-name"
+              >Timezone</label>
+          </div>
+          <div class="md:w-2/3">
+            {{ timeZoneFormatted }}
+          </div>
         </div>
         <div class="md:flex md:items-center">
           <div class="md:w-1/3" />
@@ -153,7 +157,6 @@ export default class Index extends Vue {
   }
 
   updatePlace (placeDetail: any) {
-    console.log('PLACE ==> ', placeDetail.formatted_address, placeDetail.geometry.location.lat(), placeDetail.geometry.location.lng())
     this.lat = placeDetail.geometry.location.lat()
     this.lng = placeDetail.geometry.location.lng()
     this.formatLatLng()
@@ -211,7 +214,7 @@ export default class Index extends Vue {
         Ayanamsa: 'LAHARI'
       }
     }
-    console.log(body)
+    // console.log(body)
     const resp = await this.$axios.$post('https://api.innovativeastrosolutions.com/v0/horoscope', body)
     return this.parseData(resp)
   }
