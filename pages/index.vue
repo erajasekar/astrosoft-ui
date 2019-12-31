@@ -169,9 +169,9 @@ export default class Index extends Vue {
   updateTimeZone () {
     const timezoneUrl = 'https://maps.googleapis.com/maps/api/timezone/json'
     const params = {
-      key: process.env.GOOGLE_MAPS_API_KEY + '',
+      key: process.env.GOOGLE_MAPS_API_KEY,
       location: this.lat + ',' + this.lng,
-      timestamp: '1577756011'
+      timestamp: new Date(this.dateTimeString).getTime() / 1000.0
     }
     this.$axios.$get(timezoneUrl, { params }).then((resp) => {
       console.log(resp)
