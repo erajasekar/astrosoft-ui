@@ -64,15 +64,13 @@
                 {{ place.description }}
               </span>
             </google-places-autocomplete>
-
-            <h3 v-if="place" class="mt-8 text-grey-dark">
-              Result
-            </h3>
-            <pre v-html="place" class="text-xs" />
           </div>
         </div>
         <div>
           {{ location }}
+        </div>
+         <div>
+          {{ timeZoneFormatted }}
         </div>
         <div class="md:flex md:items-center">
           <div class="md:w-1/3" />
@@ -143,10 +141,13 @@ export default class Index extends Vue {
   lat: number = 0;
   lng: number = 0;
   location: string = ''
+  timeZoneId: string = ''
+  timeZoneOffset: number = 0
+  timeZoneFormatted: string = ''
   ephData: Array<Ephemeris> = [];
 
   calculate () {
-    this.fetchData(new Date(this.dateTimeString)).then((data) => {
+    this.fetchData().then((data) => {
       this.ephData = data
     })
   }
@@ -157,13 +158,13 @@ export default class Index extends Vue {
     this.lng = placeDetail.geometry.location.lng()
     this.formatLatLng()
     this.updateTimeZone()
-    this.place = placeDetail
+    this.place = placeDetail.formatted_address
   }
 
   formatLatLng () {
     const latDir = this.lat > 0 ? ' N ' : ' S '
     const lngDir = this.lng > 0 ? ' E ' : ' W '
-    this.location = this.lat + latDir + ' , ' + this.lng + lngDir
+    this.location = `${this.formatDegMin(this.lat, '.')} ${latDir} , ${this.formatDegMin(this.lng, '.')} ${lngDir}`
   }
 
   updateTimeZone () {
@@ -174,19 +175,31 @@ export default class Index extends Vue {
       timestamp: new Date(this.dateTimeString).getTime() / 1000.0
     }
     this.$axios.$get(timezoneUrl, { params }).then((resp) => {
-      console.log(resp)
+      this.timeZoneId = resp.timeZoneId
+      this.timeZoneOffset = (resp.rawOffset + resp.dstOffset) / 3600
+      const timeZoneSign = this.timeZoneOffset > 0 ? ' + ' : ' - '
+      this.timeZoneFormatted = `${this.timeZoneId} ( GMT  ${timeZoneSign} ${this.formatDegMin(this.timeZoneOffset, ' : ')})`
     })
   }
 
-  async fetchData (dateTime: Date) {
+  formatDegMin (val: number, delim: string) {
+    const absVal = Math.abs(val)
+    const deg = Math.floor(absVal)
+    const rem = (absVal - deg) * 60
+    const min = Math.floor(rem)
+    return `${deg}${delim}${min}`
+  }
+
+  async fetchData () {
+    const dateTime = new Date(this.dateTimeString)
     // TODO
     const body = {
       name: 'Astrosoft UI',
       place: {
-        name: 'Chennai, India',
-        longitude: 80.237617,
-        latitude: 13.067439,
-        timeZoneId: 'IST'
+        name: this.place,
+        longitude: this.lng,
+        latitude: this.lat,
+        timeZoneId: this.timeZoneId
       },
       year: dateTime.getFullYear(),
       month: dateTime.getMonth() + 1,
