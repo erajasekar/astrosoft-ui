@@ -17,28 +17,17 @@
               type="datetime"
               input-class="bg-gray-200 appearance-none border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
               auto
+              use12-hour
             />
           </div>
         </div>
 
         <div class="md:flex md:items-center mb-6">
-          <!--  <div class="md:w-1/3">
-            <label
-              class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
-              for="inline-full-name"
-            >Place</label>
-          </div> -->
           <div class="md:w-2/3">
-            <!-- <input
-              id="inline-full-name"
-              class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-              type="text"
-              value="Chennai, India"
-              disabled
-            >-->
             <google-places-autocomplete
               @resultChanged="placeDetail => updatePlace(placeDetail)"
               @resultCleared="() => place = null"
+              value = 'Chennai, Tamil Nadu, India'
             >
               <div slot="input" slot-scope="{ context, events, actions }">
                 <label for="locationInput" class="block my-4 text-xl text-grey-dark">Place</label>
@@ -85,6 +74,9 @@
           </div>
         </div>
       </form>
+    </div>
+    <div>
+      {{ computedValue() }}
     </div>
     <div v-if="ephData.length > 0">
       <h1 class="text-3xl mt-10">
@@ -136,20 +128,29 @@ interface Ephemeris {
   }
 })
 export default class Index extends Vue {
-  dateTimeString: string = new Date().toISOString();
-  place: string = '';
-  lat: number = 0;
-  lng: number = 0;
-  location: string = ''
-  timeZoneId: string = ''
-  timeZoneOffset: number = 0
-  timeZoneFormatted: string = ''
+  dateTimeString: string = new Date().toISOString()
+  place: string = 'Chennai, Tamil Nadu, India' // TO MOVE PLACE RELATED STUFF TO OWN OBJECT
+  lat: number = 13.0826802;
+  lng: number = 80.27071840000008;
+  location: string = '13.4 N , 80.16 E'
+  timeZoneId: string = 'Asia/Calcutta'
+  timeZoneOffset: number = 5.5
+  timeZoneFormatted: string = 'Asia/Calcutta ( GMT + 5 : 30)'
   ephData: Array<Ephemeris> = [];
 
   calculate () {
     this.fetchData().then((data) => {
       this.ephData = data
     })
+  }
+
+  async computedValue () {
+    await this.$axios.$get('https://maps.googleapis.com/maps/api/timezone/json?location=38.908133,-77.047119&timestamp=1297658080&key=AIzaSyA4zE8lyMGrf2YG44Zj3CM6SAl1yKTzb8c')
+    return `${this.dateTimeString} -- ${this.place}`
+  }
+
+  async ephDataAsync () {
+    await this.fetchData()
   }
 
   updatePlace (placeDetail: any) {
