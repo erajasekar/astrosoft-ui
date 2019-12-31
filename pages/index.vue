@@ -174,6 +174,7 @@ export default class Index extends Vue {
     this.lat = placeDetail.geometry.location.lat()
     this.lng = placeDetail.geometry.location.lng()
     this.formatLatLng()
+    this.updateTimeZone()
     this.place = placeDetail
   }
 
@@ -181,6 +182,18 @@ export default class Index extends Vue {
     const latDir = this.lat > 0 ? ' N ' : ' S '
     const lngDir = this.lng > 0 ? ' E ' : ' W '
     this.location = this.lat + latDir + ' , ' + this.lng + lngDir
+  }
+
+  updateTimeZone () {
+    const timezoneUrl = 'https://maps.googleapis.com/maps/api/timezone/json'
+    const params = {
+      key: process.env.GOOGLE_MAPS_API_KEY + '',
+      location: this.lat + ',' + this.lng,
+      timestamp: '1577756011'
+    }
+    this.$axios.$get(timezoneUrl, { params }).then((resp) => {
+      console.log(resp)
+    })
   }
 
   async fetchData (date: Date, time: Date) {
