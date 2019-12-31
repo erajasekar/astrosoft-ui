@@ -13,26 +13,8 @@
           <div class="md:w-2/3">
             <datetime
               id="date"
-              v-model="date"
-              type="date"
-              input-class="bg-gray-200 appearance-none border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-            />
-          </div>
-        </div>
-
-        <div class="md:flex md:items-center mb-6">
-          <div class="md:w-1/3">
-            <label
-              class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
-              for="inline-full-name"
-            >Time</label>
-          </div>
-          <div class="md:w-2/3">
-            <datetime
-              id="time"
-              v-model="time"
-              use12-hour
-              type="time"
+              v-model="dateTime"
+              type="datetime"
               input-class="bg-gray-200 appearance-none border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
             />
           </div>
@@ -155,8 +137,7 @@ interface Ephemeris {
   }
 })
 export default class Index extends Vue {
-  date: string = '';
-  time: string = '';
+  dateTime: string = '';
   place: string = '';
   lat: number = 0;
   lng: number = 0;
@@ -164,7 +145,7 @@ export default class Index extends Vue {
   ephData: Array<Ephemeris> = [];
 
   calculate () {
-    this.fetchData(new Date(this.date), new Date(this.time)).then((data) => {
+    this.fetchData(new Date(this.dateTime)).then((data) => {
       this.ephData = data
     })
   }
@@ -196,7 +177,7 @@ export default class Index extends Vue {
     })
   }
 
-  async fetchData (date: Date, time: Date) {
+  async fetchData (dateTime: Date) {
     // TODO
     const body = {
       name: 'Astrosoft UI',
@@ -206,12 +187,12 @@ export default class Index extends Vue {
         latitude: 13.067439,
         timeZoneId: 'IST'
       },
-      year: date.getFullYear(),
-      month: date.getMonth() + 1,
-      date: date.getDate(),
-      hour: time.getHours(),
-      minutes: time.getMinutes(),
-      seconds: time.getSeconds(),
+      year: dateTime.getFullYear(),
+      month: dateTime.getMonth() + 1,
+      date: dateTime.getDate(),
+      hour: dateTime.getHours(),
+      minutes: dateTime.getMinutes(),
+      seconds: dateTime.getSeconds(),
       options: {
         Ayanamsa: 'LAHARI'
       }
