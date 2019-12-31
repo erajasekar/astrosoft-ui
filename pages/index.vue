@@ -13,9 +13,10 @@
           <div class="md:w-2/3">
             <datetime
               id="date"
-              v-model="dateTime"
+              v-model="dateTimeString"
               type="datetime"
               input-class="bg-gray-200 appearance-none border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+              auto
             />
           </div>
         </div>
@@ -137,7 +138,7 @@ interface Ephemeris {
   }
 })
 export default class Index extends Vue {
-  dateTime: string = '';
+  dateTimeString: string = new Date().toISOString();
   place: string = '';
   lat: number = 0;
   lng: number = 0;
@@ -145,7 +146,7 @@ export default class Index extends Vue {
   ephData: Array<Ephemeris> = [];
 
   calculate () {
-    this.fetchData(new Date(this.dateTime)).then((data) => {
+    this.fetchData(new Date(this.dateTimeString)).then((data) => {
       this.ephData = data
     })
   }
