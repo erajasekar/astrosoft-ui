@@ -39,12 +39,12 @@
         </div>
 
         <div class="md:flex md:items-center mb-6">
-          <div class="md:w-1/3">
+          <!--  <div class="md:w-1/3">
             <label
               class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
               for="inline-full-name"
             >Place</label>
-          </div>
+          </div> -->
           <div class="md:w-2/3">
             <!-- <input
               id="inline-full-name"
@@ -58,7 +58,7 @@
               @resultCleared="() => place = null"
             >
               <div slot="input" slot-scope="{ context, events, actions }">
-                <label for="locationInput" class="block my-4 text-xl text-grey-dark">Address Search</label>
+                <label for="locationInput" class="block my-4 text-xl text-grey-dark">Place</label>
                 <input
                   id="locationInput"
                   v-model="context.input"
@@ -82,9 +82,14 @@
               </span>
             </google-places-autocomplete>
 
-            <h3 class="mt-8 text-grey-dark" v-if="place">Result</h3>
+            <h3 v-if="place" class="mt-8 text-grey-dark">
+              Result
+            </h3>
             <pre v-html="place" class="text-xs" />
           </div>
+        </div>
+        <div>
+          {{ location }}
         </div>
         <div class="md:flex md:items-center">
           <div class="md:w-1/3" />
@@ -153,6 +158,9 @@ export default class Index extends Vue {
   date: string = '';
   time: string = '';
   place: string = '';
+  lat: number = 0;
+  lng: number = 0;
+  location: string = ''
   ephData: Array<Ephemeris> = [];
 
   calculate () {
@@ -163,7 +171,16 @@ export default class Index extends Vue {
 
   updatePlace (placeDetail: any) {
     console.log('PLACE ==> ', placeDetail.formatted_address, placeDetail.geometry.location.lat(), placeDetail.geometry.location.lng())
+    this.lat = placeDetail.geometry.location.lat()
+    this.lng = placeDetail.geometry.location.lng()
+    this.formatLatLng()
     this.place = placeDetail
+  }
+
+  formatLatLng () {
+    const latDir = this.lat > 0 ? ' N ' : ' S '
+    const lngDir = this.lng > 0 ? ' E ' : ' W '
+    this.location = this.lat + latDir + ' , ' + this.lng + lngDir
   }
 
   async fetchData (date: Date, time: Date) {
