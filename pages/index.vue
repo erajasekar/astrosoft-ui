@@ -23,7 +23,7 @@
         </div>
 
         <div class="md:flex md:items-center mb-6">
-          <div  class="md:w-2/3">
+          <div class="md:w-2/3">
             <google-places-autocomplete
               @resultChanged="placeDetail => updatePlace(placeDetail)"
               @resultCleared="() => place = null"
@@ -56,10 +56,10 @@
         </div>
         <div class="md:flex md:items-center mb-6">
           <div class="md:w-1/3">
-              <label
-                class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
-                for="inline-full-name"
-              >Location</label>
+            <label
+              class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
+              for="inline-full-name"
+            >Location</label>
           </div>
           <div class="md:w-2/3">
             {{ location }}
@@ -67,10 +67,10 @@
         </div>
         <div class="md:flex md:items-center mb-6">
           <div class="md:w-1/3">
-              <label
-                class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
-                for="inline-full-name"
-              >Timezone</label>
+            <label
+              class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
+              for="inline-full-name"
+            >Timezone</label>
           </div>
           <div class="md:w-2/3">
             {{ timeZoneFormatted }}
@@ -186,11 +186,24 @@ export default class Index extends Vue {
   }
 
   formatDegMin (val: number, delim: string) {
+    return this.formatDegMinSec(val, false, delim)
+  }
+
+  formatDegMinSec (val: number, includeSecs: boolean, delim: string) {
     const absVal = Math.abs(val)
     const deg = Math.floor(absVal)
     const rem = (absVal - deg) * 60
     const min = Math.floor(rem)
-    return `${deg}${delim}${min}`
+    let result = `${this.padDigits(deg, 3)}${delim}${this.padDigits(min, 2)}`
+    if (includeSecs) {
+      const secs = Math.floor((rem - min) * 60)
+      result = `${result}${delim}${this.padDigits(secs, 2)}`
+    }
+    return result
+  }
+
+  padDigits (val: number, size: number) {
+    return `${val}`.padStart(size, '0')
   }
 
   async fetchData () {
@@ -223,7 +236,7 @@ export default class Index extends Vue {
     const result: Array<Ephemeris> = []
     let value: any
     for (value of Object.values(resp.planetaryInfo)) {
-      result.push({ planet: value.planet, position: value.position, isRetro: value.isRetro })
+      result.push({ planet: value.planet, position: this.formatDegMinSec(value.position, true, ':'), isRetro: value.isRetro })
     }
     return result
   }
