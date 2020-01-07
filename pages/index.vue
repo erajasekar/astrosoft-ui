@@ -4,15 +4,12 @@
       <logo />
       <form>
         <b-field label="Datetime" label-position="on-border">
-          <div>
-            <datetime
-              id="datetime"
-              v-model="dateTimeString"
-              type="datetime"
-              auto
-              use12-hour
-            />
-          </div>
+          <b-datetimepicker
+            :timepicker="{ hourFormat }"
+            v-model="dateTimeValue"
+            icon="calendar-today"
+            rounded
+          />
         </b-field>
         <div>
           <div>
@@ -112,7 +109,8 @@ interface Ephemeris {
   }
 })
 export default class Index extends Vue {
-  dateTimeString: string = new Date().toISOString();
+  hourFormat = '12'
+  dateTimeValue: Date = new Date();
   place: string = '';
   lat: number = 0;
   lng: number = 0;
@@ -147,7 +145,7 @@ export default class Index extends Vue {
     const params = {
       key: process.env.GOOGLE_MAPS_API_KEY,
       location: this.lat + ',' + this.lng,
-      timestamp: new Date(this.dateTimeString).getTime() / 1000.0
+      timestamp: this.dateTimeValue.getTime() / 1000.0
     }
     this.$axios.$get(timezoneUrl, { params }).then((resp) => {
       this.timeZoneId = resp.timeZoneId
@@ -181,7 +179,7 @@ export default class Index extends Vue {
   }
 
   async fetchData () {
-    const dateTime = new Date(this.dateTimeString)
+    const dateTime = this.dateTimeValue
     // TODO
     const body = {
       name: 'Astrosoft UI',
