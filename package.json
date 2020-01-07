@@ -17,6 +17,7 @@
     "@nuxtjs/axios": "^5.3.6",
     "luxon": "^1.21.3",
     "nuxt": "^2.11.0",
+    "nuxt-buefy": "^0.3.20",
     "nuxt-property-decorator": "^2.5.0",
     "postcss-import": "^12.0.1",
     "vue-better-google-places-autocomplete": "^1.1.0",

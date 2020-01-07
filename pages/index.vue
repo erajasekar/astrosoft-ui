@@ -1,14 +1,9 @@
 <template>
-  <div>
+  <div class="container">
     <div>
       <logo />
       <form>
-        <div>
-          <div>
-            <label
-              for="datetime"
-            >Date</label>
-          </div>
+        <b-field label="Datetime" label-position="on-border">
           <div>
             <datetime
               id="datetime"
@@ -18,8 +13,7 @@
               use12-hour
             />
           </div>
-        </div>
-
+        </b-field>
         <div>
           <div>
             <google-places-autocomplete
@@ -51,34 +45,21 @@
             </google-places-autocomplete>
           </div>
         </div>
-        <div>
-          <div>
-            <label
-              for="location"
-            >Location</label>
-          </div>
-          <div id="location">
-            {{ location }}
-          </div>
-        </div>
-        <div>
-          <div>
-            <label
-              for="timezone"
-            >Timezone</label>
-          </div>
-          <div id="timezone">
-            {{ timeZoneFormatted }}
-          </div>
-        </div>
-        <div>
+        <b-field label="Location" label-position="on-border">
+          <b-input :value="location" readonly />
+        </b-field>
+        <b-field label="Timezone" label-position="on-border">
+          <b-input :value="timeZoneFormatted" readonly />
+        </b-field>
+        <b-field>
           <button
             v-on:click="calculate"
+            class="button is-info"
             type="button"
           >
             Calculate
           </button>
-        </div>
+        </b-field>
       </form>
     </div>
     <div v-if="ephData.length > 0">
