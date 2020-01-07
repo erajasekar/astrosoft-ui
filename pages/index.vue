@@ -1,35 +1,33 @@
 <template>
-  <div class="container mx-auto">
+  <div>
     <div>
       <logo />
-      <form class="mt-10 w-full max-w-sm">
-        <div class="md:flex md:items-center mb-6">
-          <div class="md:w-1/3">
+      <form>
+        <div>
+          <div>
             <label
-              class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
-              for="inline-full-name"
+              for="datetime"
             >Date</label>
           </div>
-          <div class="md:w-2/3">
+          <div>
             <datetime
-              id="date"
+              id="datetime"
               v-model="dateTimeString"
               type="datetime"
-              input-class="bg-gray-200 appearance-none border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
               auto
               use12-hour
             />
           </div>
         </div>
 
-        <div class="md:flex md:items-center mb-6">
-          <div class="md:w-2/3">
+        <div>
+          <div>
             <google-places-autocomplete
               @resultChanged="placeDetail => updatePlace(placeDetail)"
               @resultCleared="() => place = null"
             >
               <div slot="input" slot-scope="{ context, events, actions }">
-                <label for="locationInput" class="md:w-1/3 block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4">Place</label>
+                <label for="locationInput">Place</label>
                 <input
                   id="locationInput"
                   v-model="context.input"
@@ -39,78 +37,71 @@
                   @keydown.down.prevent="actions.shiftResultsSelection"
                   @keydown.up.prevent="actions.unshiftResultsSelection"
                   type="search"
-                  class="p-4 w-full max-w-sm outline-none rounded-t-lg"
                   placeholder="Type city name to search ..."
                   autocomplete="of"
                 >
               </div>
 
-              <span slot="item" slot-scope="{ place }" class="block p-2">
+              <span slot="item" slot-scope="{ place }">
                 {{ place.description }}
               </span>
-              <span slot="activeItem" slot-scope="{ place }" class="block p-2 rounded bg-green-lightest font-bold">
+              <span slot="activeItem" slot-scope="{ place }">
                 {{ place.description }}
               </span>
             </google-places-autocomplete>
           </div>
         </div>
-        <div class="md:flex md:items-center mb-6">
-          <div class="md:w-1/3">
+        <div>
+          <div>
             <label
-              class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
-              for="inline-full-name"
+              for="location"
             >Location</label>
           </div>
-          <div class="md:w-2/3">
+          <div id="location">
             {{ location }}
           </div>
         </div>
-        <div class="md:flex md:items-center mb-6">
-          <div class="md:w-1/3">
+        <div>
+          <div>
             <label
-              class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
-              for="inline-full-name"
+              for="timezone"
             >Timezone</label>
           </div>
-          <div class="md:w-2/3">
+          <div id="timezone">
             {{ timeZoneFormatted }}
           </div>
         </div>
-        <div class="md:flex md:items-center">
-          <div class="md:w-1/3" />
-          <div class="md:w-2/3">
-            <button
-              v-on:click="calculate"
-              class="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
-              type="button"
-            >
-              Calculate
-            </button>
-          </div>
+        <div>
+          <button
+            v-on:click="calculate"
+            type="button"
+          >
+            Calculate
+          </button>
         </div>
       </form>
     </div>
     <div v-if="ephData.length > 0">
-      <h1 class="text-3xl mt-10">
+      <h1>
         Planetary Ephemeris
       </h1>
-      <table class="table-auto text-left w-full border-collapse">
+      <table>
         <thead>
           <tr>
-            <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">
+            <th>
               Planet
             </th>
-            <th class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">
+            <th>
               Position
             </th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(eph, index) in ephData" v-bind:key="index" class="hover:bg-grey-lighter">
-            <td class="py-4 px-6 border-b border-grey-light">
+          <tr v-for="(eph, index) in ephData" v-bind:key="index">
+            <td>
               {{ eph.planet }}
             </td>
-            <td class="py-4 px-6 border-b border-grey-light">
+            <td>
               {{ eph.position }}
             </td>
           </tr>
@@ -246,9 +237,4 @@ export default class Index extends Vue {
 </script>
 
 <style>
-@import 'assets/css/tailwind.css'
-
-.vbga-results {
-  @apply .list-reset w-full max-w-sm p-4 bg-white border-t rounded-b-lg;
-}
 </style>
