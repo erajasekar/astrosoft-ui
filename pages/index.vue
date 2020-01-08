@@ -2,7 +2,7 @@
   <div class="container">
     <div>
       <logo />
-      <form>
+      <form class="max-w-xl content-center" >
         <b-field label="Datetime">
           <b-datetimepicker
             :timepicker="{ hourFormat }"
@@ -46,10 +46,10 @@
           </div>
         </div>
         <b-field label="Location">
-          <b-input :value="location" readonly />
+          <input :value="location" readonly class="w-full"/>
         </b-field>
         <b-field label="Timezone">
-          <b-input :value="timeZoneFormatted" readonly />
+          <input :value="timeZoneFormatted" readonly class="w-full"/>
         </b-field>
         <b-field>
           <button
