@@ -18,26 +18,28 @@
             >
               <div slot="input" slot-scope="{ context, events, actions }">
                 <b-field label="Place" label-position="on-border">
-                  <input
-                    id="locationInput"
-                    v-model="context.input"
-                    @focus="events.inputHasReceivedFocus"
-                    @input="events.inputHasChanged"
-                    @keydown.enter.prevent="actions.selectItemFromList"
-                    @keydown.down.prevent="actions.shiftResultsSelection"
-                    @keydown.up.prevent="actions.unshiftResultsSelection"
-                    type="search"
-                    placeholder="Type city name to search ..."
-                    autocomplete="off"
-                    class="p-4 w-full max-w-sm border-black rounded-t-lg"
-                  >
+                  <div class="control is-clearfix">
+                    <input
+                      id="locationInput"
+                      v-model="context.input"
+                      @focus="events.inputHasReceivedFocus"
+                      @input="events.inputHasChanged"
+                      @keydown.enter.prevent="actions.selectItemFromList"
+                      @keydown.down.prevent="actions.shiftResultsSelection"
+                      @keydown.up.prevent="actions.unshiftResultsSelection"
+                      type="search"
+                      placeholder="Type city name to search ..."
+                      autocomplete="off"
+                      class="input"
+                    >
+                  </div>
                 </b-field>
               </div>
 
-              <span slot="item" slot-scope="{ place }">
+              <span slot="item" slot-scope="{ place }" class="block p-2">
                 {{ place.description }}
               </span>
-              <span slot="activeItem" slot-scope="{ place }">
+              <span slot="activeItem" slot-scope="{ place }" class="block p-2 rounded bg bg-orange-300 font-bold">
                 {{ place.description }}
               </span>
             </google-places-autocomplete>
@@ -216,4 +218,15 @@ export default class Index extends Vue {
 </script>
 
 <style>
+.vbga-results {
+    list-style: none;
+    padding: 0;
+    width: 100%;
+    max-width: 30rem;
+    padding: 1rem;
+    border-width: 1px;
+    border-color: #aaa;
+    background-color: #fff;
+    z-index: -1;
+}
 </style>
