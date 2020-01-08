@@ -3,7 +3,7 @@
     <div>
       <logo />
       <form>
-        <b-field label="Datetime" label-position="on-border">
+        <b-field label="Datetime">
           <b-datetimepicker
             :timepicker="{ hourFormat }"
             v-model="dateTimeValue"
@@ -17,7 +17,7 @@
               @resultCleared="() => place = null"
             >
               <div slot="input" slot-scope="{ context, events, actions }">
-                <b-field label="Place" label-position="on-border">
+                <b-field label="Place">
                   <div class="control is-clearfix">
                     <input
                       id="locationInput"
@@ -45,10 +45,10 @@
             </google-places-autocomplete>
           </div>
         </div>
-        <b-field label="Location" label-position="on-border">
+        <b-field label="Location">
           <b-input :value="location" readonly />
         </b-field>
-        <b-field label="Timezone" label-position="on-border">
+        <b-field label="Timezone">
           <b-input :value="timeZoneFormatted" readonly />
         </b-field>
         <b-field>
@@ -180,7 +180,6 @@ export default class Index extends Vue {
   }
 
   async fetchData () {
-    console.log(this.dateTimeValue, typeof this.dateTimeValue)
     const dateTime = this.dateTimeValue
     // TODO
     const body = {
@@ -227,6 +226,7 @@ export default class Index extends Vue {
     border-width: 1px;
     border-color: #aaa;
     background-color: #fff;
-    z-index: -1;
+    z-index: 2;
+    position: absolute;
 }
 </style>
