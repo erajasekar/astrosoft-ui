@@ -91,7 +91,6 @@
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
-import { Datetime } from 'vue-datetime'
 import { GooglePlacesAutocomplete } from 'vue-better-google-places-autocomplete'
 import Logo from '@/components/Logo.vue'
 
@@ -104,7 +103,6 @@ interface Ephemeris {
 @Component({
   components: {
     Logo,
-    Datetime,
     GooglePlacesAutocomplete
   }
 })
