@@ -8,7 +8,6 @@
             :timepicker="{ hourFormat }"
             v-model="dateTimeValue"
             icon="calendar-today"
-            rounded
           />
         </b-field>
         <div>
@@ -18,19 +17,21 @@
               @resultCleared="() => place = null"
             >
               <div slot="input" slot-scope="{ context, events, actions }">
-                <label for="locationInput">Place</label>
-                <input
-                  id="locationInput"
-                  v-model="context.input"
-                  @focus="events.inputHasReceivedFocus"
-                  @input="events.inputHasChanged"
-                  @keydown.enter.prevent="actions.selectItemFromList"
-                  @keydown.down.prevent="actions.shiftResultsSelection"
-                  @keydown.up.prevent="actions.unshiftResultsSelection"
-                  type="search"
-                  placeholder="Type city name to search ..."
-                  autocomplete="of"
-                >
+                <b-field label="Place" label-position="on-border">
+                  <input
+                    id="locationInput"
+                    v-model="context.input"
+                    @focus="events.inputHasReceivedFocus"
+                    @input="events.inputHasChanged"
+                    @keydown.enter.prevent="actions.selectItemFromList"
+                    @keydown.down.prevent="actions.shiftResultsSelection"
+                    @keydown.up.prevent="actions.unshiftResultsSelection"
+                    type="search"
+                    placeholder="Type city name to search ..."
+                    autocomplete="off"
+                    class="p-4 w-full max-w-sm border-black rounded-t-lg"
+                  >
+                </b-field>
               </div>
 
               <span slot="item" slot-scope="{ place }">
@@ -108,7 +109,7 @@ interface Ephemeris {
 })
 export default class Index extends Vue {
   hourFormat = '12'
-  dateTimeValue: Date = new Date();
+  dateTimeValue: Date = new Date('12-11-2020');
   place: string = '';
   lat: number = 0;
   lng: number = 0;
@@ -177,6 +178,7 @@ export default class Index extends Vue {
   }
 
   async fetchData () {
+    console.log(this.dateTimeValue, typeof this.dateTimeValue)
     const dateTime = this.dateTimeValue
     // TODO
     const body = {
