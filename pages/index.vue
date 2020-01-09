@@ -14,11 +14,11 @@
           <div>
             <google-places-autocomplete
               @resultChanged="placeDetail => updatePlace(placeDetail)"
-              @resultCleared="() => place = null"
+              @resultCleared="() => clearPlace()"
             >
               <div slot="input" slot-scope="{ context, events, actions }">
                 <b-field label="Place">
-                  <div class="control is-clearfix">
+                  <div class="control has-icons-left is-clearfix">
                     <input
                       id="locationInput"
                       v-model="context.input"
@@ -32,6 +32,7 @@
                       autocomplete="off"
                       class="input"
                     >
+                    <span class="icon is-left"><i class="mdi mdi-magnify mdi-24px" /></span>
                   </div>
                 </b-field>
               </div>
@@ -45,16 +46,18 @@
             </google-places-autocomplete>
           </div>
         </div>
-        <b-field label="Location">
-          <input :value="location" readonly class="w-full" />
-        </b-field>
-        <b-field label="Timezone">
-          <input :value="timeZoneFormatted" readonly class="w-full" />
-        </b-field>
+        <div v-if="isPlaceSet()">
+          <b-field label="Location">
+            <input :value="location" readonly class="w-full">
+          </b-field>
+          <b-field label="Timezone">
+            <input :value="timeZoneFormatted" readonly class="w-full">
+          </b-field>
+        </div>
         <b-field>
           <button
             v-on:click="calculate"
-            class="button is-info"
+            class="button is-info m-2"
             type="button"
           >
             Calculate
@@ -64,7 +67,7 @@
     </div>
     <div v-if="ephData.length > 0" class="p-4 mt-10 mb-10 content max-w-xl">
       <h2>
-        Planetary Ephemeris for {{place}} on {{formatDateTime()}}
+        Planetary Ephemeris for {{ place }} on {{ formatDateTime() }}
       </h2>
       <table class="table is-bordered is-hoverable">
         <thead>
@@ -129,12 +132,22 @@ export default class Index extends Vue {
     })
   }
 
+  isPlaceSet () {
+    return this.location.length > 0 && this.timeZoneFormatted.length > 0
+  }
+
   updatePlace (placeDetail: any) {
     this.lat = placeDetail.geometry.location.lat()
     this.lng = placeDetail.geometry.location.lng()
     this.formatLatLng()
     this.updateTimeZone()
     this.place = placeDetail.formatted_address
+  }
+
+  clearPlace () {
+    this.place = ''
+    this.location = ''
+    this.timeZoneFormatted = ''
   }
 
   formatLatLng () {
