@@ -63,10 +63,10 @@
       </form>
     </div>
     <div v-if="ephData.length > 0" class="p-4 mt-10 mb-10 content max-w-xl">
-      <h1>
-        Planetary Ephemeris
-      </h1>
-      <table>
+      <h2>
+        Planetary Ephemeris for {{place}} on {{formatDateTime()}}
+      </h2>
+      <table class="table is-bordered is-hoverable">
         <thead>
           <tr>
             <th>
@@ -102,6 +102,8 @@ interface Ephemeris {
   position: string;
   isRetro: boolean;
 }
+
+const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 
 @Component({
   components: {
@@ -139,6 +141,17 @@ export default class Index extends Vue {
     const latDir = this.lat > 0 ? ' N ' : ' S '
     const lngDir = this.lng > 0 ? ' E ' : ' W '
     this.location = `${this.formatDegMin(this.lat, '.')} ${latDir} , ${this.formatDegMin(this.lng, '.')} ${lngDir}`
+  }
+
+  formatDateTime () { // TODO move methods to utils
+    const dateTime = this.dateTimeValue
+    const date = dateTime.getDate()
+    const month = MONTHS[dateTime.getMonth()]
+    const year = dateTime.getFullYear()
+    const hour = dateTime.getHours()
+    const ampm = hour > 12 ? 'PM' : 'AM'
+    const mins = dateTime.getMinutes()
+    return `${month} ${date}, ${year} ${hour % 12} :` + `${mins}`.padStart(2, '0') + ` ${ampm}`
   }
 
   updateTimeZone () {
