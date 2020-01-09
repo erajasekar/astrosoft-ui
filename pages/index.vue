@@ -1,8 +1,8 @@
 <template>
-  <div class="container">
+  <section class="container center">
     <div>
       <logo />
-      <form class="max-w-xl content-center" >
+      <form class="max-w-xl card p-4 mt-10 self-center">
         <b-field label="Datetime">
           <b-datetimepicker
             :timepicker="{ hourFormat }"
@@ -46,10 +46,10 @@
           </div>
         </div>
         <b-field label="Location">
-          <input :value="location" readonly class="w-full"/>
+          <input :value="location" readonly class="w-full" />
         </b-field>
         <b-field label="Timezone">
-          <input :value="timeZoneFormatted" readonly class="w-full"/>
+          <input :value="timeZoneFormatted" readonly class="w-full" />
         </b-field>
         <b-field>
           <button
@@ -62,7 +62,7 @@
         </b-field>
       </form>
     </div>
-    <div v-if="ephData.length > 0">
+    <div v-if="ephData.length > 0" class="p-4 mt-10 mb-10 content max-w-xl">
       <h1>
         Planetary Ephemeris
       </h1>
@@ -89,7 +89,7 @@
         </tbody>
       </table>
     </div>
-  </div>
+  </section>
 </template>
 
 <script lang="ts">
@@ -111,15 +111,15 @@ interface Ephemeris {
 })
 export default class Index extends Vue {
   hourFormat = '12'
-  dateTimeValue: Date = new Date('12-11-2020');
-  place: string = '';
-  lat: number = 0;
-  lng: number = 0;
+  dateTimeValue: Date = new Date()
+  place: string = ''
+  lat: number = 0
+  lng: number = 0
   location: string = ''
   timeZoneId: string = ''
   timeZoneOffset: number = 0
   timeZoneFormatted: string = ''
-  ephData: Array<Ephemeris> = [];
+  ephData: Array<Ephemeris> = []
 
   calculate () {
     this.fetchData().then((data) => {
