@@ -67,7 +67,7 @@
     </div>
     <div v-if="ephData.length > 0" class="p-4 mt-10 mb-10 content max-w-xl">
       <h2>
-        Planetary Ephemeris for {{ place }} on {{ formatDateTime() }}
+        Planetary Ephemeris for {{ place }} on {{ formattedDateTime }}
       </h2>
       <table class="table is-bordered is-hoverable">
         <thead>
@@ -98,6 +98,7 @@
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
 import { GooglePlacesAutocomplete } from 'vue-better-google-places-autocomplete'
+import { formatDateTime, formatDegMinSec, formatDegMin, formatLatLng } from '../mixins/FormatUtils'
 import Logo from '@/components/Logo.vue'
 
 interface Ephemeris {
@@ -105,8 +106,6 @@ interface Ephemeris {
   position: string;
   isRetro: boolean;
 }
-
-const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 
 @Component({
   components: {
@@ -139,7 +138,7 @@ export default class Index extends Vue {
   updatePlace (placeDetail: any) {
     this.lat = placeDetail.geometry.location.lat()
     this.lng = placeDetail.geometry.location.lng()
-    this.formatLatLng()
+    this.updateLocation()
     this.updateTimeZone()
     this.place = placeDetail.formatted_address
   }
@@ -150,21 +149,12 @@ export default class Index extends Vue {
     this.timeZoneFormatted = ''
   }
 
-  formatLatLng () {
-    const latDir = this.lat > 0 ? ' N ' : ' S '
-    const lngDir = this.lng > 0 ? ' E ' : ' W '
-    this.location = `${this.formatDegMin(this.lat, '.')} ${latDir} , ${this.formatDegMin(this.lng, '.')} ${lngDir}`
+  updateLocation () {
+    this.location = formatLatLng(this.lat, this.lng)
   }
 
-  formatDateTime () { // TODO move methods to utils
-    const dateTime = this.dateTimeValue
-    const date = dateTime.getDate()
-    const month = MONTHS[dateTime.getMonth()]
-    const year = dateTime.getFullYear()
-    const hour = dateTime.getHours()
-    const ampm = hour > 12 ? 'PM' : 'AM'
-    const mins = dateTime.getMinutes()
-    return `${month} ${date}, ${year} ${hour % 12} :` + `${mins}`.padStart(2, '0') + ` ${ampm}`
+  get formattedDateTime () {
+    return formatDateTime(this.dateTimeValue)
   }
 
   updateTimeZone () {
@@ -178,31 +168,8 @@ export default class Index extends Vue {
       this.timeZoneId = resp.timeZoneId
       this.timeZoneOffset = (resp.rawOffset + resp.dstOffset) / 3600
       const timeZoneSign = this.timeZoneOffset > 0 ? ' + ' : ' - '
-      this.timeZoneFormatted = `${this.timeZoneId} ( GMT  ${timeZoneSign} ${this.formatDegMin(this.timeZoneOffset, ' : ')})`
+      this.timeZoneFormatted = `${this.timeZoneId} ( GMT  ${timeZoneSign} ${formatDegMin(this.timeZoneOffset, ' : ')})`
     })
-  }
-
-  formatDegMin (val: number, delim: string) {
-    const absVal = Math.abs(val)
-    const deg = Math.floor(absVal)
-    const rem = (absVal - deg) * 60
-    const min = Math.floor(rem)
-    const result = `${this.padDigits(deg, 2)}${delim}${this.padDigits(min, 2)}`
-    return result
-  }
-
-  formatDegMinSec (val: number, delim: string) {
-    const absVal = Math.abs(val)
-    const deg = Math.floor(absVal)
-    const rem = (absVal - deg) * 60
-    const min = Math.floor(rem)
-    const secs = Math.floor((rem - min) * 60)
-    const result = `${this.padDigits(deg, 3)}${delim}${this.padDigits(min, 2)}${delim}${this.padDigits(secs, 2)}`
-    return result
-  }
-
-  padDigits (val: number, size: number) {
-    return `${val}`.padStart(size, '0')
   }
 
   async fetchData () {
@@ -235,7 +202,7 @@ export default class Index extends Vue {
     const result: Array<Ephemeris> = []
     let value: any
     for (value of Object.values(resp.planetaryInfo)) {
-      result.push({ planet: value.planet, position: this.formatDegMinSec(value.position, ':'), isRetro: value.isRetro })
+      result.push({ planet: value.planet, position: formatDegMinSec(value.position, ':'), isRetro: value.isRetro })
     }
     return result
   }
