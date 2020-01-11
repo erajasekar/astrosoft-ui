@@ -98,8 +98,9 @@
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
 import { GooglePlacesAutocomplete } from 'vue-better-google-places-autocomplete'
-import { formatDateTime, formatDegMinSec, formatDegMin, formatLatLng } from '../mixins/FormatUtils'
+import { formatDateTime, formatDegMinSec, formatDegMin } from '../mixins/FormatUtils'
 import { Ephemeris } from '../astro/Ephemeris'
+import { Place } from '../astro/Place'
 import Logo from '@/components/Logo.vue'
 
 @Component({
@@ -111,10 +112,7 @@ import Logo from '@/components/Logo.vue'
 export default class Index extends Vue {
   hourFormat = '12'
   dateTimeValue: Date = new Date()
-  placeName: string = ''
-  lat: number = 0
-  lng: number = 0
-  location: string = ''
+  place: Place = new Place()
   timeZoneId: string = ''
   timeZoneOffset: number = 0
   timeZoneFormatted: string = ''
@@ -127,36 +125,32 @@ export default class Index extends Vue {
   }
 
   isPlaceSet () {
-    return this.location.length > 0 && this.timeZoneFormatted.length > 0
+    return this.place.isPlaceSet && this.timeZoneFormatted.length > 0
   }
 
   updatePlace (placeDetail: any) {
-    this.lat = placeDetail.geometry.location.lat()
-    this.lng = placeDetail.geometry.location.lng()
-    this.updateLocation()
+    this.place = new Place(placeDetail)
     this.updateTimeZone()
-    this.placeName = placeDetail.formatted_address
   }
 
   clearPlace () {
-    this.placeName = ''
-    this.location = ''
+    this.place.clear()
     this.timeZoneFormatted = ''
-  }
-
-  updateLocation () {
-    this.location = formatLatLng(this.lat, this.lng)
   }
 
   get formattedDateTime () {
     return formatDateTime(this.dateTimeValue)
   }
 
+  get location () {
+    return this.place.location
+  }
+
   updateTimeZone () {
     const timezoneUrl = 'https://maps.googleapis.com/maps/api/timezone/json'
     const params = {
       key: process.env.GOOGLE_MAPS_API_KEY,
-      location: this.lat + ',' + this.lng,
+      location: this.place.lat + ',' + this.place.lng,
       timestamp: this.dateTimeValue.getTime() / 1000.0
     }
     this.$axios.$get(timezoneUrl, { params }).then((resp) => {
@@ -173,9 +167,9 @@ export default class Index extends Vue {
     const body = {
       name: 'Astrosoft UI',
       place: {
-        name: this.placeName,
-        longitude: this.lng,
-        latitude: this.lat,
+        name: this.place.placeName,
+        longitude: this.place.lng,
+        latitude: this.place.lat,
         timeZoneId: this.timeZoneId
       },
       year: dateTime.getFullYear(),

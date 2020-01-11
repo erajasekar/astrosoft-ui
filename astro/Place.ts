@@ -7,15 +7,32 @@ export class Place {
   location: string = ''
   initiazed: boolean = false
 
-  constructor () {}
+  constructor (placeDetail?: any) {
+    if (placeDetail) {
+      console.log('raja' + placeDetail)
+      this.lat = placeDetail.geometry.location.lat()
+      this.lng = placeDetail.geometry.location.lng()
+      this.location = formatLatLng(this.lat, this.lng)
+      this.placeName = placeDetail.formatted_address
+      this.initiazed = true
+    } else {
+      this.initiazed = false
+    }
+  }
 
-  fromSearchResult (placeDetail: any) {
-    this.lat = placeDetail.geometry.location.lat()
-    this.lng = placeDetail.geometry.location.lng()
-    this.location = formatLatLng(this.lat, this.lng)
-    this.placeName = placeDetail.formatted_address
-    this.initiazed = true
+  isPlaceSet () {
+      return this.initiazed
+  }
+
+  clear () {
+      this.initiazed = false
+      this.placeName = ''
+      this.lat = 0
+      this.lng = 0
+      this.location = ''
   }
 }
+
+
 
 export default Place
