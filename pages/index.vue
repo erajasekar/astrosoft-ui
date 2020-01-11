@@ -99,13 +99,8 @@
 import { Component, Vue } from 'nuxt-property-decorator'
 import { GooglePlacesAutocomplete } from 'vue-better-google-places-autocomplete'
 import { formatDateTime, formatDegMinSec, formatDegMin, formatLatLng } from '../mixins/FormatUtils'
+import { Ephemeris } from '../astro/Ephemeris'
 import Logo from '@/components/Logo.vue'
-
-interface Ephemeris {
-  planet: string;
-  position: string;
-  isRetro: boolean;
-}
 
 @Component({
   components: {
@@ -116,7 +111,7 @@ interface Ephemeris {
 export default class Index extends Vue {
   hourFormat = '12'
   dateTimeValue: Date = new Date()
-  place: string = ''
+  placeName: string = ''
   lat: number = 0
   lng: number = 0
   location: string = ''
@@ -140,11 +135,11 @@ export default class Index extends Vue {
     this.lng = placeDetail.geometry.location.lng()
     this.updateLocation()
     this.updateTimeZone()
-    this.place = placeDetail.formatted_address
+    this.placeName = placeDetail.formatted_address
   }
 
   clearPlace () {
-    this.place = ''
+    this.placeName = ''
     this.location = ''
     this.timeZoneFormatted = ''
   }
@@ -178,7 +173,7 @@ export default class Index extends Vue {
     const body = {
       name: 'Astrosoft UI',
       place: {
-        name: this.place,
+        name: this.placeName,
         longitude: this.lng,
         latitude: this.lat,
         timeZoneId: this.timeZoneId
