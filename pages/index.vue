@@ -67,7 +67,7 @@
     </div>
     <div v-if="ephData.length > 0" class="p-4 mt-10 mb-10 content max-w-xl">
       <h2>
-        Planetary Ephemeris for {{ place }} on {{ formattedDateTime }}
+        Planetary Ephemeris on {{ formattedDateTime }} at {{ placeName }}
       </h2>
       <table class="table is-bordered is-hoverable">
         <thead>
@@ -144,6 +144,10 @@ export default class Index extends Vue {
 
   get location () {
     return this.place.location
+  }
+
+  get placeName () {
+    return this.place.placeName
   }
 
   updateTimeZone () {

@@ -1,6 +1,7 @@
 import { formatLatLng } from '../mixins/FormatUtils'
 
 export class Place {
+  placeFormatted: string = ''
   placeName: string = ''
   lat: number = 0
   lng: number = 0
@@ -13,7 +14,8 @@ export class Place {
       this.lat = placeDetail.geometry.location.lat()
       this.lng = placeDetail.geometry.location.lng()
       this.location = formatLatLng(this.lat, this.lng)
-      this.placeName = placeDetail.formatted_address
+      this.placeFormatted = placeDetail.formatted_address
+      this.placeName = placeDetail.name
       this.initiazed = true
     } else {
       this.initiazed = false
@@ -27,6 +29,7 @@ export class Place {
   clear () {
       this.initiazed = false
       this.placeName = ''
+      this.placeFormatted = ''
       this.lat = 0
       this.lng = 0
       this.location = ''
