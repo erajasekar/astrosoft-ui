@@ -125,7 +125,7 @@ export default class Index extends Vue {
   }
 
   isPlaceSet () {
-    return this.place.isPlaceSet && this.timeZoneFormatted.length > 0
+    return this.place.isInitialized && this.timeZoneFormatted.length > 0
   }
 
   updatePlace (placeDetail: any) {

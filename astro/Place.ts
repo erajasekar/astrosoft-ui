@@ -6,7 +6,7 @@ export class Place {
   lat: number = 0
   lng: number = 0
   location: string = ''
-  initiazed: boolean = false
+  initialized: boolean = false
 
   constructor (placeDetail?: any) {
     if (placeDetail) {
@@ -16,18 +16,16 @@ export class Place {
       this.location = formatLatLng(this.lat, this.lng)
       this.placeFormatted = placeDetail.formatted_address
       this.placeName = placeDetail.name
-      this.initiazed = true
-    } else {
-      this.initiazed = false
-    }
+      this.initialized = true
+    } 
   }
 
-  isPlaceSet () {
-      return this.initiazed
+  get isInitialized () {
+      return this.initialized
   }
 
   clear () {
-      this.initiazed = false
+      this.initialized = false
       this.placeName = ''
       this.placeFormatted = ''
       this.lat = 0

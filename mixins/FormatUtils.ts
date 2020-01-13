@@ -4,10 +4,10 @@ export function formatDateTime (dateTime: Date) {
   const date = dateTime.getDate()
   const month = MONTHS[dateTime.getMonth()]
   const year = dateTime.getFullYear()
-  const hour = dateTime.getHours()
-  const ampm = hour > 12 ? 'PM' : 'AM'
+  const hour = dateTime.getHours() % 12
+  const ampm = dateTime.getHours() >= 12 ? 'PM' : 'AM'
   const mins = dateTime.getMinutes()
-  return `${month} ${date}, ${year} ${hour % 12} :` + `${mins}`.padStart(2, '0') + ` ${ampm}`
+  return `${month} ${date}, ${year} ${hour === 0 ? '12' : hour} :` + `${mins}`.padStart(2, '0') + ` ${ampm}`
 }
 
 export function formatDegMinSec (val: number, delim: string) {
