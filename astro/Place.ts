@@ -10,7 +10,6 @@ export class Place {
 
   constructor (placeDetail?: any) {
     if (placeDetail) {
-      console.log('raja' + placeDetail)
       this.lat = placeDetail.geometry.location.lat()
       this.lng = placeDetail.geometry.location.lng()
       this.location = formatLatLng(this.lat, this.lng)

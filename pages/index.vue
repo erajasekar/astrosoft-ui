@@ -98,9 +98,11 @@
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
 import { GooglePlacesAutocomplete } from 'vue-better-google-places-autocomplete'
-import { formatDateTime, formatDegMinSec, formatDegMin } from '../mixins/FormatUtils'
+import { formatDateTime, formatDegMinSec } from '../mixins/FormatUtils'
 import { Ephemeris } from '../astro/Ephemeris'
 import { Place } from '../astro/Place'
+import { Timezone } from '../astro/Timezone'
+
 import Logo from '@/components/Logo.vue'
 
 @Component({
@@ -113,9 +115,7 @@ export default class Index extends Vue {
   hourFormat = '12'
   dateTimeValue: Date = new Date()
   place: Place = new Place()
-  timeZoneId: string = ''
-  timeZoneOffset: number = 0
-  timeZoneFormatted: string = ''
+  timezone: Timezone = new Timezone()
   ephData: Array<Ephemeris> = []
 
   calculate () {
@@ -125,7 +125,7 @@ export default class Index extends Vue {
   }
 
   isPlaceSet () {
-    return this.place.isInitialized && this.timeZoneFormatted.length > 0
+    return this.place.isInitialized && this.timezone.isInitialized
   }
 
   updatePlace (placeDetail: any) {
@@ -135,7 +135,7 @@ export default class Index extends Vue {
 
   clearPlace () {
     this.place.clear()
-    this.timeZoneFormatted = ''
+    this.timezone.clear()
   }
 
   get formattedDateTime () {
@@ -144,6 +144,10 @@ export default class Index extends Vue {
 
   get location () {
     return this.place.location
+  }
+
+  get timeZoneFormatted () {
+    return this.timezone.timeZoneFormatted
   }
 
   get placeName () {
@@ -158,10 +162,7 @@ export default class Index extends Vue {
       timestamp: this.dateTimeValue.getTime() / 1000.0
     }
     this.$axios.$get(timezoneUrl, { params }).then((resp) => {
-      this.timeZoneId = resp.timeZoneId
-      this.timeZoneOffset = (resp.rawOffset + resp.dstOffset) / 3600
-      const timeZoneSign = this.timeZoneOffset > 0 ? ' + ' : ' - '
-      this.timeZoneFormatted = `${this.timeZoneId} ( GMT  ${timeZoneSign} ${formatDegMin(this.timeZoneOffset, ' : ')})`
+      this.timezone = new Timezone(resp)
     })
   }
 
@@ -174,7 +175,7 @@ export default class Index extends Vue {
         name: this.place.placeName,
         longitude: this.place.lng,
         latitude: this.place.lat,
-        timeZoneId: this.timeZoneId
+        timeZoneId: this.timezone.timeZoneId
       },
       year: dateTime.getFullYear(),
       month: dateTime.getMonth() + 1,
