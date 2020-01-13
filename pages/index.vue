@@ -3,11 +3,18 @@
     <div>
       <logo />
       <form class="max-w-xl card p-4 mt-10 self-center">
-        <b-field label="Datetime">
-          <b-datetimepicker
-            :timepicker="{ hourFormat }"
+        <b-field label="Date">
+          <b-datepicker
             v-model="dateTimeValue"
             icon="calendar-today"
+          />
+        </b-field>
+        <b-field label="Time">
+          <b-timepicker
+            :hour-format="12"
+            v-model="dateTimeValue"
+            icon="clock"
+            editable
           />
         </b-field>
         <div>
