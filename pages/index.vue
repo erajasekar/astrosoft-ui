@@ -3,13 +3,13 @@
     <div>
       <logo />
       <form class="max-w-xl card p-4 mt-10 self-center">
-        <b-field label="Date">
+        <b-field horizontal label="Date">
           <b-datepicker
             v-model="dateTimeValue"
             icon="calendar-today"
           />
         </b-field>
-        <b-field label="Time">
+        <b-field horizontal label="Time">
           <b-timepicker
             :hour-format="12"
             v-model="dateTimeValue"
@@ -24,7 +24,7 @@
               @resultCleared="() => clearPlace()"
             >
               <div slot="input" slot-scope="{ context, events, actions }">
-                <b-field label="Place">
+                <b-field horizontal label="Place">
                   <div class="control has-icons-left is-clearfix">
                     <input
                       id="locationInput"
@@ -53,15 +53,15 @@
             </google-places-autocomplete>
           </div>
         </div>
-        <div v-if="isPlaceSet()">
-          <b-field label="Location">
-            <input :value="location" readonly class="w-full">
+        <div v-if="isPlaceSet()" class="p-5 mt-2 mb-2">
+          <b-field horizontal label="Location" custom-class="text-xs text-gray-600">
+            <input :value="location" readonly class="w-full text-gray-600 text-xs">
           </b-field>
-          <b-field label="Timezone">
-            <input :value="timeZoneFormatted" readonly class="w-full">
+          <b-field horizontal label="Timezone" custom-class="text-xs text-gray-600">
+            <input :value="timeZoneFormatted" readonly class="w-full text-gray-600 text-xs">
           </b-field>
         </div>
-        <b-field>
+        <b-field horizontal>
           <button
             v-on:click="calculate"
             class="button is-info m-2"
