@@ -1,15 +1,15 @@
 <template>
-  <section class="container center">
+  <section class="container center ">
     <div>
       <logo />
       <form class="max-w-xl card p-4 mt-10 self-center">
-        <b-field horizontal label="Date">
+        <b-field horizontal label="Date" custom-class="text-gray-600">
           <b-datepicker
             v-model="dateTimeValue"
             icon="calendar-today"
           />
         </b-field>
-        <b-field horizontal label="Time">
+        <b-field horizontal label="Time" custom-class="text-gray-600">
           <b-timepicker
             :hour-format="12"
             v-model="dateTimeValue"
@@ -25,7 +25,7 @@
               :value="placeFormatted"
             >
               <div slot="input" slot-scope="{ context, events, actions }">
-                <b-field horizontal label="Place">
+                <b-field horizontal label="Place" custom-class="text-gray-600">
                   <div class="control has-icons-left is-clearfix">
                     <input
                       id="locationInput"
@@ -56,7 +56,7 @@
         </div>
         <div v-if="isPlaceSet" class="p-5 mt-2 mb-2">
           <b-field horizontal label="Location" custom-class="text-xs text-gray-600">
-            <input :value="location" readonly class="w-full text-gray-600 text-xs">
+            <input :value="location" class="w-full text-gray-600 text-xs">
           </b-field>
           <b-field horizontal label="Timezone" custom-class="text-xs text-gray-600">
             <input :value="timeZoneFormatted" readonly class="w-full text-gray-600 text-xs">
@@ -80,7 +80,7 @@
       </h2>
       <table class="table is-bordered is-hoverable">
         <thead>
-          <tr>
+          <tr class="bg-green-200">
             <th>
               Planet
             </th>
@@ -90,11 +90,12 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(eph, index) in ephData" v-bind:key="index">
-            <td>
+          <tr v-for="(eph, index) in ephData" v-bind:key="index" >
+            <td :class="{ 'text-blue-700' : eph.planet === 'Sun' }">
               {{ eph.planet }}
+              <span v-show="eph.isRetro"> R </span>
             </td>
-            <td>
+            <td class="font-mono text-blue-700">
               {{ eph.position }}
             </td>
           </tr>
