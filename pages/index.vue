@@ -65,6 +65,7 @@
         <b-field horizontal>
           <button
             v-on:click="calculate"
+            :disabled="!isPlaceSet"
             class="button is-info m-2"
             type="button"
           >
@@ -141,7 +142,6 @@ export default class Index extends Vue {
   }
 
   calculate () {
-    console.log('RAJA CALCULATE ', this.place, this.timezone)
     this.fetchData().then((data) => {
       this.ephData = data
     })
