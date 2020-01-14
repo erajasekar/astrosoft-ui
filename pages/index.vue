@@ -22,6 +22,7 @@
             <google-places-autocomplete
               @resultChanged="placeDetail => updatePlace(placeDetail)"
               @resultCleared="() => clearPlace()"
+              :value="placeFormatted"
             >
               <div slot="input" slot-scope="{ context, events, actions }">
                 <b-field horizontal label="Place">
@@ -53,7 +54,7 @@
             </google-places-autocomplete>
           </div>
         </div>
-        <div v-if="isPlaceSet()" class="p-5 mt-2 mb-2">
+        <div v-if="isPlaceSet" class="p-5 mt-2 mb-2">
           <b-field horizontal label="Location" custom-class="text-xs text-gray-600">
             <input :value="location" readonly class="w-full text-gray-600 text-xs">
           </b-field>
@@ -107,8 +108,9 @@ import { Component, Vue } from 'nuxt-property-decorator'
 import { GooglePlacesAutocomplete } from 'vue-better-google-places-autocomplete'
 import { formatDateTime, formatDegMinSec } from '../mixins/FormatUtils'
 import { Ephemeris } from '../astro/Ephemeris'
-import { Place } from '../astro/Place'
-import { Timezone } from '../astro/Timezone'
+import Place from '../astro/Place'
+import Timezone from '../astro/Timezone'
+import { getTimezone, setTimezone, removeTimezone, setPlace, removePlace, getPlace } from '../mixins/LocalStorageUtils'
 
 import Logo from '@/components/Logo.vue'
 
@@ -124,25 +126,40 @@ export default class Index extends Vue {
   place: Place = new Place()
   timezone: Timezone = new Timezone()
   ephData: Array<Ephemeris> = []
+  isPlaceSet = false
+
+  mounted () {
+    const storedTz = getTimezone()
+    if (storedTz) {
+      this.timezone = storedTz
+    }
+    const storedPlace = getPlace()
+    if (storedPlace) {
+      this.place = storedPlace
+      this.isPlaceSet = true
+    }
+  }
 
   calculate () {
+    console.log('RAJA CALCULATE ', this.place, this.timezone)
     this.fetchData().then((data) => {
       this.ephData = data
     })
   }
 
-  isPlaceSet () {
-    return this.place.isInitialized && this.timezone.isInitialized
-  }
-
   updatePlace (placeDetail: any) {
     this.place = new Place(placeDetail)
     this.updateTimeZone()
+    setPlace(this.place)
+    this.isPlaceSet = true
   }
 
   clearPlace () {
-    this.place.clear()
-    this.timezone.clear()
+    this.place = new Place()
+    this.timezone = new Timezone()
+    removePlace()
+    removeTimezone()
+    this.isPlaceSet = false
   }
 
   get formattedDateTime () {
@@ -161,6 +178,10 @@ export default class Index extends Vue {
     return this.place.placeName
   }
 
+  get placeFormatted () {
+    return this.place.placeFormatted
+  }
+
   updateTimeZone () {
     const timezoneUrl = 'https://maps.googleapis.com/maps/api/timezone/json'
     const params = {
@@ -170,6 +191,7 @@ export default class Index extends Vue {
     }
     this.$axios.$get(timezoneUrl, { params }).then((resp) => {
       this.timezone = new Timezone(resp)
+      setTimezone(this.timezone)
     })
   }
 
