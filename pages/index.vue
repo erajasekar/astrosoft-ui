@@ -75,9 +75,9 @@
       </form>
     </div>
     <div v-if="ephData.length > 0" class="p-4 mt-10 mb-10 content max-w-xl">
-      <h2>
+      <h1>
         Planetary Ephemeris on {{ formattedDateTime }} at {{ placeName }}
-      </h2>
+      </h1>
       <table class="table is-bordered is-hoverable">
         <thead>
           <tr class="bg-green-200">
@@ -90,12 +90,12 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(eph, index) in ephData" v-bind:key="index" >
-            <td :class="{ 'text-blue-700' : eph.planet === 'Sun' }">
+          <tr v-for="(eph, index) in ephData" v-bind:key="index">
+            <td :class="planetStyle(eph.planet)">
               {{ eph.planet }}
-              <span v-show="eph.isRetro"> R </span>
+              <span v-show="eph.isRetro"> ( R ) </span>
             </td>
-            <td class="font-mono text-blue-700">
+            <td class="planet-pos font-semibold text-blue-700">
               {{ eph.position }}
             </td>
           </tr>
@@ -230,6 +230,16 @@ export default class Index extends Vue {
     }
     return result
   }
+
+  planetStyle (planet: string) {
+    const fontStyle = 'font-semibold '
+    switch (planet) {
+      case 'Sun' : return fontStyle + 'text-orange-800'
+      case 'Moon' : return fontStyle + 'text-green-800'
+      case 'Ascendant' : return fontStyle + 'text-blue-800'
+      default : return 'text-gray-800'
+    }
+  }
 }
 </script>
 
@@ -245,5 +255,9 @@ export default class Index extends Vue {
     background-color: #fff;
     z-index: 2;
     position: absolute;
+}
+
+.planet-pos {
+  font-family: 'Share Tech Mono', Courier, monospace
 }
 </style>
