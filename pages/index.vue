@@ -4,7 +4,7 @@
       <logo />
       <form class="max-w-xl card p-4 mt-10 self-center">
         <b-field horizontal label="Date" custom-class="text-gray-600">
-          <div>
+          <div >
             <datetime
               v-model="dateTimeString"
               input-id="date"
@@ -13,7 +13,9 @@
               value-zone="local"
               auto
               v-on:close="dateTimeSelectorClosed"
-            />
+            >
+              <span class="icon is-left" slot="before"><i class="mdi mdi-calendar-today  mdi-16px" /></span>
+            </datetime>
           </div>
         </b-field>
         <b-field horizontal label="Time" custom-class="text-gray-600">
@@ -27,7 +29,9 @@
               auto
               use12-hour
               v-on:close="dateTimeSelectorClosed"
-            />
+            >
+              <span class="icon is-left" slot="before"><i class="mdi mdi-clock  mdi-16px" /></span>
+            </datetime>
           </div>
         </b-field>
         <div>
