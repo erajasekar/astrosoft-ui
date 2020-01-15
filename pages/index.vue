@@ -6,11 +6,13 @@
         <b-field horizontal label="Date" custom-class="text-gray-600">
           <div>
             <datetime
-              input-id="date"
               v-model="dateTimeString"
+              input-id="date"
               type="date"
               zone="local"
+              value-zone="local"
               auto
+              v-on:close="dateTimeSelectorClosed"
             />
           </div>
         </b-field>
@@ -21,8 +23,10 @@
               v-model="dateTimeString"
               type="time"
               zone="local"
+              value-zone="local"
               auto
               use12-hour
+              v-on:close="dateTimeSelectorClosed"
             />
           </div>
         </b-field>
@@ -134,8 +138,8 @@ import Logo from '@/components/Logo.vue'
   }
 })
 export default class Index extends Vue {
-  hourFormat = '12'
-  dateTimeString: string = new Date().toISOString()
+  dateTimeValue = new Date()
+  dateTimeString: string = this.dateTimeValue.toISOString()
   place: Place = new Place()
   timezone: Timezone = new Timezone()
   ephData: Array<Ephemeris> = []
@@ -172,10 +176,6 @@ export default class Index extends Vue {
     removePlace()
     removeTimezone()
     this.isPlaceSet = false
-  }
-
-  get dateTimeValue () {
-    return new Date(this.dateTimeString)
   }
 
   get formattedDateTime () {
@@ -244,6 +244,10 @@ export default class Index extends Vue {
       result.push({ planet: value.planet, position: formatDegMinSec(value.position, ':'), isRetro: value.isRetro })
     }
     return result
+  }
+
+  dateTimeSelectorClosed () {
+    this.dateTimeValue = new Date(this.dateTimeString)
   }
 
   planetStyle (planet: string) {
