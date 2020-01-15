@@ -4,18 +4,27 @@
       <logo />
       <form class="max-w-xl card p-4 mt-10 self-center">
         <b-field horizontal label="Date" custom-class="text-gray-600">
-          <b-datepicker
-            v-model="dateTimeValue"
-            icon="calendar-today"
-          />
+          <div>
+            <datetime
+              input-id="date"
+              v-model="dateTimeString"
+              type="date"
+              zone="local"
+              auto
+            />
+          </div>
         </b-field>
         <b-field horizontal label="Time" custom-class="text-gray-600">
-          <b-timepicker
-            :hour-format="12"
-            v-model="dateTimeValue"
-            icon="clock"
-            editable
-          />
+          <div>
+            <datetime
+              input-id="datetime"
+              v-model="dateTimeString"
+              type="time"
+              zone="local"
+              auto
+              use12-hour
+            />
+          </div>
         </b-field>
         <div>
           <div>
@@ -107,6 +116,7 @@
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
+import { Datetime } from 'vue-datetime'
 import { GooglePlacesAutocomplete } from 'vue-better-google-places-autocomplete'
 import { formatDateTime, formatDegMinSec } from '../mixins/FormatUtils'
 import { Ephemeris } from '../astro/Ephemeris'
@@ -119,12 +129,13 @@ import Logo from '@/components/Logo.vue'
 @Component({
   components: {
     Logo,
+    Datetime,
     GooglePlacesAutocomplete
   }
 })
 export default class Index extends Vue {
   hourFormat = '12'
-  dateTimeValue: Date = new Date()
+  dateTimeString: string = new Date().toISOString()
   place: Place = new Place()
   timezone: Timezone = new Timezone()
   ephData: Array<Ephemeris> = []
@@ -161,6 +172,10 @@ export default class Index extends Vue {
     removePlace()
     removeTimezone()
     this.isPlaceSet = false
+  }
+
+  get dateTimeValue () {
+    return new Date(this.dateTimeString)
   }
 
   get formattedDateTime () {
