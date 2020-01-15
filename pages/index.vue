@@ -14,7 +14,7 @@
               auto
               v-on:close="dateTimeSelectorClosed"
             >
-              <span class="icon is-left" slot="before"><i class="mdi mdi-calendar-today  mdi-16px" /></span>
+              <span class="icon is-left" slot="before"><i class="mdi mdi-calendar-today mdi-20px" /></span>
             </datetime>
           </div>
         </b-field>
@@ -30,7 +30,7 @@
               use12-hour
               v-on:close="dateTimeSelectorClosed"
             >
-              <span class="icon is-left" slot="before"><i class="mdi mdi-clock  mdi-16px" /></span>
+              <span class="icon is-left" slot="before"><i class="mdi mdi-watch  mdi-20px" /></span>
             </datetime>
           </div>
         </b-field>
@@ -72,11 +72,27 @@
           </div>
         </div>
         <div v-if="isPlaceSet" class="p-5 mt-2 mb-2">
-          <b-field horizontal label="Location" custom-class="text-xs text-gray-600">
-            <input :value="location" class="w-full text-gray-600 text-xs">
-          </b-field>
-          <b-field horizontal label="Timezone" custom-class="text-xs text-gray-600">
-            <input :value="timeZoneFormatted" readonly class="w-full text-gray-600 text-xs">
+          <b-field>
+            <b-field>
+              <p class="control">
+                <span class="button is-static is-small"><i class="mdi mdi-map-marker mdi-20px" /></span>
+              </p>
+              <b-input :value="location" custom-class="text-gray-600 text-xs" expanded readonly></b-input>
+              <b-input :value="location" custom-class="text-gray-600 text-xs" expanded readonly></b-input>
+              <p class="control">
+                <span class="button is-static is-small text-gray-600 text-xs">E</span>
+              </p>
+            </b-field>
+            <b-field>
+              <p class="control">
+                <span class="button is-static is-small"><i class="mdi mdi-clock mdi-16px" /></span>
+              </p>
+              <b-input :value="timeZoneFormatted" readonly custom-class="w-full text-gray-600 text-xs" expanded></b-input>
+              <b-input :value="timeZoneFormatted" readonly custom-class="w-full text-gray-600 text-xs" expanded></b-input>
+              <p class="control">
+                <span class="button is-static is-small text-gray-600 text-xs">E</span>
+              </p>
+            </b-field>
           </b-field>
         </div>
         <b-field horizontal>
