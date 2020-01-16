@@ -1,3 +1,5 @@
+import { Location } from '../astro/Place'
+
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 
 export function formatDateTime (dateTime: Date) {
@@ -29,12 +31,22 @@ export function formatDegMin (val: number, delim: string) {
   return result
 }
 
-export function formatLatLng (lat: number, lng: number) {
+export function formatLatLng (lat: number, lng: number) : Location {
   const latDir = lat > 0 ? ' N ' : ' S '
   const lngDir = lng > 0 ? ' E ' : ' W '
-  return `${formatDegMin(lat, '.')} ${latDir} , ${formatDegMin(lng, '.')} ${lngDir}`
+  return {
+    lat: formatDegMin(lat, ' : '),
+    latDir,
+    lng: formatDegMin(lng, ' : '),
+    lngDir
+  }
 }
 
 function padDigits (val: number, size: number) {
   return `${val}`.padStart(size, '0')
+}
+
+export function formatTimeZoneOffset(timeZoneOffset: number) {
+  const timeZoneSign = timeZoneOffset > 0 ? ' + ' : ' - '
+  return `GMT  ${timeZoneSign} ${formatDegMin(timeZoneOffset, ' : ')}`
 }

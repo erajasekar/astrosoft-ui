@@ -78,29 +78,33 @@
           </div>
         </div>
         <div v-if="isPlaceSet" class="p-5 mt-2 mb-2">
-          <b-field>
+          <b-field horizontal label="Location" custom-class="text-gray-600 text-xs">
             <b-field>
               <p class="control">
                 <span class="button is-static is-small">
-                  <b-icon type="is-dark" icon="crosshairs-gps"></b-icon>
+                  <b-icon type="is-dark" icon="crosshairs-gps" size="is-small"></b-icon>
                 </span>
               </p>
-              <b-input :value="location" custom-class="text-gray-600 text-xs" expanded readonly></b-input>
-              <b-input :value="location" custom-class="text-gray-600 text-xs" expanded readonly></b-input>
+              <b-input :value="location.lat" custom-class="text-gray-700 text-xs" expanded readonly></b-input>
+               <p class="control">
+                <span class="button is-static is-small text-gray-700 text-xs">{{ location.latDir }}</span>
+              </p>
+              <b-input :value="location.lng" custom-class="text-gray-700 text-xs" expanded readonly></b-input>
               <p class="control">
-                <span class="button is-static is-small text-gray-600 text-xs">E</span>
+                <span class="button is-static is-small text-gray-700 text-xs">{{ location.lngDir }}</span>
               </p>
             </b-field>
+          </b-field>
+          <b-field horizontal  label="Timezone" custom-class="text-gray-600 text-xs">
             <b-field>
               <p class="control">
                 <span class="button is-static is-small">
-                  <b-icon type="is-dark" icon="earth" ></b-icon>
+                  <b-icon type="is-dark" icon="earth" size="is-small" ></b-icon>
                 </span>
               </p>
-              <b-input :value="timeZoneFormatted" readonly custom-class="w-full text-gray-600 text-xs" expanded></b-input>
-              <b-input :value="timeZoneFormatted" readonly custom-class="w-full text-gray-600 text-xs" expanded></b-input>
+              <b-input :value="timezone.timeZoneId" readonly custom-class="w-full text-gray-700 text-xs" expanded></b-input>
               <p class="control">
-                <span class="button is-static is-small text-gray-600 text-xs">E</span>
+                <span class="button is-static is-small text-gray-700 text-xs" >{{ timezone.timeZoneOffset }} </span>
               </p>
             </b-field>
           </b-field>
@@ -216,10 +220,6 @@ export default class Index extends Vue {
     return this.place.location
   }
 
-  get timeZoneFormatted () {
-    return this.timezone.timeZoneFormatted
-  }
-
   get placeName () {
     return this.place.placeName
   }
@@ -278,6 +278,7 @@ export default class Index extends Vue {
 
   dateTimeSelectorClosed () {
     this.dateTimeValue = new Date(this.dateTimeString)
+    this.ephData = []
   }
 
   planetStyle (planet: string) {
