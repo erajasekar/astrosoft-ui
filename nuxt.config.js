@@ -71,12 +71,6 @@ export default {
   ** Build configuration
   */
   build: {
-    postcss: {
-      plugins: {
-        'postcss-import': {},
-        tailwindcss: {}
-      }
-    },
     /*
     ** You can extend webpack config here
     */
