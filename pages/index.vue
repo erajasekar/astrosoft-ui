@@ -14,7 +14,9 @@
               auto
               v-on:close="dateTimeSelectorClosed"
             >
-              <span class="icon is-left" slot="before"><i class="mdi mdi-calendar-today mdi-20px" /></span>
+              <span class="icon is-left" slot="before">
+                <b-icon icon="calendar-today" size="is-small"></b-icon>
+              </span>
             </datetime>
           </div>
         </b-field>
@@ -30,7 +32,9 @@
               use12-hour
               v-on:close="dateTimeSelectorClosed"
             >
-              <span class="icon is-left" slot="before"><i class="mdi mdi-watch  mdi-20px" /></span>
+              <span class="icon is-left" slot="before">
+                <b-icon icon="clock" size="is-small"></b-icon>
+              </span>
             </datetime>
           </div>
         </b-field>
@@ -57,7 +61,9 @@
                       autocomplete="off"
                       class="input"
                     >
-                    <span class="icon is-left"><i class="mdi mdi-magnify mdi-24px" /></span>
+                    <span class="icon is-left">
+                      <b-icon type="is-dark" icon="map-marker" size="is-small"></b-icon>
+                    </span>
                   </div>
                 </b-field>
               </div>
@@ -75,7 +81,9 @@
           <b-field>
             <b-field>
               <p class="control">
-                <span class="button is-static is-small"><i class="mdi mdi-map-marker mdi-20px" /></span>
+                <span class="button is-static is-small">
+                  <b-icon type="is-dark" icon="crosshairs-gps"></b-icon>
+                </span>
               </p>
               <b-input :value="location" custom-class="text-gray-600 text-xs" expanded readonly></b-input>
               <b-input :value="location" custom-class="text-gray-600 text-xs" expanded readonly></b-input>
@@ -85,7 +93,9 @@
             </b-field>
             <b-field>
               <p class="control">
-                <span class="button is-static is-small"><i class="mdi mdi-clock mdi-16px" /></span>
+                <span class="button is-static is-small">
+                  <b-icon type="is-dark" icon="earth" ></b-icon>
+                </span>
               </p>
               <b-input :value="timeZoneFormatted" readonly custom-class="w-full text-gray-600 text-xs" expanded></b-input>
               <b-input :value="timeZoneFormatted" readonly custom-class="w-full text-gray-600 text-xs" expanded></b-input>
