@@ -271,7 +271,7 @@ export default class Index extends Vue {
     const result: Array<Ephemeris> = []
     let value: any
     for (value of Object.values(resp.planetaryInfo)) {
-      result.push({ planet: value.planet, position: formatDegMinSec(value.position, ':'), isRetro: value.isRetro })
+      result.push({ planet: value.planet, position: formatDegMinSec(value.position), isRetro: value.isRetro })
     }
     return result
   }
