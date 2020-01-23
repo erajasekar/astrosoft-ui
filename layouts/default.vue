@@ -1,8 +1,23 @@
 <template>
-  <div>
-    <nuxt />
-  </div>
+  <section class="container center">
+    <div>
+      <logo />
+      <nuxt />
+    </div>
+  </section>
 </template>
+
+<script lang="ts">
+import { Component, Vue } from 'nuxt-property-decorator'
+import Logo from '@/components/Logo.vue'
+
+@Component({
+  components: {
+    Logo
+  }
+})
+export default class Index extends Vue {}
+</script>
 
 <style>
 @import url('https://fonts.googleapis.com/css?family=KoHo|Share+Tech+Mono|Roboto|Titillium+Web');

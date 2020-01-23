@@ -1,7 +1,6 @@
 <template>
   <section class="container center ">
     <div>
-      <logo />
       <form class="max-w-xl card p-4 mt-10 self-center">
         <b-field horizontal label="Date" custom-class="text-gray-600">
           <div>
