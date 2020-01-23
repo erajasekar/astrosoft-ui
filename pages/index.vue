@@ -121,6 +121,8 @@
         </b-field>
       </form>
     </div>
+    <b-loading is-full-page="false" :active.sync="isLoading" :can-cancel="true">
+    </b-loading>
     <div v-if="ephData.length > 0" class="p-4 mt-10 mb-10 content max-w-xl">
       <h1>
         Planetary Ephemeris on {{ formattedDateTime }} at {{ placeName }}
@@ -178,6 +180,7 @@ export default class Index extends Vue {
   timezone: Timezone = new Timezone()
   ephData: Array<Ephemeris> = []
   isPlaceSet = false
+  isLoading = false
 
   mounted () {
     const storedTz = getTimezone()
@@ -192,8 +195,13 @@ export default class Index extends Vue {
   }
 
   calculate () {
+    this.isLoading = true
+    // const loadingComponent = this.$buefy.loading.open()
+    // setTimeout(() => loadingComponent.close(), 3 * 1000)
     this.fetchData().then((data) => {
       this.ephData = data
+      // loadingComponent.close()
+      this.isLoading = false
     })
   }
 
