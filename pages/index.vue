@@ -1,21 +1,36 @@
 <template>
   <section class="content mt-5">
-    <b-notification :closable="false" type="is-info">
-      <blockquote class="text-xl font-bold">
-        Guide a person through astrology, he will make his life better. Teach astrology to a person, he will make other people's lives better
-      </blockquote>
-    </b-notification>
-    <p class="mt-3">
-      Too much information over the Internet can easily divert your learning.
-      We aim at providing the most relevant information to you and help you become a highly learned Vedic astrology practitioner.
-      My father Elango has more than 45 years of experience in this field. I am combining his expertise in this learning portal.
+    <section class="hero is-primary card">
+      <div class="hero-body">
+        <div class="container">
+          <h4 class="title italic p-5">
+            Guide a person through astrology, he will make his life better. Teach astrology to a person, he will make other people's lives better
+          </h4>
+          <p class="text-lg font-semibold text-teal-100">
+            Too much information over the Internet can easily divert your learning.
+            We aim at providing the most relevant information to you and help you become a highly learned Vedic astrology practitioner.
+            My father Elango has more than 45 years of experience in this field. I am combining his expertise in this learning portal.
+          </p>
+        </div>
+      </div>
+    </section>
+    <h1>Course </h1>
+    <p>
+      I am currently creating an online Astrology course. You can checkout the <a class="underline text-orange-800" href="https://docs.google.com/document/d/1diavcmYijxVW3tLQgzi2vJ6AE954XBpLE1aYotiw3_s/edit?usp=sharing" target="_blank">course content.</a>
+      Please fill this <a class="underline text-orange-800" href="https://docs.google.com/forms/d/11JY99KZSMdMao5O0bduwBMWbe2zF6NHXcGIT-KQ4sTQ" target="_blank">survey </a> to book your enrollment.
+      You will receive a notification as soon as the course is launched and you will get a discount in appreciation of your input.
     </p>
     <h1>Tools </h1>
-    <ul>
+    <ul class="list-none">
       <li>
         <nuxt-link to="/ephemeris">
-          <h3>Planetary Ephemeris</h3>
+          <div class="subtitle text-orange-800">Planetary Ephemeris</div>
         </nuxt-link>
+      </li>
+      <li>
+        <a href="https://www.innovativeastrosolutions.com/astrology-software" target="_blank">
+          <div class="subtitle text-orange-800">Astrology Software</div>
+        </a>
       </li>
     </ul>
   </section>

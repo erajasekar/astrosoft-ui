@@ -16,9 +16,10 @@ import Logo from '@/components/Logo.vue'
     Logo
   }
 })
-export default class Index extends Vue {}
-</script>
+export default class extends Vue {
+}
 
+</script>
 <style>
 @import url('https://fonts.googleapis.com/css?family=KoHo|Share+Tech+Mono|Roboto|Titillium+Web');
 html {
@@ -34,10 +35,7 @@ html {
 body {
   font-family: 'Titillium Web', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
    'Helvetica Neue', Arial, sans-serif;
-}
-
-h1 {
-  font-family: 'KoHo', sans-serif;
+  color: black;
 }
 
 </style>

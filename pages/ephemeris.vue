@@ -211,6 +211,7 @@ export default class Index extends Vue {
   }
 
   clearPlace () {
+    this.ephData = []
     this.place = new Place()
     this.timezone = new Timezone()
     removePlace()
@@ -299,7 +300,7 @@ export default class Index extends Vue {
 }
 </script>
 
-<style>
+<style scoped>
 .vbga-results {
     list-style: none;
     padding: 0;
@@ -315,5 +316,9 @@ export default class Index extends Vue {
 
 .planet-pos {
   font-family: 'Share Tech Mono', Courier, monospace
+}
+
+h1 {
+  font-family: 'KoHo', sans-serif;
 }
 </style>
