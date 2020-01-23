@@ -1,19 +1,18 @@
 <template>
-  <section class="hero is-warning">
+  <section class="hero is-warning max-w-full">
   <div class="hero-head">
     <nav class="navbar">
       <div class="container">
-        <!-- <div class="navbar-brand">
-          <a class="navbar-item">
+         <div class="navbar-brand">
+          <!-- <a class="navbar-item">
             <img class="h-24" src="https://static.wixstatic.com/media/fd356f_c3ba9281b9c84ef5b5e9992d74c397c3~mv2.png" alt="Innovative Astro Solutions"> </img>
-          </a>
+          </a> -->
           <span class="navbar-burger burger" data-target="navbarMenuHeroB">
             <span></span>
             <span></span>
             <span></span>
           </span>
         </div>
-        -->
         <div id="navbarMenuHeroB" class="navbar-menu">
           <div class="navbar-end">
             <a class="navbar-item is-active">

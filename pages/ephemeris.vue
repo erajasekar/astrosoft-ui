@@ -1,5 +1,5 @@
 <template>
-  <section class="container center ">
+  <section class="center">
     <div>
       <form class="max-w-xl card p-4 mt-10 self-center">
         <b-field horizontal label="Date" custom-class="text-gray-600">

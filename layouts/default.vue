@@ -1,7 +1,7 @@
 <template>
-  <section class="container center">
-    <div>
-      <logo />
+  <section class="center">
+    <logo />
+    <div class="container">
       <nuxt />
     </div>
   </section>
