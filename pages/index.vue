@@ -24,7 +24,9 @@
     <ul class="list-none">
       <li>
         <nuxt-link to="/ephemeris">
-          <div class="subtitle text-orange-800">Planetary Ephemeris</div>
+          <div class="subtitle text-orange-800">
+            Planetary Ephemeris
+          </div>
         </nuxt-link>
       </li>
       <li>
