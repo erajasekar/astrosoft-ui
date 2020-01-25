@@ -125,9 +125,9 @@
       <h1>
         Planetary Ephemeris on {{ formattedDateTime }} at {{ placeName }}
       </h1>
-      <table class="table is-bordered is-hoverable">
+      <table class="table is-bordered is-hoverable card">
         <thead>
-          <tr class="bg-green-200">
+          <tr class="bg-green-400 text-gray-900">
             <th>
               Planet
             </th>
