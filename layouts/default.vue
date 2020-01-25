@@ -1,11 +1,11 @@
 <template>
-  <section class="center site bg-orange-100">
+  <section class="center site bg-gray-100">
     <logo />
     <div class="container main">
       <nuxt />
     </div>
-    <footer class="p-5 bg-orange-900">
-      <div class="level text-white text-xl font-bold">
+    <footer class="p-5 bg-red-900">
+      <div class="level  text-red-100 text-xl">
         <p class="level-item">
           &copy; by &nbsp; <a href="https://www.innovativeastrosolutions.com/"> Innovative Astro Solutions</a>.
         </p>
@@ -36,7 +36,7 @@ export default class extends Vue {
 <style>
 @import url('https://fonts.googleapis.com/css?family=KoHo|Share+Tech+Mono|Roboto|Titillium+Web');
 html {
-  font-size: 16px;
+  font-size: 18px;
   word-spacing: 1px;
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;

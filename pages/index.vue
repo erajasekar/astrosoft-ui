@@ -1,12 +1,12 @@
 <template>
   <section class="content mt-5">
-    <section class="hero is-primary card">
-      <div class="hero-body">
+    <section class="hero card">
+      <div class="hero-body bg-green-500 text-gray-900">
         <div class="container">
-          <h4 class="title italic p-5">
+          <blockquote class="text-xl font-bold italic p-5">
             Guide a person through astrology, he will make his life better. Teach astrology to a person, he will make other people's lives better
-          </h4>
-          <p class="text-lg font-semibold text-teal-100">
+          </blockquote>
+          <p class="text-lg font-semibold text-yellow-200">
             Too much information over the Internet can easily divert your learning.
             We aim at providing the most relevant information to you and help you become a highly learned Vedic astrology practitioner.
             My father Elango has more than 45 years of experience in this field. I am combining his expertise in this learning portal.
