@@ -1,32 +1,22 @@
 <template>
   <section class="center site bg-gray-100">
-    <logo />
+    <TopHeader />
     <div class="container main">
       <nuxt />
     </div>
-    <footer class="p-5 bg-red-900">
-      <div class="level  text-red-100 text-xl">
-        <p class="level-item">
-          &copy; by &nbsp; <a href="https://www.innovativeastrosolutions.com/"> Innovative Astro Solutions</a>.
-        </p>
-        <p class="level-item">
-          Contact : innovativeastrosolutions@gmail.com
-        </p>
-        <p class="level-item">
-          Phone : +91 9008477228
-        </p>
-      </div>
-    </footer>
+    <BottomFooter />
   </section>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
-import Logo from '@/components/Logo.vue'
+import TopHeader from '@/components/TopHeader.vue'
+import BottomFooter from '@/components/BottomFooter.vue'
 
 @Component({
   components: {
-    Logo
+    TopHeader,
+    BottomFooter
   }
 })
 export default class extends Vue {

@@ -162,11 +162,8 @@ import Place from '../astro/Place'
 import Timezone from '../astro/Timezone'
 import { getTimezone, setTimezone, removeTimezone, setPlace, removePlace, getPlace } from '../mixins/LocalStorageUtils'
 
-import Logo from '@/components/Logo.vue'
-
 @Component({
   components: {
-    Logo,
     Datetime,
     GooglePlacesAutocomplete
   }
