@@ -4,8 +4,11 @@
       <div class="container has-text-centered">
         <img class="h-24" src="https://static.wixstatic.com/media/fd356f_c3ba9281b9c84ef5b5e9992d74c397c3~mv2.png" alt="Innovative Astro Solutions"> </img>
         <h1 class="title">
-          Learn Astrology
+          Learn Vedic Astrology
         </h1>
+        <h2 class="italic text-lg text-yellow-800">
+          Divine Subject, Demystified For You!
+        </h2>
       </div>
     </div>
 
@@ -15,6 +18,11 @@
           <ul>
             <li>
               <a href="/">Course</a>
+            </li>
+            <li>
+              <nuxt-link to="/ephemeris">
+                Ephemeris
+              </nuxt-link>
             </li>
             <li>
               <a href="https://www.innovativeastrosolutions.com/books" target="_blank">Books</a>
