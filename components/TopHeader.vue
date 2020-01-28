@@ -16,10 +16,10 @@
       <nav class="tabs is-boxed is-fullwidth">
         <div class="container">
           <ul>
-            <li>
+            <li :class="isMenuActive('index')">
               <a href="/">Course</a>
             </li>
-            <li>
+            <li :class="isMenuActive('ephemeris')">
               <nuxt-link to="/ephemeris">
                 Ephemeris
               </nuxt-link>
@@ -43,5 +43,15 @@
   </section>
 </template>
 
+<script lang="ts">
+
+import { Vue } from 'nuxt-property-decorator'
+export default class extends Vue {
+  isMenuActive (menuName: string) {
+    return this.$route.name === menuName ? 'is-active' : ''
+  }
+}
+
+</script>
 <style>
 </style>
