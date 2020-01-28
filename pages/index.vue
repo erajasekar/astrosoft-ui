@@ -24,6 +24,18 @@
     <p>
       The course content is published online and you view it by clicking <a class="no-underline hover:underline text-orange-800" href=" http://bit.ly/2sVotis" target="_blank">this link. </a>
     </p>
+    <h1>Course Preview </h1>
+    <p>
+      You can watch the sneak peek video of the course.
+      <iframe
+        width="560"
+        height="100%"
+        src="https://www.youtube.com/embed/uMJtoixkWgw"
+        frameborder="0"
+        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+    </p>
     <h1>Learning Tools</h1>
     <ul class="list-none">
       <li>
