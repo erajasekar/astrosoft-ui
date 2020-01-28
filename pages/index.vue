@@ -28,14 +28,14 @@
     <ul class="list-none">
       <li>
         <nuxt-link to="/ephemeris">
-          <div class="subtitle text-orange-800">
+          <span class="subtitle text-orange-800">
             Planetary Ephemeris
-          </div>
+          </span>
         </nuxt-link>
       </li>
       <li>
         <a href="https://www.innovativeastrosolutions.com/astrology-software" target="_blank">
-          <div class="subtitle text-orange-800">Astrology Software</div>
+          <span class="subtitle text-orange-800"> Astrology Software</span>
         </a>
       </li>
     </ul>
@@ -49,7 +49,15 @@
 <style>
 
 .content blockquote {
-    background-color:transparent;
+  background-color:transparent;
+}
+
+.content ul {
+  list-style: none;
+}
+
+.content li:before {
+  content: "\2650 ";
 }
 
 </style>
