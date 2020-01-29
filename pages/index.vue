@@ -1,5 +1,5 @@
 <template>
-  <section class="content mt-5">
+  <section class="content">
     <section class="hero card">
       <div class="hero-body bg-green-500 text-gray-900">
         <div class="container">
@@ -27,15 +27,29 @@
     <h1>Course Preview </h1>
     <p>
       You can watch the sneak peek video of the course.
+    </p>
+    <h3> What is Astrology in English ? </h3>
+    <div class="video-container">
       <iframe
         width="560"
-        height="100%"
+        height="315"
         src="https://www.youtube.com/embed/uMJtoixkWgw"
         frameborder="0"
         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen>
-      </iframe>
-    </p>
+        allowfullscreen
+      />
+    </div>
+    <h3> What is Astrology in Tamil ? </h3>
+    <div class="video-container">
+      <iframe
+        width="560"
+        height="315"
+        src="https://www.youtube.com/embed/4r9Ic1guvAo"
+        frameborder="0"
+        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+      />
+    </div>
     <h1>Learning Tools</h1>
     <ul class="list-none">
       <li>
@@ -58,7 +72,11 @@
 
 </script>
 
-<style>
+<style scoped>
+
+h1 {
+  color: #2e68da;
+}
 
 .content blockquote {
   background-color:transparent;
@@ -70,6 +88,20 @@
 
 .content li:before {
   content: "\2650 ";
+}
+
+.video-container {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 */
+  height: 0;
+}
+
+.video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 95%;
+  height: 95%;
 }
 
 </style>
