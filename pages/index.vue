@@ -20,36 +20,25 @@
       Please fill this <a class="no-underline hover:underline text-orange-800" href="http://bit.ly/3aHf2Eu" target="_blank">survey </a> to book your enrollment.
       You will receive a notification as soon as the course is launched and you will get a discount in appreciation of your input.
     </p>
-    <h1>Course Content </h1>
-    <p>
-      The course content is published online and you view it by clicking <a class="no-underline hover:underline text-orange-800" href=" http://bit.ly/2sVotis" target="_blank">this link. </a>
-    </p>
     <h1>Course Preview </h1>
-    <p>
-      You can watch the sneak peek video of the course.
-    </p>
-    <h3> What is Astrology in English ? </h3>
-    <div class="video-container">
-      <iframe
-        width="560"
-        height="315"
-        src="https://www.youtube.com/embed/uMJtoixkWgw"
-        frameborder="0"
-        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen
-      />
-    </div>
-    <h3> What is Astrology in Tamil ? </h3>
-    <div class="video-container">
-      <iframe
-        width="560"
-        height="315"
-        src="https://www.youtube.com/embed/4r9Ic1guvAo"
-        frameborder="0"
-        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen
-      />
-    </div>
+    <h3> Introduction to Astrology in English </h3>
+    <b-collapse :open="false" aria-id="contentIdForA11y1">
+      <button
+        slot="trigger"
+        class="button is-info"
+        aria-controls="contentIdForA11y1"
+      >
+        View Course Content
+      </button>
+      <div class="notification is-white max-h-full">
+        <div class="content">
+          <p>
+            You can checkout the <a class="no-underline hover:underline text-orange-800" href="https://docs.google.com/document/d/1diavcmYijxVW3tLQgzi2vJ6AE954XBpLE1aYotiw3_s/edit?usp=sharing" target="_blank">course content.</a>
+            <iframe src="https://docs.google.com/document/d/e/2PACX-1vRrEbhYx69QSaqXVyIBUbtOo0DOQ6Qdoe3tTuDmYn4tWNYTHE0Sfz4DAUWRqOVcbhnN1O31fEw1FLB4/pub?embedded=true" width="100%" height="200" />
+          </p>
+        </div>
+      </div>
+    </b-collapse>
     <h1>Learning Tools</h1>
     <ul class="list-none">
       <li>
