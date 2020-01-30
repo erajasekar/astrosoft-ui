@@ -6,11 +6,14 @@ export default {
   ** Headers of the page
   */
   head: {
-    title: process.env.npm_package_description || '',
+    title: ' | ' + process.env.npm_package_description || '',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: process.env.npm_package_description || '' }
+      { hid: 'description', name: 'description', content: 'Vedic Astrology Learning Portal from Innovative Astro Solutions. Here you will find courses, books , articles that will help you become a highly learned vedic astrology practitioner' },
+      { name: 'keywords', content: 'Astrology, Vedic Astrology, Learn Astrology, Astrology Course , Astrology Books'},
+      { name: 'robots', content: 'index, follow'},
+      { name: 'author', content: 'Muthu Vijayan Elango'},
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }

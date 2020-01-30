@@ -70,6 +70,16 @@
 
 <script lang="ts">
 
+import { Component, Vue } from 'nuxt-property-decorator'
+
+@Component
+export default class extends Vue {
+  head () {
+    return {
+      titleTemplate: 'Learn Vedic Astrology %s'
+    }
+  }
+}
 </script>
 
 <style scoped>

@@ -168,7 +168,7 @@ import { getTimezone, setTimezone, removeTimezone, setPlace, removePlace, getPla
     GooglePlacesAutocomplete
   }
 })
-export default class Index extends Vue {
+export default class EphemerisVue extends Vue {
   dateTimeValue = new Date()
   dateTimeString: string = this.dateTimeValue.toISOString()
   place: Place = new Place()
@@ -176,6 +176,12 @@ export default class Index extends Vue {
   ephData: Array<Ephemeris> = []
   isPlaceSet = false
   isLoading = false
+
+  head () {
+    return {
+      titleTemplate: 'Planetary Ephemeris ' + this.titleSuffix + ' %s'
+    }
+  }
 
   mounted () {
     const storedTz = getTimezone()
@@ -187,6 +193,10 @@ export default class Index extends Vue {
       this.place = storedPlace
       this.isPlaceSet = true
     }
+  }
+
+  get titleSuffix () {
+    return this.isPlaceSet ? 'at  ' + this.placeFormatted : ''
   }
 
   calculate () {
