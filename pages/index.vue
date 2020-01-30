@@ -22,7 +22,7 @@
     </p>
     <h1>Course Preview </h1>
     <h3> Introduction to Astrology in English </h3>
-    <b-collapse :open="false" aria-id="contentIdForA11y1">
+    <b-collapse :open="true" aria-id="contentIdForA11y1">
       <button
         slot="trigger"
         class="button is-info"
@@ -31,11 +31,17 @@
         View Course Content
       </button>
       <div class="notification is-white max-h-full">
-        <div class="content">
-          <p>
-            You can checkout the <a class="no-underline hover:underline text-orange-800" href="https://docs.google.com/document/d/1diavcmYijxVW3tLQgzi2vJ6AE954XBpLE1aYotiw3_s/edit?usp=sharing" target="_blank">course content.</a>
-            <iframe src="https://docs.google.com/document/d/e/2PACX-1vRrEbhYx69QSaqXVyIBUbtOo0DOQ6Qdoe3tTuDmYn4tWNYTHE0Sfz4DAUWRqOVcbhnN1O31fEw1FLB4/pub?embedded=true" width="100%" height="200" />
-          </p>
+        <div class="video-container">
+          <iframe
+            id="preview-iframe"
+            src="https://doculet.net/doc/fe11ed64e486edebee8f24f27fad8291"
+            align="middle"
+            width="100%"
+            height="3359"
+            allowfullscreen="true"
+            scrolling="no"
+            frameborder="0">
+          </iframe>
         </div>
       </div>
     </b-collapse>
