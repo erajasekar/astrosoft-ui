@@ -161,6 +161,7 @@ import { Ephemeris } from '../astro/Ephemeris'
 import Place from '../astro/Place'
 import Timezone from '../astro/Timezone'
 import { getTimezone, setTimezone, removeTimezone, setPlace, removePlace, getPlace } from '../mixins/LocalStorageUtils'
+import { getCurrentPageUrl } from '../mixins/AppUtils'
 
 @Component({
   components: {
@@ -179,7 +180,11 @@ export default class EphemerisVue extends Vue {
 
   head () {
     return {
-      titleTemplate: 'Planetary Ephemeris ' + this.titleSuffix + ' %s'
+      titleTemplate: 'Planetary Ephemeris ' + this.titleSuffix + ' | %s',
+      meta: [
+        { name: 'og:url', content: getCurrentPageUrl(this.$route) },
+        { name: 'twitter:url', content: getCurrentPageUrl(this.$route) }
+      ]
     }
   }
 

@@ -71,15 +71,21 @@
 <script lang="ts">
 
 import { Component, Vue } from 'nuxt-property-decorator'
+import { getCurrentPageUrl } from '../mixins/AppUtils'
 
 @Component
 export default class extends Vue {
   head () {
     return {
-      titleTemplate: 'Learn Vedic Astrology %s'
+      titleTemplate: 'Learn Vedic Astrology | Divine subject Demystified For You from %s',
+      meta: [
+        { name: 'og:url', content: getCurrentPageUrl(this.$route) },
+        { name: 'twitter:url', content: getCurrentPageUrl(this.$route) }
+      ]
     }
   }
 }
+
 </script>
 
 <style scoped>
