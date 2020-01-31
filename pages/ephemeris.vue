@@ -182,8 +182,8 @@ export default class EphemerisVue extends Vue {
     return {
       titleTemplate: 'Planetary Ephemeris ' + this.titleSuffix + ' | %s',
       meta: [
-        { name: 'og:url', content: getCurrentPageUrl(this.$route) },
-        { name: 'twitter:url', content: getCurrentPageUrl(this.$route) }
+        { name: 'og:url', content: getCurrentPageUrl('/ephemeris') },
+        { name: 'twitter:url', content: getCurrentPageUrl('/ephemeris') }
       ]
     }
   }

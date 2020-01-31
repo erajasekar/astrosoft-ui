@@ -79,8 +79,8 @@ export default class extends Vue {
     return {
       titleTemplate: 'Learn Vedic Astrology | Divine subject Demystified For You from %s',
       meta: [
-        { name: 'og:url', content: getCurrentPageUrl(this.$route) },
-        { name: 'twitter:url', content: getCurrentPageUrl(this.$route) }
+        { name: 'og:url', content: getCurrentPageUrl('/') },
+        { name: 'twitter:url', content: getCurrentPageUrl('/') }
       ]
     }
   }
