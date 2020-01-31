@@ -19,11 +19,11 @@ export default {
       { name: 'og:type', content: 'website'},
       { name: 'og:title', content: process.env.npm_package_description},
       { name: 'og:description', content: description},
-      { name: 'og:image', content: 'Muthu Vijayan Elango'},
+      { name: 'og:image', content: '/social_image.png'},
       { name: 'twitter:card', content: 'website'},
       { name: 'twitter:title', content: process.env.npm_package_description},
       { name: 'twitter:description', content: description},
-      { name: 'twitter:image', content: 'Muthu Vijayan Elango'}
+      { name: 'twitter:image', content: '/social_image.png'}
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }

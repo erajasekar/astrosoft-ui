@@ -2,7 +2,7 @@
   <section class="hero is-warning max-w-full  border-b-4 border-yellow-700">
     <div class="hero-body">
       <div class="container has-text-centered">
-        <img class="h-24" src="https://static.wixstatic.com/media/fd356f_c3ba9281b9c84ef5b5e9992d74c397c3~mv2.png" alt="Innovative Astro Solutions"> </img>
+        <img class="h-24" src="~assets/logo.png" alt="Innovative Astro Solutions"> </img>
         <h1 class="title">
           Learn Vedic Astrology
         </h1>

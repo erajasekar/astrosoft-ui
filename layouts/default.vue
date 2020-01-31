@@ -39,7 +39,7 @@ body {
   font-family: 'Titillium Web', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
    'Helvetica Neue', Arial, sans-serif;
   color: black;
-  background-image: url("https://www.dropbox.com/s/iawcfudpq41flnj/background8.png?raw=1")
+  background-image: url("~assets/background8.png")
 }
 
 .site {
