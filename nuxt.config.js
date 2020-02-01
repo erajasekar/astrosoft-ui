@@ -15,6 +15,7 @@ export default {
       { hid: 'description', name: 'description', content: description },
       { name: 'keywords', content: 'Astrology, Vedic Astrology, Learn Astrology, Astrology Course , Astrology Books'},
       { name: 'robots', content: 'index, follow'},
+      { name: 'google-site-verification', content: 'dEjBnsCAemk2rBsYmFEiNwPlhVYyjl7D-k1dz9A3s0g'},
       { name: 'author', content: 'Muthu Vijayan Elango'},
       { name: 'og:type', content: 'website'},
       { name: 'og:title', content: process.env.npm_package_description},
