@@ -3,7 +3,7 @@
     <section class="hero is-large">
       <div class="book-body columns">
         <div class="column is-half">
-          <b-carousel :indicator-inside="false" :autoplay="false" >
+          <b-carousel :indicator-inside="false" :autoplay="false">
             <b-carousel-item>
               <span class="image">
                 <img width="600px" src="~assets/AstrologyBook-FrontCover.jpg" alt="Book: Achieving Success Through Astrological Guidance">
@@ -15,9 +15,9 @@
               </span>
             </b-carousel-item>
             <template slot="indicators" slot-scope="key">
-                <span class="al image">
-                  {{ getCoverSlideText(key) }}
-                </span>
+              <span class="al image">
+                {{ getCoverSlideText(key) }}
+              </span>
             </template>
           </b-carousel>
         </div>
@@ -28,15 +28,47 @@
             After reading this book if you are able <i>to make better decisions in your life</i>, then my purpose is met.
           </p>
           <div>
-            <b-button
-              type="is-info"
-              tag="a"
-              target="_blank"
-              href="https://www.amazon.in/Achieving-Astrological-Guidance-Paperback-Book-100_Muthu/dp/B07WVXP7PH"
-              size="is-large"
-              icon-left="cart">
-              Order
-            </b-button>
+            <div class="buttons level">
+              <div class="level-item">
+                <b-button
+                  type="is-info"
+                  tag="a"
+                  target="_blank"
+                  href="https://www.amazon.in/Achieving-Astrological-Guidance-Paperback-Book-100_Muthu/dp/B07WVXP7PH"
+                  size="is-large"
+                  icon-left="cart"
+                >
+                  Order
+                </b-button>
+              </div>
+              <div class="level-item">
+                <b-button
+                  type="is-light"
+                  tag="a"
+                  target="_blank"
+                  href="https://78033ec1-ab1b-44c0-8cec-9f40e2fb171b.filesusr.com/ugd/16b291_915afccc9d6341c6ab1abccca81e6e22.pdf"
+                  size="is-medium"
+                  icon-left="book-open-variant"
+                >
+                  Read Sample
+                </b-button>
+              </div>
+            </div>
+          </div>
+          <div class="mt-16 h-10">
+            <b-rate
+              v-model="reviewRating"
+              :spaced="true"
+              :disabled="true"
+              custom-text="Reviews from Amazon"
+            />
+            <b-carousel :indicator-inside="true" :autoplay="true">
+              <b-carousel-item v-for="(item, i) in 3" :key="i">
+                <span class="image h-56">
+                  <img :src="`/book-review-${i}.png`" alt="Book: Achieving Success Through Astrological Guidance Amazon Review">
+                </span>
+              </b-carousel-item>
+            </b-carousel>
           </div>
         </div>
       </div>
@@ -69,6 +101,10 @@ export default class extends Vue {
 
   getCoverSlideText (key: any) {
     return key.i === 0 ? 'Front' : 'Back'
+  }
+
+  get reviewRating () {
+    return 5.0
   }
 }
 
