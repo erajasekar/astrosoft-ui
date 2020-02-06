@@ -5,18 +5,18 @@
         <div class="column is-half">
           <b-carousel :indicator-inside="false" :autoplay="false" >
             <b-carousel-item>
-              <span class="image" key="1">
+              <span class="image">
                 <img width="600px" src="~assets/AstrologyBook-FrontCover.jpg" alt="Book: Achieving Success Through Astrological Guidance">
               </span>
             </b-carousel-item>
-            <b-carousel-item key="2">
+            <b-carousel-item>
               <span class="image">
                 <img width="600px" src="~assets/AstrologyBook-BackCover.jpg" alt="Book: Achieving Success Through Astrological Guidance">
               </span>
             </b-carousel-item>
-            <template slot="indicators">
+            <template slot="indicators" slot-scope="key">
                 <span class="al image">
-                  front
+                  {{ getCoverSlideText(key) }}
                 </span>
             </template>
           </b-carousel>
@@ -65,6 +65,10 @@ export default class extends Vue {
         { name: 'twitter:url', content: getCurrentPageUrl('/astrology-books') }
       ]
     }
+  }
+
+  getCoverSlideText (key: any) {
+    return key.i === 0 ? 'Front' : 'Back'
   }
 }
 
