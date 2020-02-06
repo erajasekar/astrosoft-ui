@@ -32,9 +32,9 @@
       <h3> {{ preview.title }} </h3>
       <div class="video-container">
         <iframe
-          :src="preview.src"
           width="560"
           height="315"
+          :src="preview.src"
           frameborder="0"
           allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
           allowfullscreen

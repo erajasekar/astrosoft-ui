@@ -24,8 +24,10 @@
                 Ephemeris
               </nuxt-link>
             </li>
-            <li>
-              <a href="https://www.innovativeastrosolutions.com/books" target="_blank">Books</a>
+            <li :class="isMenuActive('astrology-books')">
+              <nuxt-link to="/astrology-books">
+                Books
+              </nuxt-link>
             </li>
             <li>
               <a href="https://www.innovativeastrosolutions.com/articles" target="_blank">Articles</a>
