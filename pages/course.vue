@@ -28,18 +28,27 @@
     <p>
       You can watch the sneak peek video of the course.
     </p>
-    <div v-for="(preview, index) in previewVideos" v-bind:key="index">
-      <h3> {{ preview.title }} </h3>
-      <div class="video-container">
-        <iframe
-          width="560"
-          height="315"
-          :src="preview.src"
-          frameborder="0"
-          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-        />
-      </div>
+    <h3> What is Astrology in English ? </h3>
+    <div class="video-container">
+      <iframe
+        width="560"
+        height="315"
+        src="https://www.youtube.com/embed/uMJtoixkWgw"
+        frameborder="0"
+        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+      />
+    </div>
+    <h3> What is Astrology in Tamil ? </h3>
+    <div class="video-container">
+      <iframe
+        width="560"
+        height="315"
+        src="https://www.youtube.com/embed/4r9Ic1guvAo"
+        frameborder="0"
+        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+      />
     </div>
     <h1>Learning Tools</h1>
     <ul class="list-none">
@@ -63,7 +72,6 @@
 
 import { Component, Vue } from 'nuxt-property-decorator'
 import { getCurrentPageUrl } from '../mixins/AppUtils'
-import { previewVideos } from '../mixins/CoursePreview'
 
 @Component
 export default class extends Vue {
@@ -75,10 +83,6 @@ export default class extends Vue {
         { name: 'twitter:url', content: getCurrentPageUrl('/') }
       ]
     }
-  }
-
-  get previewVideos () {
-    return previewVideos
   }
 }
 
