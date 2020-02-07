@@ -36,7 +36,11 @@
           </section>
           <p>
             Most astrology books talk about astrological concepts but they have a minimal focus on clearing myths about astrology and in guiding a common man to best utilize astrological guidance.
+          </p>
+          <p>
             This book will explain the importance of astrological guidance in human advancement.
+          </p>
+          <p>
             After reading this book if you are able <i>to make better decisions in your life</i>, then my purpose is met.
           </p>
           <div>
@@ -47,7 +51,7 @@
                   tag="a"
                   target="_blank"
                   href="https://www.amazon.in/Achieving-Astrological-Guidance-Paperback-Book-100_Muthu/dp/B07WVXP7PH"
-                  size="is-large"
+                  size="is-medium"
                   icon-left="cart"
                 >
                   Order
@@ -76,7 +80,7 @@
           v-model="reviewRating"
           :spaced="true"
           :disabled="true"
-          custom-text="Reviews from Amazon"
+          custom-text="Reviews in Amazon"
         />
         <b-carousel :indicator-inside="true" :autoplay="true">
           <b-carousel-item v-for="(item, i) in 3" :key="i">
@@ -139,7 +143,7 @@ import { getCurrentPageUrl } from '../mixins/AppUtils'
 export default class extends Vue {
   head () {
     return {
-      titleTemplate: 'Book: Achieving Success Through Astrological Guidance | %s',
+      titleTemplate: 'Book: Achieving Success Through Astrological Guidance from %s',
       meta: [
         { name: 'og:url', content: getCurrentPageUrl('/astrology-books') },
         { name: 'twitter:url', content: getCurrentPageUrl('/astrology-books') }
@@ -159,10 +163,6 @@ export default class extends Vue {
 </script>
 
 <style scoped>
-
-.content blockquote {
-  background-color:transparent;
-}
 
 .book-body {
   background-color: #5b4e4b;
