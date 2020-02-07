@@ -22,6 +22,18 @@
           </b-carousel>
         </div>
         <div class="column is-half font-semibold text-2xl">
+          <section class="mb-20">
+            <div class="video-container">
+              <iframe
+                src="https://www.youtube.com/embed/pR5kBA6TXA0"
+                width="560"
+                height="315"
+                frameborder="0"
+                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+              />
+            </div>
+          </section>
           <p>
             Most astrology books talk about astrological concepts but they have a minimal focus on clearing myths about astrology and in guiding a common man to best utilize astrological guidance.
             This book will explain the importance of astrological guidance in human advancement.
@@ -55,30 +67,38 @@
               </div>
             </div>
           </div>
-          <div class="mt-16 h-10">
-            <b-rate
-              v-model="reviewRating"
-              :spaced="true"
-              :disabled="true"
-              custom-text="Reviews from Amazon"
-            />
-            <b-carousel :indicator-inside="true" :autoplay="true">
-              <b-carousel-item v-for="(item, i) in 3" :key="i">
-                <span class="image h-56">
-                  <img :src="`/book-review-${i}.png`" alt="Book: Achieving Success Through Astrological Guidance Amazon Review">
-                </span>
-              </b-carousel-item>
-            </b-carousel>
-          </div>
         </div>
       </div>
     </section>
-    <h1>Course </h1>
-    <p>
-      I am currently creating an online Astrology course in English and Tamil Language. The course will be available in udemy.
-      Please fill this <a class="no-underline hover:underline text-orange-800" href="http://bit.ly/3aHf2Eu" target="_blank">survey </a> to book your enrollment.
-      You will receive a notification as soon as the course is launched and you will get a discount in appreciation of your input.
-    </p>
+    <div class="hero bg-teal-500 card mt-10">
+      <div class="hero-body text-white font-bold">
+        <b-rate
+          v-model="reviewRating"
+          :spaced="true"
+          :disabled="true"
+          custom-text="Reviews from Amazon"
+        />
+        <b-carousel :indicator-inside="true" :autoplay="true">
+          <b-carousel-item v-for="(item, i) in 3" :key="i">
+            <span class="image">
+              <img :src="`/book-review-${i}.png`" alt="Book: Achieving Success Through Astrological Guidance Amazon Review">
+            </span>
+          </b-carousel-item>
+        </b-carousel>
+      </div>
+    </div>
+    <h1>Is this book for you? </h1>
+    <ul class="list-none">
+      <li>
+        If you are a strong believer of astrology, but unsure on how to use astrological guidance wisely
+      </li>
+      <li>
+        You know that astrology works but don’t know how astrology really works?
+      </li>
+      <li>
+        If you want to lead an exceptional life by understanding what you are good at
+      </li>
+    </ul>
   </section>
 </template>
 
@@ -114,6 +134,10 @@ export default class extends Vue {
 
 h1 {
   color: #2e68da;
+}
+
+h6 {
+  color: white
 }
 
 .content blockquote {
