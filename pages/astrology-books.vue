@@ -1,6 +1,6 @@
 <template>
   <section class="content">
-    <section class="hero is-large">
+    <section class="hero">
       <div class="book-body columns">
         <div class="column is-half">
           <b-carousel :indicator-inside="false" :autoplay="false">
@@ -70,7 +70,7 @@
         </div>
       </div>
     </section>
-    <div class="hero bg-teal-500 card mt-10">
+    <section class="hero bg-teal-500 card">
       <div class="hero-body text-white font-bold">
         <b-rate
           v-model="reviewRating"
@@ -86,19 +86,47 @@
           </b-carousel-item>
         </b-carousel>
       </div>
-    </div>
-    <h1>Is this book for you? </h1>
-    <ul class="list-none">
-      <li>
-        If you are a strong believer of astrology, but unsure on how to use astrological guidance wisely
-      </li>
-      <li>
-        You know that astrology works but don’t know how astrology really works?
-      </li>
-      <li>
-        If you want to lead an exceptional life by understanding what you are good at
-      </li>
-    </ul>
+    </section>
+    <section class="hero bg-yellow-300 card">
+      <div class="hero-body font-semibold">
+        <h1>Is this book for you? </h1>
+        <ul class="list-none">
+          <li>
+            If you are a strong believer of astrology, but unsure on how to use astrological guidance wisely
+          </li>
+          <li>
+            You know that astrology works but don’t know how astrology really works?
+          </li>
+          <li>
+            If you want to lead an exceptional life by understanding what you are good at
+          </li>
+          <li>
+            If you want to understand the clear difference between fate and freewill
+          </li>
+          <li>
+            If you are deliberately looking for a how to book on astrological guidance that can help you to achieve success and fulfillment in life
+          </li>
+          <li>
+            If you wanted to read a book on astrology without too much jargons
+          </li>
+          <li>
+            This is not a technical book on astrology but has technical content in relevant sections.
+          </li>
+        </ul>
+        <div class="buttons  ml-8">
+          <b-button
+            type="is-info"
+            tag="a"
+            target="_blank"
+            href="https://www.amazon.in/Achieving-Astrological-Guidance-Paperback-Book-100_Muthu/dp/B07WVXP7PH"
+            size="is-large"
+            icon-left="cart"
+          >
+            Order
+          </b-button>
+        </div>
+      </div>
+    </section>
   </section>
 </template>
 
@@ -132,14 +160,6 @@ export default class extends Vue {
 
 <style scoped>
 
-h1 {
-  color: #2e68da;
-}
-
-h6 {
-  color: white
-}
-
 .content blockquote {
   background-color:transparent;
 }
@@ -147,7 +167,8 @@ h6 {
 .book-body {
   background-color: #5b4e4b;
   color: white;
-  padding: 100px 10px 10px 10px;
+  padding: 30px 10px 10px 10px;
+  margin: 0px;
 }
 
 .content ul {
@@ -155,7 +176,7 @@ h6 {
 }
 
 .content li:before {
-  content: "\2650 ";
+  content: "\2714 ";
 }
 
 .video-container {
