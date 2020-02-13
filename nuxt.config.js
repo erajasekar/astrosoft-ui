@@ -21,11 +21,11 @@ export default {
       { property: 'og:type', content: 'website'},
       { property: 'og:title', content: process.env.npm_package_description},
       { property: 'og:description', content: description},
-      { property: 'og:image', content: baseUrl + '/social_image1.png'},
+      { property: 'og:image', content: baseUrl + '/social_image2.png'},
       { name: 'twitter:card', content: 'summary_large_image'},
       { name: 'twitter:title', content: process.env.npm_package_description},
       { name: 'twitter:description', content: description},
-      { name: 'twitter:image', content: baseUrl + '/social_image.png'}
+      { name: 'twitter:image', content: baseUrl + '/social_image2.png'}
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
