@@ -80,8 +80,8 @@
           About the Author
         </p>
         <p>
-          <span class="italic" itemprop="name">Muthu Vijayan Elango</span> is an <span itemprop="title">astrologer and a certified life coach</span> at <a class="border-dotted border-b-2 hover:text-gray-700" itemprop="url" href="https://www.innovativeastrosolutions.com/" target="_blank">innovativeastrosolutions.com</a>
-          He learnt astrology from his father Elango and has been practicing it for more than 18 years.
+          <span class="italic" itemprop="name">Muthu Vijayan Elango</span> is an <span itemprop="jobTitle">astrologer and a certified life coach</span> at <a class="border-dotted border-b-2 hover:text-gray-700" itemprop="url" href="https://www.innovativeastrosolutions.com/" target="_blank">innovativeastrosolutions.com</a>
+          . He learnt astrology from his father Elango and has been practicing it for more than 18 years.
           After completing his Master degree in engineering from College of Engineering Guindy a premier institute in India , he worked in a well known MNC for a decade before he found his calling in astrology.
           He is passionate on sharing his astrological wisdom to the common man.
           He is one of the most popular writers on <a class="border-dotted border-b-2 hover:text-gray-700" href="https://www.quora.com/profile/Elango-Muthu-Vijayan/answers" target="_blank">Quora</a> pertaining to the topic of astrology.
