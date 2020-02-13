@@ -1,7 +1,7 @@
 require('dotenv').config()
 
 const description = 'Vedic Astrology Learning Portal from Innovative Astro Solutions. Here you will find courses, books , articles that will help you become a highly learned vedic astrology practitioner'
-const baseUrl = 'https://learn.innovativeastrosolutions.com/'
+const baseUrl = 'https://learn.innovativeastrosolutions.com'
 
 export default {
   mode: 'universal',
