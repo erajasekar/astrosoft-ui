@@ -75,12 +75,12 @@
       </div>
     </section>
     <section class="hero bg-red-500 card">
-      <div class="hero-body text-white font-semibold">
+      <div class="hero-body text-white font-semibold" itemscope itemtype="http://schema.org/Person">
         <p class="text-3xl">
           About the Author
         </p>
         <p>
-          <span class="italic">Muthu Vijayan Elango</span> is an astrologer and a certified life coach at <a class="border-dotted border-b-2 hover:text-gray-700" href="https://www.innovativeastrosolutions.com/" target="_blank">innovativeastrosolutions.com</a>
+          <span class="italic" itemprop="name">Muthu Vijayan Elango</span> is an <span itemprop="title">astrologer and a certified life coach</span> at <a class="border-dotted border-b-2 hover:text-gray-700" itemprop="url" href="https://www.innovativeastrosolutions.com/" target="_blank">innovativeastrosolutions.com</a>
           He learnt astrology from his father Elango and has been practicing it for more than 18 years.
           After completing his Master degree in engineering from College of Engineering Guindy a premier institute in India , he worked in a well known MNC for a decade before he found his calling in astrology.
           He is passionate on sharing his astrological wisdom to the common man.
