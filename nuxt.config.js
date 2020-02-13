@@ -1,6 +1,7 @@
 require('dotenv').config()
 
 const description = 'Vedic Astrology Learning Portal from Innovative Astro Solutions. Here you will find courses, books , articles that will help you become a highly learned vedic astrology practitioner'
+const baseUrl = 'https://learn.innovativeastrosolutions.com/'
 
 export default {
   mode: 'universal',
@@ -17,14 +18,14 @@ export default {
       { name: 'robots', content: 'index, follow'},
       { name: 'google-site-verification', content: 'dEjBnsCAemk2rBsYmFEiNwPlhVYyjl7D-k1dz9A3s0g'},
       { name: 'author', content: 'Muthu Vijayan Elango'},
-      { name: 'og:type', content: 'website'},
-      { name: 'og:title', content: process.env.npm_package_description},
-      { name: 'og:description', content: description},
-      { name: 'og:image', content: '/social_image.png'},
-      { name: 'twitter:card', content: 'website'},
+      { property: 'og:type', content: 'website'},
+      { property: 'og:title', content: process.env.npm_package_description},
+      { property: 'og:description', content: description},
+      { property: 'og:image', content: baseUrl + '/social_image1.png'},
+      { name: 'twitter:card', content: 'summary_large_image'},
       { name: 'twitter:title', content: process.env.npm_package_description},
       { name: 'twitter:description', content: description},
-      { name: 'twitter:image', content: '/social_image.png'}
+      { name: 'twitter:image', content: baseUrl + '/social_image.png'}
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
