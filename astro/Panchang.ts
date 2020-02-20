@@ -1,3 +1,5 @@
+import { IInfoEntry , InfoEntry } from './InfoEntry'
+
 export interface IPanchang {
   date: string
   weekday: string
@@ -62,5 +64,9 @@ export class Panchang implements IPanchang {
     this.thithi = { name: data.thithi.name, endTime: data.thithi.endTime }
     this.yoga = { name: data.yoga.name, endTime: data.yoga.endTime }
     this.karna = new Karna(data.karna)
+  }
+
+  get entries () : Array<InfoEntry> {
+    return Object.keys(this).map(k => new InfoEntry(this, k) )
   }
 }

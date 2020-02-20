@@ -121,29 +121,18 @@
       </form>
     </div>
     <b-loading :active.sync="isLoading" />
-    <div v-if="ephData.length > 0" class="p-4 mt-10 mb-10 content max-w-xl">
+    <div v-if="panchangData.length > 0" class="p-4 mt-10 mb-10 content max-w-xl">
       <h1>
-        Planetary Ephemeris on {{ formattedDateTime }} at {{ placeName }}
+        Panchang on {{ formattedDateTime }} at {{ placeName }}
       </h1>
       <table class="table is-bordered is-hoverable card">
-        <thead>
-          <tr class="bg-green-400 text-gray-900">
-            <th>
-              Planet
-            </th>
-            <th>
-              Position
-            </th>
-          </tr>
-        </thead>
         <tbody>
-          <tr v-for="(eph, index) in ephData" v-bind:key="index">
-            <td :class="planetStyle(eph.planet)">
-              {{ eph.planet }}
-              <span v-show="eph.isRetro"> ( R ) </span>
+          <tr v-for="(pan, index) in panchangData" v-bind:key="index">
+            <td>
+              {{ pan.name }}
             </td>
-            <td class="planet-pos font-semibold text-blue-700">
-              {{ eph.position }}
+            <td>
+              {{ pan.value }}
             </td>
           </tr>
         </tbody>
@@ -157,8 +146,8 @@ import { Component, Vue } from 'nuxt-property-decorator'
 import { Datetime } from 'vue-datetime'
 import { GooglePlacesAutocomplete } from 'vue-better-google-places-autocomplete'
 import { formatDateTime } from '../mixins/FormatUtils'
-import { IPanchang, Panchang } from '../astro/Panchang'
-import { Ephemeris } from '../astro/Ephemeris'
+import { Panchang } from '../astro/Panchang'
+import { IInfoEntry, InfoEntry } from '../astro/InfoEntry'
 import Place from '../astro/Place'
 import Timezone from '../astro/Timezone'
 import { getTimezone, setTimezone, removeTimezone, setPlace, removePlace, getPlace } from '../mixins/LocalStorageUtils'
@@ -175,8 +164,7 @@ export default class EphemerisVue extends Vue {
   dateTimeString: string = this.dateTimeValue.toISOString()
   place: Place = new Place()
   timezone: Timezone = new Timezone()
-  ephData: Array<Ephemeris> = []
-  panchang : IPanchang | null = null
+  panchangData : Array<IInfoEntry> = []
   isPlaceSet = false
   isLoading = false
 
@@ -211,7 +199,7 @@ export default class EphemerisVue extends Vue {
     // const loadingComponent = this.$buefy.loading.open()
     // setTimeout(() => loadingComponent.close(), 3 * 1000)
     this.fetchData().then((data) => {
-      this.ephData = data
+      this.panchangData = data
       // loadingComponent.close()
       this.isLoading = false
     })
@@ -225,7 +213,7 @@ export default class EphemerisVue extends Vue {
   }
 
   clearPlace () {
-    this.ephData = []
+    this.panchangData = []
     this.place = new Place()
     this.timezone = new Timezone()
     removePlace()
@@ -288,20 +276,15 @@ export default class EphemerisVue extends Vue {
     return this.parseData(resp)
   }
 
-  parseData (resp: any): Array<Ephemeris> {
-    const result: Array<Ephemeris> = []
-    this.panchang = new Panchang(resp)
-    console.log('RAJA ', this.panchang)
-    /* let value: any
-    for (value of Object.values(resp.planetaryInfo)) {
-      result.push({ planet: value.planet, position: formatDegMinSec(value.position), isRetro: value.isRetro })
-    } */
+  parseData (resp: any): Array<InfoEntry> {
+    const result = new Panchang(resp).entries
+    console.log('RAJA ', result)
     return result
   }
 
   dateTimeSelectorClosed () {
     this.dateTimeValue = new Date(this.dateTimeString)
-    this.ephData = []
+    this.panchangData = []
   }
 
   planetStyle (planet: string) {
