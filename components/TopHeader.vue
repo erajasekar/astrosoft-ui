@@ -33,7 +33,7 @@
               <a href="https://www.innovativeastrosolutions.com/articles" target="_blank">Articles</a>
             </li>
             <li>
-              <a href="https://www.innovativeastrosolutions.com/" target="_blank">Consuling</a>
+              <a href="https://www.innovativeastrosolutions.com/" target="_blank">Consulting</a>
             </li>
             <li>
               <a href="https://www.innovativeastrosolutions.com/about" target="_blank">About</a>

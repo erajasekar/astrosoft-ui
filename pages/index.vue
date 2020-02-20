@@ -69,7 +69,7 @@ import { previewVideos } from '../mixins/CoursePreview'
 export default class extends Vue {
   head () {
     return {
-      titleTemplate: 'Learn Vedic Astrology | Divine subject Demystified For You from %s',
+      titleTemplate: 'Best Vedic Astrology Course Online| Divine subject Demystified For You from %s',
       meta: [
         { name: 'og:url', content: getCurrentPageUrl('/') },
         { name: 'twitter:url', content: getCurrentPageUrl('/') }
