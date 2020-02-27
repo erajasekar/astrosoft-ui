@@ -122,7 +122,7 @@
     </div>
     <b-loading :active.sync="isLoading" />
     <div v-if="panchangData.length > 0" class="p-4 mt-10 mb-10 content max-w-xl">
-      <h1>
+      <h1 v-colorDirective="{color: 'red', backgroundColor: 'blue'}">
         Panchang on {{ formattedDateTime }} at {{ placeName }}
       </h1>
       <table class="table is-bordered is-hoverable card">
@@ -152,11 +152,15 @@ import Place from '../astro/Place'
 import Timezone from '../astro/Timezone'
 import { getTimezone, setTimezone, removeTimezone, setPlace, removePlace, getPlace } from '../mixins/LocalStorageUtils'
 import { getCurrentPageUrl } from '../mixins/AppUtils'
+import colorDirective from '../plugins/color-directive'
 
 @Component({
   components: {
     Datetime,
     GooglePlacesAutocomplete
+  },
+  directives: {
+    colorDirective
   }
 })
 export default class EphemerisVue extends Vue {
@@ -252,7 +256,6 @@ export default class EphemerisVue extends Vue {
 
   async fetchData () {
     const dateTime = this.dateTimeValue
-    // TODO
     const body = {
       name: 'Astrosoft UI',
       place: {

@@ -8,25 +8,25 @@ export interface IPanchang {
   paksha: string
   rahuKala: string
   yamaKanda: string
-  nakshathra: PanEvent
-  thithi: PanEvent
-  yoga: PanEvent
+  nakshathra: IPanEvent
+  thithi: IPanEvent
+  yoga: IPanEvent
   karna: IKarna
 }
 
-interface PanEvent {
+interface IPanEvent {
   name: string
   endTime: string
 }
 
 interface IKarna {
-  first: PanEvent
-  second: PanEvent
+  first: IPanEvent
+  second: IPanEvent
 }
 
 class Karna implements IKarna {
-  first: PanEvent
-  second: PanEvent
+  first: IPanEvent
+  second: IPanEvent
 
   constructor(data: any) {
     this.first = this.extractKarna(data.first)
@@ -37,6 +37,23 @@ class Karna implements IKarna {
     return { name: event.name, endTime: event.endTime }
   }
 
+  toString() {
+    return `${this.first.name} until ${this.first.endTime}`
+  }
+}
+
+class PanEvent implements IPanEvent {
+  name: string
+  endTime: string
+
+  constructor(data: any) {
+    this.name = data.name
+    this.endTime = data.endTime
+  }
+
+  toString() {
+    return `${this.name} until ${this.endTime}`
+  }
 }
 
 export class Panchang implements IPanchang {
@@ -47,9 +64,9 @@ export class Panchang implements IPanchang {
   paksha: string
   rahuKala: string
   yamaKanda: string
-  nakshathra: PanEvent
-  thithi: PanEvent
-  yoga: PanEvent
+  nakshathra: IPanEvent
+  thithi: IPanEvent
+  yoga: IPanEvent
   karna: IKarna
 
   constructor(data: any) {
@@ -60,13 +77,17 @@ export class Panchang implements IPanchang {
     this.paksha = data.paksha
     this.rahuKala = data.rahuKala
     this.yamaKanda = data.yamaKanda
-    this.nakshathra = { name: data.nakshathra.name, endTime: data.nakshathra.endTime }
-    this.thithi = { name: data.thithi.name, endTime: data.thithi.endTime }
-    this.yoga = { name: data.yoga.name, endTime: data.yoga.endTime }
+    this.nakshathra = new PanEvent(data.nakshathra)
+    this.thithi = new PanEvent(data.thithi)
+    this.yoga = new PanEvent(data.yoga)
     this.karna = new Karna(data.karna)
   }
 
   get entries () : Array<InfoEntry> {
-    return Object.keys(this).map(k => new InfoEntry(this, k) )
+    return Object.keys(this).map(k => {
+        const val: string = (<any>this)[k]
+        console.log(val.toString())
+        return new InfoEntry(this, k)
+    })
   }
 }
