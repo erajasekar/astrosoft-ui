@@ -129,7 +129,7 @@
         <tbody>
           <tr v-for="(pan, index) in panchangData" v-bind:key="index">
             <td>
-              {{ pan.name }}
+              {{ pan.name | camel2title }}
             </td>
             <td v-panDirective="pan">
               {{ pan.value }}
@@ -145,7 +145,7 @@
 import { Component, Vue } from 'nuxt-property-decorator'
 import { Datetime } from 'vue-datetime'
 import { GooglePlacesAutocomplete } from 'vue-better-google-places-autocomplete'
-import { formatDateTime } from '../mixins/FormatUtils'
+import { formatDateTime, camel2title } from '../mixins/FormatUtils'
 import { Panchang } from '../astro/Panchang'
 import { IInfoEntry, InfoEntry } from '../astro/InfoEntry'
 import Place from '../astro/Place'
@@ -161,6 +161,9 @@ import panDirective from '../plugins/panchang-directive'
   },
   directives: {
     panDirective
+  },
+  filters: {
+    camel2title
   }
 })
 export default class EphemerisVue extends Vue {

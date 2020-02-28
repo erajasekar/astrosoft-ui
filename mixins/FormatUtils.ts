@@ -53,3 +53,8 @@ export function formatTimeZoneOffset(timeZoneOffset: number) {
   const timeZoneSign = timeZoneOffset > 0 ? ' + ' : ' - '
   return `GMT  ${timeZoneSign} ${formatDegMin(timeZoneOffset, ' : ')}`
 }
+
+export function camel2title(camelCase: string) {
+  var value = camelCase.replace( /([A-Z])/g, " $1" )
+  return value.charAt(0).toUpperCase() + value.slice(1)
+}
