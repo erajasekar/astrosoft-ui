@@ -12,6 +12,7 @@ export interface IPanchang {
   thithi: IPanEvent
   yoga: IPanEvent
   karna: IKarna
+  auspiciousTime: Array<String>
 }
 
 interface IPanEvent {
@@ -68,6 +69,8 @@ export class Panchang implements IPanchang {
   thithi: IPanEvent
   yoga: IPanEvent
   karna: IKarna
+  auspiciousTime: Array<String>
+
 
   constructor(data: any) {
     this.date = data.date
@@ -81,6 +84,7 @@ export class Panchang implements IPanchang {
     this.thithi = new PanEvent(data.thithi)
     this.yoga = new PanEvent(data.yoga)
     this.karna = new Karna(data.karna)
+    this.auspiciousTime = data.auspiciousTime
   }
 
   get entries () : Array<InfoEntry> {
