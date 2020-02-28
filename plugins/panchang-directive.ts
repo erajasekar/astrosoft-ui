@@ -25,7 +25,8 @@ function applyPanchangStyles(el: Element, binding: VNodeDirective) {
   }
   else if (name === 'auspiciousTime'){
     const items = data as Array<String>
-    el.innerHTML = items.map(item =>  `<div>${item}</div>`).join('')
+    el.innerHTML = items.flatMap(item => item.split(","))
+      .map(item =>  `<div>${item}</div>`).join('')
   }
 }
 
