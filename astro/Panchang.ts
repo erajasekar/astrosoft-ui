@@ -37,10 +37,6 @@ class Karna implements IKarna {
   extractKarna(event: any) {
     return { name: event.name, endTime: event.endTime }
   }
-
-  toString() {
-    return `${this.first.name} until ${this.first.endTime}`
-  }
 }
 
 class PanEvent implements IPanEvent {
@@ -50,10 +46,6 @@ class PanEvent implements IPanEvent {
   constructor(data: any) {
     this.name = data.name
     this.endTime = data.endTime
-  }
-
-  toString() {
-    return `${this.name} until ${this.endTime}`
   }
 }
 

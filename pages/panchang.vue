@@ -128,10 +128,10 @@
       <table class="table is-bordered is-hoverable card">
         <tbody>
           <tr v-for="(pan, index) in panchangData" v-bind:key="index">
-            <td>
+            <td class="font-semibold text-green-800">
               {{ pan.name | camel2title }}
             </td>
-            <td v-panDirective="pan">
+            <td class="panchang font-semibold text-blue-700" v-panDirective="pan">
               {{ pan.value }}
             </td>
           </tr>
@@ -319,7 +319,7 @@ export default class EphemerisVue extends Vue {
     position: absolute;
 }
 
-.planet-pos {
+.panchang {
   font-family: 'Share Tech Mono', Courier, monospace
 }
 

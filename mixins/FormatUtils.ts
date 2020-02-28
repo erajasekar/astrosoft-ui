@@ -16,6 +16,22 @@ export function formatDateTime (dateTime: Date) {
   return `${month} ${date}, ${year} ${hour === 0 ? '12' : hour} :` + `${mins}`.padStart(2, '0') + ` ${ampm}`
 }
 
+export function formatEndTime(endTime: string) {
+  const hrmin = endTime.split(":")
+  let hr = parseInt(hrmin[0])
+  const min = parseInt(hrmin[1])
+  let nextDay = ''
+  let ampm = 'AM'
+  if (hr >= 12) {
+    ampm = 'PM'
+    if (hr >= 24) {
+      nextDay = " ( Next Day )"
+    }
+  }
+  hr = hr % 12
+  return `${hr}:${min} ${ampm} ${nextDay}`
+}
+
 export function formatDegMinSec (val: number, delim?: string) {
   const degMinSec = toDegMinSec(val)
   if (delim) {
