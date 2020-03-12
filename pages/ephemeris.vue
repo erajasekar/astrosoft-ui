@@ -206,11 +206,8 @@ export default class EphemerisVue extends Vue {
 
   calculate () {
     this.isLoading = true
-    // const loadingComponent = this.$buefy.loading.open()
-    // setTimeout(() => loadingComponent.close(), 3 * 1000)
     this.fetchData().then((data) => {
       this.ephData = data
-      // loadingComponent.close()
       this.isLoading = false
     })
   }
@@ -262,7 +259,6 @@ export default class EphemerisVue extends Vue {
 
   async fetchData () {
     const dateTime = this.dateTimeValue
-    // TODO
     const body = {
       name: 'Astrosoft UI',
       place: {
@@ -281,7 +277,6 @@ export default class EphemerisVue extends Vue {
         Ayanamsa: 'LAHARI'
       }
     }
-    // console.log(body)
     const resp = await this.$axios.$post('https://api.innovativeastrosolutions.com/v0/horoscope', body)
     return this.parseData(resp)
   }

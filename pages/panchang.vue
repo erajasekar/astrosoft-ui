@@ -131,7 +131,7 @@
             <td class="font-semibold text-green-800">
               {{ pan.name | camel2title }}
             </td>
-            <td class="panchang font-semibold text-blue-700" v-panDirective="pan">
+            <td v-panDirective="pan" class="panchang font-semibold text-blue-700">
               {{ pan.value }}
             </td>
           </tr>
@@ -177,10 +177,10 @@ export default class EphemerisVue extends Vue {
 
   head () {
     return {
-      titleTemplate: 'Planetary Ephemeris ' + this.titleSuffix + ' | %s',
+      titleTemplate: 'Panchang ' + this.titleSuffix + ' | %s',
       meta: [
-        { name: 'og:url', content: getCurrentPageUrl('/ephemeris') },
-        { name: 'twitter:url', content: getCurrentPageUrl('/ephemeris') }
+        { name: 'og:url', content: getCurrentPageUrl('/panchang') },
+        { name: 'twitter:url', content: getCurrentPageUrl('/panchang') }
       ]
     }
   }
@@ -203,11 +203,8 @@ export default class EphemerisVue extends Vue {
 
   calculate () {
     this.isLoading = true
-    // const loadingComponent = this.$buefy.loading.open()
-    // setTimeout(() => loadingComponent.close(), 3 * 1000)
     this.fetchData().then((data) => {
       this.panchangData = data
-      // loadingComponent.close()
       this.isLoading = false
     })
   }
@@ -277,7 +274,6 @@ export default class EphemerisVue extends Vue {
         Ayanamsa: 'LAHARI'
       }
     }
-    // console.log(body)
     const resp = await this.$axios.$post('https://api.innovativeastrosolutions.com/v0/panchang', body)
     return this.parseData(resp)
   }
@@ -291,16 +287,6 @@ export default class EphemerisVue extends Vue {
   dateTimeSelectorClosed () {
     this.dateTimeValue = new Date(this.dateTimeString)
     this.panchangData = []
-  }
-
-  planetStyle (planet: string) {
-    const fontStyle = 'font-semibold '
-    switch (planet) {
-      case 'Sun' : return fontStyle + 'text-orange-800'
-      case 'Moon' : return fontStyle + 'text-green-800'
-      case 'Ascendant' : return fontStyle + 'text-red-500'
-      default : return 'text-gray-800'
-    }
   }
 }
 </script>
