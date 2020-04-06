@@ -22,7 +22,8 @@
     "postcss-import": "^12.0.1",
     "vue-better-google-places-autocomplete": "^1.1.0",
     "vue-datetime": "^1.0.0-beta.11",
-    "weekstart": "^1.0.1"
+    "weekstart": "^1.0.1",
+    "minimist": ">=1.2.3"
   },
   "devDependencies": {
     "@nuxt/typescript-build": "^0.5.1",
