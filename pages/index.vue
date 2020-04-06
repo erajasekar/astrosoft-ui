@@ -41,21 +41,6 @@
         />
       </div>
     </div>
-    <h1>Learning Tools</h1>
-    <ul class="list-none">
-      <li>
-        <nuxt-link to="/ephemeris">
-          <span class="subtitle text-orange-800">
-            Planetary Ephemeris
-          </span>
-        </nuxt-link>
-      </li>
-      <li>
-        <a href="https://www.innovativeastrosolutions.com/astrology-software" target="_blank">
-          <span class="subtitle text-orange-800"> Astrology Software</span>
-        </a>
-      </li>
-    </ul>
   </section>
 </template>
 
@@ -92,14 +77,6 @@ h1 {
 
 .content blockquote {
   background-color:transparent;
-}
-
-.content ul {
-  list-style: none;
-}
-
-.content li:before {
-  content: "\2650 ";
 }
 
 .video-container {
