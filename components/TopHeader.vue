@@ -19,14 +19,19 @@
             <li :class="isMenuActive('index')">
               <a href="/">Course</a>
             </li>
+            <li :class="isMenuActive('ephemeris')">
+              <nuxt-link to="/ephemeris">
+                Ephemeris
+              </nuxt-link>
+            </li>
             <li :class="isMenuActive('astrology-books')">
               <nuxt-link to="/astrology-books">
                 Books
               </nuxt-link>
             </li>
-            <li :class="isMenuActive('ephemeris')">
-              <nuxt-link to="/ephemeris">
-                Ephemeris
+            <li :class="isMenuActive('software')">
+              <nuxt-link to="/software">
+                Software
               </nuxt-link>
             </li>
             <li>
