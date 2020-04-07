@@ -28,17 +28,21 @@
     <p>
       You can watch the sneak peek video of the course.
     </p>
-    <div v-for="(preview, index) in previewVideos" v-bind:key="index">
-      <h3> {{ preview.title }} </h3>
-      <div class="video-container">
-        <iframe
-          :src="preview.src"
-          width="560"
-          height="315"
-          frameborder="0"
-          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-        />
+    <div class="columns is-multiline mt-5 bg-gray-200 card">
+      <div v-for="(preview, index) in previewVideos" v-bind:key="index" class="column is-half pb-10 mt-5 border-gray-600 border-b-2">
+        <h3>
+          {{ preview.title }}
+        </h3>
+        <div class="video-container">
+          <iframe
+            :src="preview.src"
+            width="560"
+            height="315"
+            frameborder="0"
+            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          />
+        </div>
       </div>
     </div>
   </section>
@@ -73,6 +77,10 @@ export default class extends Vue {
 
 h1 {
   color: #2e68da;
+}
+
+h3 {
+  color: darkslategrey;
 }
 
 .content blockquote {
