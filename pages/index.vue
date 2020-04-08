@@ -14,37 +14,39 @@
         </div>
       </div>
     </section>
-    <h1>Course </h1>
-    <p>
-      I am currently creating an online Astrology course in English and Tamil Language. The course will be available in udemy.
-      Please fill this <a class="no-underline hover:underline text-orange-800" href="http://bit.ly/3aHf2Eu" target="_blank">survey </a> to book your enrollment.
-      You will receive a notification as soon as the course is launched and you will get a discount in appreciation of your input.
-    </p>
-    <h1>Course Content </h1>
-    <p>
-      The course content is published online and you view it by clicking <a class="no-underline hover:underline text-orange-800" href=" http://bit.ly/2sVotis" target="_blank">this link. </a>
-    </p>
-    <h1>Course Preview </h1>
-    <p>
-      You can watch the sneak peek video of the course.
-    </p>
-    <div class="columns is-multiline mt-5 bg-gray-200 card">
-      <div v-for="(preview, index) in previewVideos" v-bind:key="index" class="column is-half pb-10 mt-5 border-gray-600 border-b-2">
-        <h3>
-          {{ preview.title }}
-        </h3>
-        <div class="video-container">
-          <iframe
-            :src="preview.src"
-            width="560"
-            height="315"
-            frameborder="0"
-            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
-          />
+    <section class="m-2">
+      <h1>Course </h1>
+      <p>
+        I am currently creating an online Astrology course in English and Tamil Language. The course will be available in udemy.
+        Please fill this <a class="no-underline hover:underline text-orange-800" href="http://bit.ly/3aHf2Eu" target="_blank">survey </a> to book your enrollment.
+        You will receive a notification as soon as the course is launched and you will get a discount in appreciation of your input.
+      </p>
+      <h1>Course Content </h1>
+      <p>
+        The course content is published online and you view it by clicking <a class="no-underline hover:underline text-orange-800" href=" http://bit.ly/2sVotis" target="_blank">this link. </a>
+      </p>
+      <h1>Course Preview </h1>
+      <p>
+        You can watch the sneak peek video of the course.
+      </p>
+      <div class="columns is-multiline mt-5 ml-1 mr-1 bg-gray-200 card">
+        <div v-for="(preview, index) in previewVideos" v-bind:key="index" class="column is-half pb-10 mt-5 border-gray-600 border-b-2">
+          <h3>
+            {{ preview.title }}
+          </h3>
+          <div class="video-container">
+            <iframe
+              :src="preview.src"
+              width="560"
+              height="315"
+              frameborder="0"
+              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            />
+          </div>
         </div>
       </div>
-    </div>
+    </section>
   </section>
 </template>
 

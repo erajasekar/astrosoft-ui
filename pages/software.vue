@@ -90,19 +90,17 @@
             </li>
           </ul>
         </div>
-        <div class="buttons level">
-          <div class="level-item">
-            <b-button
-              type="is-info"
-              tag="a"
-              target="_blank"
-              href="https://github.com/erajasekar/Astrosoft#installation"
-              size="is-medium"
-              icon-left="download"
-            >
-              Download
-            </b-button>
-          </div>
+        <div class="buttons ml-8">
+          <b-button
+            type="is-info"
+            tag="a"
+            target="_blank"
+            href="https://github.com/erajasekar/Astrosoft#installation"
+            size="is-medium"
+            icon-left="download"
+          >
+            Download
+          </b-button>
         </div>
       </div>
     </section>
