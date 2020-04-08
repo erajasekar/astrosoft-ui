@@ -7,7 +7,7 @@
             Astrosoft - Free Vedic Astrology Software
           </h1>
           <p>
-            Given birth details of individual it provides horoscope with details of Lagna, Rasi, Nakshata, Thithi, Paksha and many other features listed below
+            Given birth details of individual it provides horoscope with details of Lagna, Rasi, Nakshata, Thithi, Paksha and many other <b><i>features</i></b> listed below
           </p>
           <ul class="list-none">
             <li class="mb-3">

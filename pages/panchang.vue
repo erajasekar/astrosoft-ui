@@ -280,7 +280,6 @@ export default class EphemerisVue extends Vue {
 
   parseData (resp: any): Array<InfoEntry> {
     const result = new Panchang(resp).entries
-    console.log('RAJA ', resp)
     return result
   }
 

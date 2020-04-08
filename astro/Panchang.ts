@@ -82,7 +82,6 @@ export class Panchang implements IPanchang {
   get entries () : Array<InfoEntry> {
     return Object.keys(this).map(k => {
         const val: string = (<any>this)[k]
-        console.log(val.toString())
         return new InfoEntry(this, k)
     })
   }
