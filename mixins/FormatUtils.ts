@@ -29,7 +29,7 @@ export function formatEndTime(endTime: string) {
     }
   }
   hr = hr % 12
-  return `${hr}:${min} ${ampm} ${nextDay}`
+  return `${padDigits(hr,2)}:${padDigits(min,2)} ${ampm} ${nextDay}`
 }
 
 export function formatDegMinSec (val: number, delim?: string) {

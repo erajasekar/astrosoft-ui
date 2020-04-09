@@ -19,24 +19,6 @@
             </datetime>
           </div>
         </b-field>
-        <b-field horizontal label="Time" custom-class="text-gray-600">
-          <div>
-            <datetime
-              v-model="dateTimeString"
-              v-on:close="dateTimeSelectorClosed"
-              input-id="datetime"
-              type="time"
-              zone="local"
-              value-zone="local"
-              auto
-              use12-hour
-            >
-              <span slot="before" class="icon is-left">
-                <b-icon icon="clock" size="is-small" />
-              </span>
-            </datetime>
-          </div>
-        </b-field>
         <div>
           <div>
             <google-places-autocomplete
@@ -256,6 +238,10 @@ export default class EphemerisVue extends Vue {
 
   async fetchData () {
     const dateTime = this.dateTimeValue
+    const panHr = 6
+    const panMin = 0
+    const panSec = 0
+
     const body = {
       name: 'Astrosoft UI',
       place: {
@@ -267,9 +253,9 @@ export default class EphemerisVue extends Vue {
       year: dateTime.getFullYear(),
       month: dateTime.getMonth() + 1,
       date: dateTime.getDate(),
-      hour: dateTime.getHours(),
-      minutes: dateTime.getMinutes(),
-      seconds: dateTime.getSeconds(),
+      hour: panHr,
+      minutes: panMin,
+      seconds: panSec,
       options: {
         Ayanamsa: 'LAHARI'
       }

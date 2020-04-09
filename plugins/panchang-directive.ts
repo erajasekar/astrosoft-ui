@@ -46,7 +46,7 @@ function stylePanEvent(data: any) {
 
 function styleDurationEvent(data: any) {
   const items = data.split(" - ")
-  return `<div>${items[0]} ${styleDeEmphasizedSpan('-')} ${items[1]}`
+  return `<div>${items[0]} ${styleDeEmphasizedSpan('-')} ${items[1].toUpperCase()}`
 }
 
 function styleDeEmphasizedSpan(value: string) {
