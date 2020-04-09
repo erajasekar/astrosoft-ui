@@ -149,30 +149,8 @@ h6 {
   color: #fd1f2a;
 }
 
-.content blockquote {
-  background-color:transparent;
-}
-
 .content ul {
   list-style: none;
-}
-
-/* TODO .content li:before {
-  content: "\2650 ";
-}*/
-
-.video-container {
-  position: relative;
-  padding-bottom: 56.25%; /* 16:9 */
-  height: 0;
-}
-
-.video-container iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 95%;
-  height: 95%;
 }
 
 </style>
