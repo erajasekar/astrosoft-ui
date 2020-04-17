@@ -113,7 +113,7 @@
             <td class="font-semibold text-green-800">
               {{ pan.name | camel2title }}
             </td>
-            <td v-panDirective="pan" class="panchang font-semibold text-blue-700">
+            <td v-panDirective="pan" class="panchang font-semibold text-indigo-700">
               {{ pan.value }}
             </td>
           </tr>
@@ -127,7 +127,7 @@
 import { Component, Vue } from 'nuxt-property-decorator'
 import { Datetime } from 'vue-datetime'
 import { GooglePlacesAutocomplete } from 'vue-better-google-places-autocomplete'
-import { formatDateTime, camel2title } from '../mixins/FormatUtils'
+import { camel2title, formatDateTimeWithHrMin } from '../mixins/FormatUtils'
 import { Panchang } from '../astro/Panchang'
 import { IInfoEntry, InfoEntry } from '../astro/InfoEntry'
 import Place from '../astro/Place'
@@ -148,7 +148,7 @@ import panDirective from '../plugins/panchang-directive'
     camel2title
   }
 })
-export default class EphemerisVue extends Vue {
+export default class PanchangVue extends Vue {
   dateTimeValue = new Date()
   dateTimeString: string = this.dateTimeValue.toISOString()
   place: Place = new Place()
@@ -156,6 +156,9 @@ export default class EphemerisVue extends Vue {
   panchangData : Array<IInfoEntry> = []
   isPlaceSet = false
   isLoading = false
+  static panHr = 6
+  static panMin = 0
+  static panSec = 0
 
   head () {
     return {
@@ -208,7 +211,7 @@ export default class EphemerisVue extends Vue {
   }
 
   get formattedDateTime () {
-    return formatDateTime(this.dateTimeValue)
+    return formatDateTimeWithHrMin(this.dateTimeValue, PanchangVue.panHr, PanchangVue.panMin)
   }
 
   get location () {
@@ -238,10 +241,6 @@ export default class EphemerisVue extends Vue {
 
   async fetchData () {
     const dateTime = this.dateTimeValue
-    const panHr = 6
-    const panMin = 0
-    const panSec = 0
-
     const body = {
       name: 'Astrosoft UI',
       place: {
@@ -253,9 +252,9 @@ export default class EphemerisVue extends Vue {
       year: dateTime.getFullYear(),
       month: dateTime.getMonth() + 1,
       date: dateTime.getDate(),
-      hour: panHr,
-      minutes: panMin,
-      seconds: panSec,
+      hour: PanchangVue.panHr,
+      minutes: PanchangVue.panMin,
+      seconds: PanchangVue.panSec,
       options: {
         Ayanamsa: 'LAHARI'
       }

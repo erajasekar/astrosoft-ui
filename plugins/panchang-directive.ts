@@ -1,6 +1,9 @@
 import { DirectiveOptions } from 'vue'
 import {VNodeDirective} from 'vue';
 import { formatEndTime } from '../mixins/FormatUtils'
+const WARNING_STYLE = 'text-yellow-700'
+const NEXT_ITEM_STYLE = 'text-blue-700'
+const DEEMPHASIS_STYLE = 'text-gray-600 text-sm'
 
 const directive: DirectiveOptions = {
     inserted(el, node) {
@@ -16,46 +19,54 @@ const directive: DirectiveOptions = {
 function applyPanchangStyles(el: Element, binding: VNodeDirective) {
   const name = binding.value.name
   const data = binding.value.value
-  if (name === 'nakshathra' || name === 'thithi' || name === 'yoga' || name === 'amirthathiYoga') {
-    el.innerHTML = stylePanEvent(data)
+  if (name === 'nakshathra' || name === 'thithi' || name === 'yoga') {
+    el.innerHTML = stylePanEvent(data ,false)
+  }
+  else if (name === 'amirthathiYoga'){
+    el.innerHTML = stylePanEvent(data, true)
   }
   else if (name === 'karna'){
     const first = data.first
     const second = data.second
-    el.innerHTML = `<div>${stylePanEvent(first)}</div><div>${stylePanEvent(second)}</div>`
+    el.innerHTML = `<div>${stylePanEvent(first, false)}</div><div>${stylePanEvent(second, false)}</div>`
   }
   else if (name === 'auspiciousTime'){
     const items = data as Array<String>
     el.innerHTML = items.flatMap(item => item.split(","))
-      .map(item =>  `<div>${styleDurationEvent(item)}</div>`).join('')
+      .map(item =>  `<div>${styleDurationEvent(item,'')}</div>`).join('')
   }
   else if (name === 'rahuKala' || name === 'yamaKanda'){
-    el.innerHTML = styleDurationEvent(data)
+    el.innerHTML = styleDurationEvent(data, WARNING_STYLE)
   }
 }
 
-function stylePanEvent(data: any) {
+function stylePanEvent(data: any, isAmirthathiYoga: boolean) {
+  const name = data.name;
   const endTime = formatEndTime(data.endTime)
   const items = endTime.split(" , ")
-  let html = `<div>${data.name} ${styleDeEmphasizedSpan('upto')} ${items[0]}`;
+  let html = `<div class="${getWarningStyle(isAmirthathiYoga, name, '')}">${name} ${styleDeEmphasizedSpan('upto')} ${items[0]}`;
   if (items.length > 1){
     html = html + styleDeEmphasizedSpan(items[1])
   }
   html = html + '</div>'
   const next = data.next;
   if (next) {
-    html = html + `<div class="text-teal-700">${next}</div>`
+    html = html + `<div class=${getWarningStyle(isAmirthathiYoga, name, NEXT_ITEM_STYLE)}>${next}</div>`
   }
   return html
 }
 
-function styleDurationEvent(data: any) {
+function getWarningStyle(isAmirthathiYoga: boolean, name : string, defaultStyle : string) {
+  return (isAmirthathiYoga && (name == 'Marana' || name === 'Prabalarshta')) ? WARNING_STYLE : defaultStyle;
+}
+
+function styleDurationEvent(data: any, style: string) {
   const items = data.split(" - ")
-  return `<div>${items[0]} ${styleDeEmphasizedSpan('-')} ${items[1]}`
+  return `<div class="${style}">${items[0]} ${styleDeEmphasizedSpan('-')} ${items[1]}`
 }
 
 function styleDeEmphasizedSpan(value: string) {
-  return `<span class="text-gray-600 text-sm"> ${value} </span>`
+  return `<span class="${DEEMPHASIS_STYLE}"> ${value} </span>`
 }
 
 export default directive;

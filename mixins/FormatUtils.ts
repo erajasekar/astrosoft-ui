@@ -7,13 +7,15 @@ const MIN_SYM = '\u2032'
 const SEC_SYM = '\u2033'
 
 export function formatDateTime (dateTime: Date) {
+  return formatDateTimeWithHrMin(dateTime, dateTime.getHours(), dateTime.getMinutes());
+}
+
+export function formatDateTimeWithHrMin (dateTime: Date, hour: number, mins: number) {
   const date = dateTime.getDate()
   const month = MONTHS[dateTime.getMonth()]
   const year = dateTime.getFullYear()
-  const hour = dateTime.getHours() % 12
-  const ampm = dateTime.getHours() >= 12 ? 'PM' : 'AM'
-  const mins = dateTime.getMinutes()
-  return `${month} ${date}, ${year} ${hour === 0 ? '12' : hour} :` + `${mins}`.padStart(2, '0') + ` ${ampm}`
+  const ampm = hour >= 12 ? 'PM' : 'AM'
+  return `${month} ${date}, ${year} ${hour === 0 ? '12' : hour}:` + `${mins}`.padStart(2, '0') + ` ${ampm}`
 }
 
 export function formatEndTime(endTime: string) {
