@@ -6,18 +6,20 @@ export interface IPanchang {
   sunrise: string
   sunset: string
   paksha: string
-  rahuKala: string
-  yamaKanda: string
   nakshathra: IPanEvent
   thithi: IPanEvent
-  yoga: IPanEvent
   karna: IKarna
+  yoga: IPanEvent
+  amirthathiYoga: IPanEvent
+  rahuKala: string
+  yamaKanda: string
   auspiciousTime: Array<String>
 }
 
 interface IPanEvent {
   name: string
   endTime: string
+  next: string
 }
 
 interface IKarna {
@@ -35,17 +37,19 @@ class Karna implements IKarna {
   }
 
   extractKarna(event: any) {
-    return { name: event.name, endTime: event.endTime }
+    return { name: event.name, endTime: event.endTime, next: '' }
   }
 }
 
 class PanEvent implements IPanEvent {
   name: string
   endTime: string
+  next: string
 
   constructor(data: any) {
     this.name = data.name
     this.endTime = data.endTime
+    this.next = data.next
   }
 }
 
@@ -55,12 +59,13 @@ export class Panchang implements IPanchang {
   sunrise: string
   sunset: string
   paksha: string
-  rahuKala: string
-  yamaKanda: string
   nakshathra: IPanEvent
   thithi: IPanEvent
-  yoga: IPanEvent
   karna: IKarna
+  yoga: IPanEvent
+  amirthathiYoga: IPanEvent
+  rahuKala: string
+  yamaKanda: string
   auspiciousTime: Array<String>
 
 
@@ -70,12 +75,13 @@ export class Panchang implements IPanchang {
     this.sunrise = data.sunrise
     this.sunset = data.sunset
     this.paksha = data.paksha
-    this.rahuKala = data.rahuKala
-    this.yamaKanda = data.yamaKanda
     this.nakshathra = new PanEvent(data.nakshathra)
     this.thithi = new PanEvent(data.thithi)
-    this.yoga = new PanEvent(data.yoga)
     this.karna = new Karna(data.karna)
+    this.yoga = new PanEvent(data.yoga)
+    this.amirthathiYoga = new PanEvent(data.amirthathiYoga)
+    this.rahuKala = data.rahuKala
+    this.yamaKanda = data.yamaKanda
     this.auspiciousTime = data.auspiciousTime
   }
 

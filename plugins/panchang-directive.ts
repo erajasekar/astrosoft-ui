@@ -16,7 +16,7 @@ const directive: DirectiveOptions = {
 function applyPanchangStyles(el: Element, binding: VNodeDirective) {
   const name = binding.value.name
   const data = binding.value.value
-  if (name === 'nakshathra' || name === 'thithi' || name === 'yoga') {
+  if (name === 'nakshathra' || name === 'thithi' || name === 'yoga' || name === 'amirthathiYoga') {
     el.innerHTML = stylePanEvent(data)
   }
   else if (name === 'karna'){
@@ -37,16 +37,21 @@ function applyPanchangStyles(el: Element, binding: VNodeDirective) {
 function stylePanEvent(data: any) {
   const endTime = formatEndTime(data.endTime)
   const items = endTime.split(" , ")
-  let html = `${data.name} ${styleDeEmphasizedSpan('upto')} ${items[0]}`;
+  let html = `<div>${data.name} ${styleDeEmphasizedSpan('upto')} ${items[0]}`;
   if (items.length > 1){
     html = html + styleDeEmphasizedSpan(items[1])
+  }
+  html = html + '</div>'
+  const next = data.next;
+  if (next) {
+    html = html + `<div class="text-teal-700">${next}</div>`
   }
   return html
 }
 
 function styleDurationEvent(data: any) {
   const items = data.split(" - ")
-  return `<div>${items[0]} ${styleDeEmphasizedSpan('-')} ${items[1].toUpperCase()}`
+  return `<div>${items[0]} ${styleDeEmphasizedSpan('-')} ${items[1]}`
 }
 
 function styleDeEmphasizedSpan(value: string) {
