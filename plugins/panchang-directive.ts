@@ -2,7 +2,7 @@ import { DirectiveOptions } from 'vue'
 import {VNodeDirective} from 'vue';
 import { formatEndTime } from '../mixins/FormatUtils'
 const WARNING_STYLE = 'text-yellow-700'
-const NEXT_ITEM_STYLE = 'text-blue-700'
+const NEXT_ITEM_STYLE = 'text-blue-600'
 const DEEMPHASIS_STYLE = 'text-gray-600 text-sm'
 
 const directive: DirectiveOptions = {
@@ -32,12 +32,23 @@ function applyPanchangStyles(el: Element, binding: VNodeDirective) {
   }
   else if (name === 'auspiciousTime'){
     const items = data as Array<String>
-    el.innerHTML = items.flatMap(item => item.split(","))
-      .map(item =>  `<div>${styleDurationEvent(item,'')}</div>`).join('')
+    el.innerHTML = styleAuspiciousTime(items)
   }
   else if (name === 'rahuKala' || name === 'yamaKanda'){
     el.innerHTML = styleDurationEvent(data, WARNING_STYLE)
   }
+}
+
+function styleAuspiciousTime(items: Array<String>) {
+  let html = ''
+  for(let i = 0; i < items.length; i++) {
+    html = html + "<div>"
+    html = html + items[i].split(",")
+     .map(item =>  styleDurationEvent(item,'')).join(',')
+    html = html + "</div>"
+  }
+  console.log(html)
+  return html
 }
 
 function stylePanEvent(data: any, isAmirthathiYoga: boolean) {
@@ -51,7 +62,7 @@ function stylePanEvent(data: any, isAmirthathiYoga: boolean) {
   html = html + '</div>'
   const next = data.next;
   if (next) {
-    html = html + `<div class=${getWarningStyle(isAmirthathiYoga, name, NEXT_ITEM_STYLE)}>${next}</div>`
+    html = html + `<div class=${getWarningStyle(isAmirthathiYoga, next, NEXT_ITEM_STYLE)}>${next}</div>`
   }
   return html
 }
@@ -62,7 +73,7 @@ function getWarningStyle(isAmirthathiYoga: boolean, name : string, defaultStyle 
 
 function styleDurationEvent(data: any, style: string) {
   const items = data.split(" - ")
-  return `<div class="${style}">${items[0]} ${styleDeEmphasizedSpan('-')} ${items[1]}`
+  return `<span class="${style}">${items[0]} ${styleDeEmphasizedSpan('-')} ${items[1]}`
 }
 
 function styleDeEmphasizedSpan(value: string) {

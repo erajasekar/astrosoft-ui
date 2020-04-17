@@ -27,6 +27,7 @@ export function formatEndTime(endTime: string) {
   if (hr >= 12) {
     ampm = 'PM'
     if (hr >= 24) {
+      ampm = 'AM'
       nextDay = ", ( Next Day )"
     }
   }
