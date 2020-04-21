@@ -19,27 +19,25 @@
           </datetime>
         </div>
       </b-field>
-      <div v-if="shouldShowTime()">
-        <b-field horizontal label="Time" custom-class="text-gray-600">
-          <div>
-            <datetime
-              ref="timePicker"
-              v-model="dateTimeString"
-              v-on:close="dateTimeSelectorClosed"
-              input-id="datetime"
-              type="time"
-              zone="local"
-              value-zone="local"
-              auto
-              use12-hour
-            >
-              <span slot="before" class="icon is-left">
-                <b-icon icon="clock" size="is-small" />
-              </span>
-            </datetime>
-          </div>
-        </b-field>
-      </div>
+      <b-field v-if="shouldShowTime()" horizontal label="Time" custom-class="text-gray-600">
+        <div>
+          <datetime
+            ref="timePicker"
+            v-model="dateTimeString"
+            v-on:close="dateTimeSelectorClosed"
+            input-id="datetime"
+            type="time"
+            zone="local"
+            value-zone="local"
+            auto
+            use12-hour
+          >
+            <span slot="before" class="icon is-left">
+              <b-icon icon="clock" size="is-small" />
+            </span>
+          </datetime>
+        </div>
+      </b-field>
       <div>
         <div>
           <google-places-autocomplete
@@ -182,14 +180,6 @@ export default class AstroInput extends Vue {
       return this.showTime
     }
   }
-
-  /* @Watch('dateTimeString')
-  onDateChanged (value: string) {
-    // TODO try to use emit annotation
-    this.$emit('input', {
-      dateTimeValue: new Date(value)
-    })
-   } */
 
   @Emit('input')
   inputChanged () {
