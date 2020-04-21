@@ -1,11 +1,13 @@
 <template>
   <section class="center">
     <AstroInput />
+    <div>{{ astroInputData }}</div>
   </section>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
+import AstroInputData from '../astro/AstroInputData'
 import AstroInput from '@/components/AstroInput.vue'
 
 @Component({
@@ -14,7 +16,7 @@ import AstroInput from '@/components/AstroInput.vue'
   }
 })
 export default class EphemerisVue extends Vue {
-
+  astroInputData = new AstroInputData();
 }
 </script>
 

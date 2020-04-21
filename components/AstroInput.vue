@@ -4,8 +4,10 @@
       <b-field horizontal label="Date" custom-class="text-gray-600">
         <div>
           <datetime
+            ref="datePicker"
+            v-model="astroInputData.dateTimeString"
             v-on:close="dateTimeSelectorClosed"
-            v-model="dateTimeString"
+            @input="updateDate()"
             input-id="date"
             type="date"
             zone="local"
@@ -21,7 +23,8 @@
       <b-field horizontal label="Time" custom-class="text-gray-600">
         <div>
           <datetime
-            v-model="dateTimeString"
+            ref="timePicker"
+            v-model="astroInputData.dateTimeString"
             v-on:close="dateTimeSelectorClosed"
             input-id="datetime"
             type="time"
@@ -41,9 +44,10 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'nuxt-property-decorator'
+import { Component, Vue, Prop } from 'nuxt-property-decorator'
 import { Datetime } from 'vue-datetime'
 import { GooglePlacesAutocomplete } from 'vue-better-google-places-autocomplete'
+import AstroInputData from '../astro/AstroInputData'
 
 @Component({
   components: {
@@ -52,12 +56,15 @@ import { GooglePlacesAutocomplete } from 'vue-better-google-places-autocomplete'
   }
 })
 export default class AstroInput extends Vue {
-  dateTimeValue = new Date()
-  dateTimeString: string = this.dateTimeValue.toISOString()
+  @Prop() astroInputData: AstroInputData = new AstroInputData()
 
   dateTimeSelectorClosed () {
-    this.dateTimeValue = new Date(this.dateTimeString)
+    // this.astroInputData.dateTimeValue = new Date(this.dateTimeString)
     // this.ephData = [] TODO: figure this out
+  }
+
+  updateDate () {
+    // console.log(this.$refs.datePicker)
   }
 }
 </script>
