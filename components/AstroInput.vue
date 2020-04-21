@@ -43,7 +43,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Watch, Prop, Emit } from 'nuxt-property-decorator'
+import { Component, Vue, Prop, Emit } from 'nuxt-property-decorator'
 import { Datetime } from 'vue-datetime'
 import { GooglePlacesAutocomplete } from 'vue-better-google-places-autocomplete'
 import AstroInputData from '../astro/AstroInputData'
@@ -56,24 +56,34 @@ import AstroInputData from '../astro/AstroInputData'
 })
 export default class AstroInput extends Vue {
   @Prop() astroInputData: AstroInputData | undefined
-  dateTimeString: string = new Date().toISOString()
+  dateTimeString: string = this.initDateTimeString()
 
   @Emit('close')
   dateTimeSelectorClosed () {
-    // this.astroInputData.dateTimeValue = new Date(this.dateTimeString)
-    // this.ephData = [] TODO: figure this out
+    return this.inputChanged()
   }
 
-  updateDate () {
-    // console.log(this.$refs.datePicker)
+  initDateTimeString () {
+    if (this.astroInputData) {
+      return this.astroInputData.dateTimeValue.toISOString()
+    } else {
+      return new Date().toISOString()
+    }
   }
 
-  @Watch('dateTimeString')
+  /* @Watch('dateTimeString')
   onDateChanged (value: string) {
     // TODO try to use emit annotation
     this.$emit('input', {
       dateTimeValue: new Date(value)
     })
+   } */
+
+  @Emit('input')
+  inputChanged () {
+    return {
+      dateTimeValue: new Date(this.dateTimeString)
+    }
   }
 }
 </script>
