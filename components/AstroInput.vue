@@ -184,16 +184,13 @@ export default class AstroInput extends Vue {
     return {
       dateTimeValue: new Date(this.dateTimeString),
       place: this.place,
-      timezone: this.timezone
+      timezone: this.timezone,
+      isPlaceSet: this.isPlaceSet
     }
   }
 
   get location () {
     return this.place.location
-  }
-
-  get placeName () {
-    return this.place.placeName
   }
 
   get placeFormatted () {
@@ -208,14 +205,14 @@ export default class AstroInput extends Vue {
     this.inputChanged()
   }
 
+  @Emit('change')
   clearPlace () {
-    // TODO this.ephData = []
     this.place = new Place()
     this.timezone = new Timezone()
     removePlace()
     removeTimezone()
     this.isPlaceSet = false
-    this.inputChanged()
+    return this.inputChanged()
   }
 
   updateTimeZone () {
