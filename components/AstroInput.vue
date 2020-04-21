@@ -19,25 +19,27 @@
           </datetime>
         </div>
       </b-field>
-      <b-field horizontal label="Time" custom-class="text-gray-600">
-        <div>
-          <datetime
-            ref="timePicker"
-            v-model="dateTimeString"
-            v-on:close="dateTimeSelectorClosed"
-            input-id="datetime"
-            type="time"
-            zone="local"
-            value-zone="local"
-            auto
-            use12-hour
-          >
-            <span slot="before" class="icon is-left">
-              <b-icon icon="clock" size="is-small" />
-            </span>
-          </datetime>
-        </div>
-      </b-field>
+      <div v-if="shouldShowTime()">
+        <b-field horizontal label="Time" custom-class="text-gray-600">
+          <div>
+            <datetime
+              ref="timePicker"
+              v-model="dateTimeString"
+              v-on:close="dateTimeSelectorClosed"
+              input-id="datetime"
+              type="time"
+              zone="local"
+              value-zone="local"
+              auto
+              use12-hour
+            >
+              <span slot="before" class="icon is-left">
+                <b-icon icon="clock" size="is-small" />
+              </span>
+            </datetime>
+          </div>
+        </b-field>
+      </div>
       <div>
         <div>
           <google-places-autocomplete
@@ -140,6 +142,8 @@ import { getTimezone, setTimezone, removeTimezone, setPlace, removePlace, getPla
 })
 export default class AstroInput extends Vue {
   @Prop() astroInputData: AstroInputData | undefined
+  @Prop() showTime: boolean | undefined
+
   dateTimeString: string = this.initDateTimeString()
   place: Place = new Place()
   timezone: Timezone = new Timezone()
@@ -168,6 +172,14 @@ export default class AstroInput extends Vue {
       return this.astroInputData.dateTimeValue.toISOString()
     } else {
       return new Date().toISOString()
+    }
+  }
+
+  shouldShowTime () {
+    if (this.showTime === undefined) {
+      return true
+    } else {
+      return this.showTime
     }
   }
 
