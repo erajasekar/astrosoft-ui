@@ -5,9 +5,8 @@
         <div>
           <datetime
             ref="datePicker"
-            v-model="astroInputData.dateTimeString"
+            v-model="dateTimeString"
             v-on:close="dateTimeSelectorClosed"
-            @input="updateDate()"
             input-id="date"
             type="date"
             zone="local"
@@ -24,7 +23,7 @@
         <div>
           <datetime
             ref="timePicker"
-            v-model="astroInputData.dateTimeString"
+            v-model="dateTimeString"
             v-on:close="dateTimeSelectorClosed"
             input-id="datetime"
             type="time"
@@ -44,7 +43,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop } from 'nuxt-property-decorator'
+import { Component, Vue, Watch, Prop, Emit } from 'nuxt-property-decorator'
 import { Datetime } from 'vue-datetime'
 import { GooglePlacesAutocomplete } from 'vue-better-google-places-autocomplete'
 import AstroInputData from '../astro/AstroInputData'
@@ -56,8 +55,10 @@ import AstroInputData from '../astro/AstroInputData'
   }
 })
 export default class AstroInput extends Vue {
-  @Prop() astroInputData: AstroInputData = new AstroInputData()
+  @Prop() astroInputData: AstroInputData | undefined
+  dateTimeString: string = new Date().toISOString()
 
+  @Emit('close')
   dateTimeSelectorClosed () {
     // this.astroInputData.dateTimeValue = new Date(this.dateTimeString)
     // this.ephData = [] TODO: figure this out
@@ -65,6 +66,14 @@ export default class AstroInput extends Vue {
 
   updateDate () {
     // console.log(this.$refs.datePicker)
+  }
+
+  @Watch('dateTimeString')
+  onDateChanged (value: string) {
+    // TODO try to use emit annotation
+    this.$emit('input', {
+      dateTimeValue: new Date(value)
+    })
   }
 }
 </script>

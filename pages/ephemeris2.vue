@@ -1,6 +1,6 @@
 <template>
   <section class="center">
-    <AstroInput />
+    <AstroInput v-model="astroInputData" v-on:close="dateTimeSelectorClosed" />
     <div>{{ astroInputData }}</div>
   </section>
 </template>
@@ -17,6 +17,14 @@ import AstroInput from '@/components/AstroInput.vue'
 })
 export default class EphemerisVue extends Vue {
   astroInputData = new AstroInputData();
+
+  mounted () {
+  }
+
+  dateTimeSelectorClosed () {
+    console.log('dateTimeSelectorClosed2')
+    // this.ephData = [] TODO: figure this out
+  }
 }
 </script>
 
