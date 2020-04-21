@@ -158,7 +158,7 @@ export default class AstroInput extends Vue {
     this.inputChanged()
   }
 
-  @Emit('close')
+  @Emit('change')
   dateTimeSelectorClosed () {
     return this.inputChanged()
   }
