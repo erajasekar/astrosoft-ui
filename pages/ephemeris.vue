@@ -4,7 +4,6 @@
       v-model="astroInputData"
       v-on:change="resetData"
       v-on:click="calculate"
-      :showTime="false"
     />
     <b-loading :active.sync="isLoading" />
     <div v-if="ephData.length > 0" class="p-4 mt-10 mb-10 content max-w-xl">

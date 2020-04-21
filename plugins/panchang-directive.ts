@@ -47,7 +47,6 @@ function styleAuspiciousTime(items: Array<String>) {
      .map(item =>  styleDurationEvent(item,'')).join(',')
     html = html + "</div>"
   }
-  console.log(html)
   return html
 }
 
