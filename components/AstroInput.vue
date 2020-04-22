@@ -127,7 +127,6 @@
 import { Component, Vue, Prop, Emit } from 'nuxt-property-decorator'
 import { Datetime } from 'vue-datetime'
 import { GooglePlacesAutocomplete } from 'vue-better-google-places-autocomplete'
-import AstroInputData from '../astro/AstroInputData'
 import Place from '../astro/Place'
 import Timezone from '../astro/Timezone'
 import { getTimezone, setTimezone, removeTimezone, setPlace, removePlace, getPlace } from '../mixins/LocalStorageUtils'
@@ -139,10 +138,9 @@ import { getTimezone, setTimezone, removeTimezone, setPlace, removePlace, getPla
   }
 })
 export default class AstroInput extends Vue {
-  @Prop() astroInputData: AstroInputData | undefined
   @Prop() showTime: boolean | undefined
 
-  dateTimeString: string = this.initDateTimeString()
+  dateTimeString: string = new Date().toISOString()
   place: Place = new Place()
   timezone: Timezone = new Timezone()
   isPlaceSet = false
@@ -157,20 +155,11 @@ export default class AstroInput extends Vue {
       this.place = storedPlace
       this.isPlaceSet = true
     }
-    this.inputChanged()
   }
 
   @Emit('change')
   dateTimeSelectorClosed () {
-    return this.inputChanged()
-  }
-
-  initDateTimeString () {
-    if (this.astroInputData) {
-      return this.astroInputData.dateTimeValue.toISOString()
-    } else {
-      return new Date().toISOString()
-    }
+    return this.getInputData()
   }
 
   shouldShowTime () {
@@ -181,8 +170,7 @@ export default class AstroInput extends Vue {
     }
   }
 
-  @Emit('input')
-  inputChanged () {
+  getInputData () {
     return {
       dateTimeValue: new Date(this.dateTimeString),
       place: this.place,
@@ -204,7 +192,7 @@ export default class AstroInput extends Vue {
     this.updateTimeZone()
     setPlace(this.place)
     this.isPlaceSet = true
-    this.inputChanged()
+    this.getInputData()
   }
 
   @Emit('change')
@@ -214,7 +202,7 @@ export default class AstroInput extends Vue {
     removePlace()
     removeTimezone()
     this.isPlaceSet = false
-    return this.inputChanged()
+    return this.getInputData()
   }
 
   updateTimeZone () {
@@ -230,8 +218,9 @@ export default class AstroInput extends Vue {
     })
   }
 
-  @Emit('click')
+  @Emit('submit')
   calculate () {
+    return this.getInputData()
   }
 }
 </script>

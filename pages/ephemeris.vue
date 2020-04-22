@@ -1,9 +1,8 @@
 <template>
   <section class="center">
     <AstroInput
-      v-model="astroInputData"
-      v-on:change="resetData"
-      v-on:click="calculate"
+      @change="resetData"
+      @submit="calculate"
     />
     <b-loading :active.sync="isLoading" />
     <div v-if="ephData.length > 0" class="p-4 mt-10 mb-10 content max-w-xl">
@@ -81,7 +80,8 @@ export default class EphemerisVue extends Vue {
     return this.astroInputData.place.placeName
   }
 
-  calculate () {
+  calculate (value: AstroInputData) {
+    this.astroInputData = value
     this.isLoading = true
     this.fetchData().then((data) => {
       this.ephData = data

@@ -1,9 +1,8 @@
 <template>
   <section class="center">
     <AstroInput
-      v-model="astroInputData"
-      v-on:change="resetData"
-      v-on:click="calculate"
+      @change="resetData"
+      @submit="calculate"
       :showTime="false"
     />
     <b-loading :active.sync="isLoading" />
@@ -74,7 +73,8 @@ export default class PanchangVue extends Vue {
     return this.astroInputData.place.placeFormatted
   }
 
-  calculate () {
+  calculate (value: AstroInputData) {
+    this.astroInputData = value
     this.isLoading = true
     this.fetchData().then((data) => {
       this.panchangData = data
