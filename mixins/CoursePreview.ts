@@ -61,5 +61,13 @@ export const previewVideos : Array<PreviewVideo> = [
   {
     title: 'வேத ஜோதிடத்தில் பாவங்கள் என்றால் என்ன? ',
     src: 'https://www.youtube.com/embed/ofkkvAd1x6k'
+  },
+  {
+    title: 'A surprising technique to Judge a horoscope accurately? ',
+    src: 'https://www.youtube.com/embed/75smoljKg38'
+  },
+  {
+    title: 'ஒரு ஜாதகத்தின் பலாபலன்களை எப்படி துல்லியமாக கணிப்பது? ',
+    src: 'https://www.youtube.com/embed/t5kog8a-XPw'
   }
 ]

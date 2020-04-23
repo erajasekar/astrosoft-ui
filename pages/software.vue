@@ -104,18 +104,37 @@
         </div>
       </div>
     </section>
-    <h2>Installation</h2>
-    <ol>
-      <li>Install Java JDK from <a class="no-underline hover:underline font-bold text-purple-900" href="https://www.oracle.com/java/technologies/javase-downloads.html" rel="nofollow">oracle</a> if you don't already have Java installed on your system.</li>
-      <li>Run <code>java -version</code> to verify if Java is installed.</li>
-      <li>Download code from <a class="no-underline hover:underline font-bold text-purple-900" href="https://github.com/erajasekar/Astrosoft">GitHub</a> by clicking this <a href="https://github.com/erajasekar/Astrosoft/archive/master.zip">link</a> or clicking <code>Clone or download -&gt; Download Zip</code> button in Github</li>
-      <li>Unzip <code>Astrosoft - master.zip</code></li>
-      <li>Open command window on windows or terminal window in Mac/Linux.</li>
-      <li>Change dir to Astrosoft installation dir for e.g <code>cd C:\Astrosoft - master</code></li>
-      <li>Run <code>cd bin</code></li>
-      <li>Launch Astrosoft by running command <code>./RunAstroSoft.bat</code></li>
-      <li>If you run into problems or need help contact <strong><a class="no-underline hover:underline font-bold text-purple-900" href="mailto:innovativeastrosolutions@gmail.com">innovativeastrosolutions@gmail.com</a></strong></li>
-    </ol>
+    <section class="columns is-multiline mt-5 ml-1 mr-1 card">
+      <div class="column is-half pb-10 mt-5 border-gray-600 border-b-2">
+        <h2>Installation</h2>
+        <ol>
+          <li>Install Java JDK from <a class="no-underline hover:underline font-bold text-purple-900" href="https://www.oracle.com/java/technologies/javase-downloads.html" rel="nofollow">oracle</a> if you don't already have Java installed on your system.</li>
+          <li>Run <code>java -version</code> to verify if Java is installed.</li>
+          <li>Download code from <a class="no-underline hover:underline font-bold text-purple-900" href="https://github.com/erajasekar/Astrosoft">GitHub</a> by clicking this <a href="https://github.com/erajasekar/Astrosoft/archive/master.zip">link</a> or clicking <code>Clone or download -&gt; Download Zip</code> button in Github</li>
+          <li>Unzip <code>Astrosoft - master.zip</code></li>
+          <li>Open command window on windows or terminal window in Mac/Linux.</li>
+          <li>Change dir to Astrosoft installation dir for e.g <code>cd C:\Astrosoft - master</code></li>
+          <li>Run <code>cd bin</code></li>
+          <li>Launch Astrosoft by running command <code>./RunAstroSoft.bat</code></li>
+          <li>If you run into problems or need help contact <strong><a class="no-underline hover:underline font-bold text-purple-900" href="mailto:innovativeastrosolutions@gmail.com">innovativeastrosolutions@gmail.com</a></strong></li>
+        </ol>
+      </div>
+      <div class="column is-half pb-10 mt-5 border-gray-600 border-b-2" >
+        <h2>
+          Installation Instructions Video
+        </h2>
+        <div class="video-container">
+          <iframe
+            src="https://www.youtube.com/embed/MbzYURTO0sc"
+            width="560"
+            height="315"
+            frameborder="0"
+            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          />
+        </div>
+      </div>
+    </section>
   </section>
 </template>
 
@@ -140,6 +159,20 @@ export default class extends Vue {
 </script>
 
 <style scoped>
+
+.video-container {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 */
+  height: 0;
+}
+
+.video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 95%;
+  height: 95%;
+}
 
 h1 {
   color: green;
