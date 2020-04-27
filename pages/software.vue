@@ -110,6 +110,7 @@
         <ol>
           <li>Install Java JDK from <a class="no-underline hover:underline font-bold text-purple-900" href="https://www.oracle.com/java/technologies/javase-downloads.html" rel="nofollow">oracle</a> if you don't already have Java installed on your system.</li>
           <li>Run <code>java -version</code> to verify if Java is installed.</li>
+          <li>You will need Java version 8 or later. If you have older version Java Installed, please install version higher than Java 8.</li>
           <li>Download code from <a class="no-underline hover:underline font-bold text-purple-900" href="https://github.com/erajasekar/Astrosoft">GitHub</a> by clicking this <a href="https://github.com/erajasekar/Astrosoft/archive/master.zip">link</a> or clicking <code>Clone or download -&gt; Download Zip</code> button in Github</li>
           <li>Unzip <code>Astrosoft - master.zip</code></li>
           <li>Open command window on windows or terminal window in Mac/Linux.</li>
@@ -119,7 +120,7 @@
           <li>If you run into problems or need help contact <strong><a class="no-underline hover:underline font-bold text-purple-900" href="mailto:innovativeastrosolutions@gmail.com">innovativeastrosolutions@gmail.com</a></strong></li>
         </ol>
       </div>
-      <div class="column is-half pb-10 mt-5 border-gray-600 border-b-2" >
+      <div class="column is-half pb-10 mt-5 border-gray-600 border-b-2">
         <h2>
           Installation Instructions Video
         </h2>
