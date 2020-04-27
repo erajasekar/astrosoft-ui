@@ -16,19 +16,19 @@
     </section>
     <section class="m-2">
       <h1>Course </h1>
-      <p>
+      <p class="text-xl">
         Have you ever wanted to learn astrology for yourself to find the deeper meaning from your birth chart?
         or aspired to become a full-time astrologer with a deep understanding of astrological principles,
         and ready to guide other people by this noble profession? If so, let us continue.
       </p>
-      <p>
+      <p class="text-xl">
         The hugely rewarding aspect of being an astrologer is enabling people to advance in life in a practical and meaningful way.
         Throughout this training course, you'll learn to add massive value to people’s lives by helping them to read their birth chart to find inherent strengths and weaknesses and guide them in life.
       </p>
-      <section class="hero card bg-red-100 p-5">
-        <div class="book-body columns">
-          <div class="column is-half">
-            <h3>Who this course is for:</h3>
+      <section class="hero card course-intro">
+        <div class="hero-body columns font-medium">
+          <div class="tick-list column is-half">
+            <h3>Who this course is for?</h3>
             <ul>
               <li>If you want to learn astrology from the scratch.</li>
               <li>If you want to understand the science behind the astrology.</li>
@@ -40,7 +40,7 @@
               <li>If you want to teach astrology to the budding astrologers.</li>
             </ul>
           </div>
-          <div class="column is-half">
+          <div class="column is-half check-list">
             <h3>Why should you learn through an online course?</h3>
             <ul>
               <li>You can learn astrology sitting at your home.</li>
@@ -53,34 +53,70 @@
           </div>
         </div>
       </section>
-      <h2>In this course, You will learn</h2>
-      <ul>
-        <li>What is astrology?</li>
-        <li>The astronomical evidence in astrology</li>
-        <li>What is Ayanamsa?</li>
-        <li>What is Rahu/Ketu?</li>
-        <li>The Zodiac, and its significance</li>
-        <li>12 Zodiac signs and its characteristics</li>
-        <li>Planets in Vedic astrology and its characteristics</li>
-        <li>The casting of Rashi chart</li>
-        <li>The casting of Navamsa Chart</li>
-        <li>Shadbala</li>
-        <li>Dasa bukti calculations</li>
-        <li>Raja Yogas in Vedic astrology</li>
-        <li>Prediction techniques for Career</li>
-        <li>Prediction techniques for marriage</li>
-        <li>Prediction techniques for wealth</li>
-        <li>Prediction techniques for health</li>
-        <li>Longevity predictions, etc.</li>
-      </ul>
-      <p>
-        Join your instructor, Muthu Vijayan Elango he is an astrologer and a certified life coach at Innovativeastrosolutions.
-        He learnt astrology from his father Elango and has been practicing it for more than 18 years.
-        After completing his Master's degree in engineering from the College of Engineering Guindy a premier institute in India,
-        he worked in a well-known MNC for a decade before he found his calling in astrology.
-        He is passionate about sharing his astrological wisdom to the common man.
-        He is one of the most popular writers on Quora pertaining to the topic of astrology.
-      </p>
+      <section class="hero card bg-red-100 mt-10">
+        <div class="hero-body course-body columns">
+          <div class="column is-half font-semibold">
+            <h2>In this course, You will learn</h2>
+            <ol class="text-lg">
+              <li>What is astrology?</li>
+              <li>The astronomical evidence in astrology</li>
+              <li>What is Ayanamsa?</li>
+              <li>What is Rahu/Ketu?</li>
+              <li>The Zodiac, and its significance</li>
+              <li>12 Zodiac signs and its characteristics</li>
+              <li>Planets in Vedic astrology and its characteristics</li>
+              <li>The casting of Rashi chart</li>
+              <li>The casting of Navamsa Chart</li>
+              <li>Shadbala</li>
+              <li>Dasa bukti calculations</li>
+              <li>Raja Yogas in Vedic astrology</li>
+              <li>Prediction techniques for Career</li>
+              <li>Prediction techniques for marriage</li>
+              <li>Prediction techniques for wealth</li>
+              <li>Prediction techniques for health</li>
+              <li>Longevity predictions, etc.</li>
+            </ol>
+          </div>
+          <div class="column is-half" itemscope itemtype="http://schema.org/Person">
+            <h2>
+              About the Author
+            </h2>
+            <p class="text-yellow-200 text-lg font-extrabold">
+              <span class="italic" itemprop="name">Muthu Vijayan Elango</span> is an <span itemprop="jobTitle">astrologer and a certified life coach</span> at <a class="border-dotted border-b-2 hover:text-gray-700" itemprop="url" href="https://www.innovativeastrosolutions.com/" target="_blank">innovativeastrosolutions.com</a>
+              . He learnt astrology from his father Elango and has been practicing it for more than 18 years.
+              After completing his Master degree in engineering from College of Engineering Guindy a premier institute in India , he worked in a well known MNC for a decade before he found his calling in astrology.
+              He is passionate on sharing his astrological wisdom to the common man.
+              He is one of the most popular writers on <a class="border-dotted border-b-2 hover:text-gray-700" href="https://www.quora.com/profile/Elango-Muthu-Vijayan/answers" target="_blank">Quora</a> pertaining to the topic of astrology.
+            </p>
+            <div class="buttons level">
+              <div class="level-item">
+                <b-button
+                  type="is-info"
+                  tag="a"
+                  target="_blank"
+                  href="https://www.udemy.com/course/fundamentals-of-vedic-astrology-beginner-to-intermediate/"
+                  size="is-medium"
+                  icon-left="school"
+                >
+                  Enroll in English Course
+                </b-button>
+              </div>
+              <div class="level-item">
+                <b-button
+                  type="is-light"
+                  tag="a"
+                  target="_blank"
+                  href="https://www.udemy.com/course/fundamentals-of-vedic-astrology-in-tamil-beginner-level/"
+                  size="is-medium"
+                  icon-left="school"
+                >
+                  Enroll in Tamil Course
+                </b-button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
       <h1>Course Preview </h1>
       <p>
         You can watch the sneak peek video of the course.
@@ -133,8 +169,24 @@ export default class extends Vue {
 
 <style scoped>
 
+.course-body {
+  background-color: #4A586F;
+  color: white;
+  padding: 30px 10px 10px 10px;
+  margin: 0px;
+}
+
+.course-intro {
+  background-color: #dcf6e5;
+  color: #05130a;
+}
+
 h1 {
   color: #2e68da;
+}
+
+h2 {
+  color: #F3CA6B;
 }
 
 h3 {
@@ -157,6 +209,22 @@ h3 {
   left: 0;
   width: 95%;
   height: 95%;
+}
+
+.tick-list ul {
+  list-style: none;
+}
+
+.tick-list li:before {
+  content: "\2714    ";
+}
+
+.check-list ul {
+  list-style: none;
+}
+
+.check-list li:before {
+  content: "\274F    ";
 }
 
 </style>
