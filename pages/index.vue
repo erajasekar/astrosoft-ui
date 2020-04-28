@@ -114,6 +114,15 @@
                 </b-button>
               </div>
             </div>
+            <b-notification
+              type="is-dark"
+              has-icon
+              aria-close-label="Close notification"
+            >
+              <p class="text-lg italic font-semibold text-yellow-400">
+                Please fill this <a href="https://bit.ly/353VF69" target="_blank">survey </a> to get notified we announce special offers.
+              </p>
+            </b-notification>
           </div>
         </div>
       </section>
