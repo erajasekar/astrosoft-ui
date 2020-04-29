@@ -120,7 +120,7 @@
               aria-close-label="Close notification"
             >
               <p class="text-lg italic font-semibold text-yellow-400">
-                Please fill this <a href="https://bit.ly/353VF69" target="_blank">survey </a> to get notified we announce special offers.
+                Looking for discounts? Please fill this <a href="https://bit.ly/353VF69" target="_blank">survey </a> to get notified when we announce special offers.
               </p>
             </b-notification>
           </div>
@@ -128,7 +128,7 @@
       </section>
       <h1>Course Preview </h1>
       <p>
-        You can watch the sneak peek video of the course.
+        Watch the sneak peek videos of the course go get glimpse of the course.
       </p>
       <div class="columns is-multiline mt-5 ml-1 mr-1 bg-gray-200 card">
         <div v-for="(preview, index) in previewVideos" v-bind:key="index" class="column is-half pb-10 mt-5 border-gray-600 border-b-2">
