@@ -38,6 +38,7 @@
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
+import AstroChart from '../astrochart/AstroChart'
 import AstroInputData from '../astro/AstroInputData'
 import { formatDateTime, formatDegMinSec } from '../mixins/FormatUtils'
 import { Ephemeris } from '../astro/Ephemeris'
@@ -62,6 +63,12 @@ export default class EphemerisVue extends Vue {
         { name: 'twitter:url', content: getCurrentPageUrl('/ephemeris') }
       ]
     }
+  }
+
+  mounted () {
+    /* eslint-disable no-console */
+    console.log(AstroChart)
+    /* eslint-enable no-console */
   }
 
   resetData () {
