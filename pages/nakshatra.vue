@@ -2,12 +2,12 @@
   <section class="center">
     <b-loading :active.sync="isLoading" />
     <form class="nakshatra-form">
-      <div class="form-inputs">
+      <div class="form-inputs max-w-xl card p-4 mt-10 self-center">
       <div class="boy">
         <h1> Boy Details</h1>
-        <label class="label text-gray-600">Name</label><input type="text"><br>
+        <label class="label text-gray-600">Name</label><input class="card" type="text"><br>
         <label class="label text-gray-600">Rasi</label>
-        <select v-model="rasiBoy" @change="isAshwini()" class="rasiBoy" id="Rasi" :key="dkey">
+        <select v-model="rasiBoy" @change="calcBoy()" class="rasiBoy card">
         <option disabled value="0">Please select one</option>
         <option value="1">Mesh</option>
         <option value="2">Vrishabha</option>
@@ -24,18 +24,18 @@
         </select>
         <br>
         <label class="label text-gray-600">Nakshatra</label>
-        <select v-model="nakshatraBoy" name="NakshatraValBoy">
-        <option disabled value="">Please select one</option>
-        <option value="1">{{nakshOp1B}}</option>
-        <option value="2">{{nakshOp2B}}</option>
-        <option value="3">{{nakshOp1B}}</option>
+        <select v-model="nakshatraBoy" name="NakshatraValBoy" class="card">
+        <option disabled value="0">Please select one</option>
+        <option value="1">{{nakBoy1}}</option>
+        <option value="2">{{nakBoy2}}</option>
+        <option value="3">{{nakBoy3}}</option>
         </select>
       </div>
       <div class="girl">
         <h1> Girl Details</h1>
-        <label class="label text-gray-600">Name</label><input type="text"><br>
+        <label class="label text-gray-600">Name</label><input class="card" type="text"><br>
         <label class="label text-gray-600">Rasi</label>
-        <select v-model="rasiGirl" name="RasiGirl" id="Rasi">
+        <select v-model="rasiGirl" @change="calcGirl()" class="card">
         <option disabled value="0">Please select one</option>
         <option value="1">Mesh</option>
         <option value="2">Vrishabha</option>
@@ -52,44 +52,104 @@
         </select>
         <br>
         <label class="label text-gray-600">Nakshatra</label>
-        <select v-model="nakshatraGirl" name="NakshatraValGirl">
+        <select v-model="nakshatraGirl" class="card">
         <option disabled value="">Please select one</option>
-        <option :value="1">{{nakshOp1G}}</option>
-        <option :value="2">{{nakshOp2G}}</option>
-        <option :value="3">{{nakshOp3G}}</option>
+        <option value="1">{{nakGirl1}}</option>
+        <option value="2">{{nakGirl2}}</option>
+        <option value="3">{{nakGirl3}}</option>
         </select>
       </div>
       </div>
       <button
-          v-on:click="calculate"
           class="button is-info m-2"
           type="button"
+          v-on:click="calculate()"
         >
           Calculate
         </button>
     </form>
+    <div v-if="valuesVisibility">
+        girl nashatra = {{resp.girl.nakshatra}}<br>
+        girl rasi = {{resp.girl.rasi}}<br>
+        boy nakshatra = {{resp.boy.nakshatra}}<br>
+        boy rasi = {{resp.boy.rasi}}<br>
+        kutas dina gained = {{resp.kutas.Dina.gained}}<br>
+        kutas dina max = {{resp.kutas.Dina.max}}<br>
+        kutas dina gained = {{resp.kutas.Dina.gained}}<br>
+        Nadi max= {{resp.kutas.Nadi.max}}<br>
+        Nadi gained = {{resp.kutas.Nadi.gained}}<br>
+        Rajju max= {{resp.kutas.Rajju.max}}<br>
+        Rajju gained = {{resp.kutas.Rajju.gained}}<br>
+        Rasi max= {{resp.kutas.Rasi.max}}<br>
+        Rasi gained = {{resp.kutas.Rasi.gained}}<br>
+        RasiAdhipathi max= {{resp.kutas.RasiAdhipathi.max}}<br>
+        RasiAdhipathi gained = {{resp.kutas.RasiAdhipathi.gained}}<br>
+        StreeDeergha max= {{resp.kutas.StreeDeergha.max}}<br>
+        StreeDeergha gained = {{resp.kutas.StreeDeergha.gained}}<br>
+        Varna max= {{resp.kutas.Varna.max}}<br>
+        Varna gained = {{resp.kutas.Varna.gained}}<br>
+        Vasya max= {{resp.kutas.Vasya.max}}<br>
+        Vasya gained = {{resp.kutas.Vasya.gained}}<br>
+        Vedha max= {{resp.kutas.Vedha.max}}<br>
+        Vedha gained = {{resp.kutas.Vedha.gained}}<br>
+        Yoni max= {{resp.kutas.Yoni.max}}<br>
+        Yoni gained = {{resp.kutas.Yoni.gained}}<br>
+    </div>
   </section>
 </template>
 
 <script lang="ts">
-import { Component, Emit, Vue } from 'nuxt-property-decorator'
-import { getCurrentPageUrl } from '../mixins/AppUtils'
-@Component({
-  components: {
-  }
-})
-export default class NakshatraVue extends Vue {
-  isLoading = false
+import { Vue, Component, Prop } from 'vue-property-decorator'
+import { getCurrentPageUrl } from '~/mixins/AppUtils'
 
-  nakshOp1G= 'pop'
-  nakshOp2G= 'p'
-  nakshOp3G= 'p'
-  /* @Prop()
-  nakshOp1B= 'p'
-  @Prop()
-  nakshOp2B= 'p'
-  @Prop()
-  nakshOp3B= 'p' */
+@Component
+export default class NakshatraVue extends Vue {
+  @Prop({ type: Object, required: true })
+  key1 = 0
+
+  @Prop({ type: Object, required: true })
+  key2 =0
+
+  @Prop({ type: Object, required: true })
+  rasiBoy = ''
+
+  @Prop({ type: Object, required: true })
+  rasiGirl = ''
+
+  @Prop({ type: Object, required: true })
+  nkb1 = ''
+
+  @Prop({ type: Object, required: true })
+  nkb2 = ''
+
+  @Prop({ type: Object, required: true })
+  nkb3 = ''
+
+  @Prop({ type: Object, required: true })
+  nkg1 = ''
+
+  @Prop({ type: Object, required: true })
+  nkg2 = ''
+
+  @Prop({ type: Object, required: true })
+  nkg3 = ''
+
+  @Prop({ type: Object, required: true })
+  nakshatraGirl = ''
+
+  @Prop({ type: Object, required: true })
+  nakshatraBoy = ''
+
+  @Prop({ type: Object, required: true })
+  resp = {
+    value: true
+  }
+
+  @Prop({ type: Object, required: true })
+  nakshatraFinal = 'p'
+
+  @Prop({ type: Boolean, required: true })
+  valuesVisibility = false
 
   head () {
     return {
@@ -101,216 +161,184 @@ export default class NakshatraVue extends Vue {
     }
   }
 
-  @Emit('change')
-  isAshwini () {
-    return this.rasiBoy === '1'
-  }
-
-  rasiBoy=''
-
-  rasiGirl=''
-
-  nakshatraBoy=''
-
-  nakshatraGirl=''
-
-  data () {
+  calcBoy () {
     if (this.rasiBoy === '1') {
-      return {
-        rasiBoy: '0',
-        nakshOp1B: 'Ashwini',
-        nakshOp2B: 'Bharani',
-        nakshOp3B: 'Kirthika'
-      }
+      this.nkb1 = 'Ashwini'
+      this.nkb2 = 'Bharani'
+      this.nkb3 = 'Kirthika'
     } else if (this.rasiBoy === '2') {
-      return {
-        rasiBoy: '0',
-        nakshOp1B: 'Ashwini',
-        nakshOp2B: 'Rohini',
-        nakshOp3B: 'Mrigasira'
-      }
+      this.nkb1 = 'Kirthika'
+      this.nkb2 = 'Rohini'
+      this.nkb3 = 'Mrigasira'
     } else if (this.rasiBoy === '3') {
-      return {
-        rasiBoy: '0',
-        nakshOp1B: 'Mrigsira',
-        nakshOp2B: 'Ardra',
-        nakshOp3B: 'Punarvasu'
-      }
+      this.nkb1 = 'Mrigsira'
+      this.nkb2 = 'Ardra'
+      this.nkb3 = 'Punarvasu'
     } else if (this.rasiBoy === '4') {
-      return {
-        rasiBoy: '0',
-        nakshOp1B: 'Punarvasu',
-        nakshOp2B: 'Pushyami',
-        nakshOp3B: 'Ashlesha'
-      }
+      this.nkb1 = 'Punarvasu'
+      this.nkb2 = 'Pushyami'
+      this.nkb3 = 'Ashlesha'
     } else if (this.rasiBoy === '5') {
-      return {
-        rasiBoy: '0',
-        nakshOp1B: 'Magha',
-        nakshOp2B: 'Purva Phalguni',
-        nakshOp3B: 'Uttra Phalguni'
-      }
-    } else {
-      return {
-        rasiBoy: '0',
-        nakshOp1B: '',
-        nakshOp2B: '',
-        nakshOp3B: ''
-      }
+      this.nkb1 = 'Magha'
+      this.nkb2 = 'Purva Phalguni'
+      this.nkb3 = 'Uttra Phalguni'
+    } else if (this.rasiBoy === '6') {
+      this.nkb1 = 'Uttra Phalguni'
+      this.nkb2 = 'Hastra'
+      this.nkb3 = 'Chitra'
+    } else if (this.rasiBoy === '7') {
+      this.nkb1 = 'Chitra'
+      this.nkb2 = 'Swathi'
+      this.nkb3 = 'Vishakha'
+    } else if (this.rasiBoy === '8') {
+      this.nkb1 = 'Vishakha'
+      this.nkb2 = 'Anuradha'
+      this.nkb3 = 'Jyestha'
+    } else if (this.rasiBoy === '9') {
+      this.nkb1 = 'Moola'
+      this.nkb2 = 'Purva Ashadha'
+      this.nkb3 = 'Uttra Ashadha'
+    } else if (this.rasiBoy === '10') {
+      this.nkb1 = 'Uttra Ashadha'
+      this.nkb2 = 'Shravana'
+      this.nkb3 = 'Dhanishta'
+    } else if (this.rasiBoy === '11') {
+      this.nkb1 = 'Dhanishta'
+      this.nkb2 = 'Shatabhisha'
+      this.nkb3 = 'Purva Bhadrapada'
+    } else if (this.rasiBoy === '12') {
+      this.nkb1 = 'Purva Bhadrapada'
+      this.nkb2 = 'Uttra Bhadrapada'
+      this.nkb3 = 'Revathi'
     }
-    /*  if (this.rasiBoy === '6') {
-      this.nakshboy[0] = 'Uttra Phalguni'
-      this.nakshboy[1] = 'Hastra'
-      this.nakshboy[2] = 'Chitra'
-    }
-    if (this.rasiBoy === '7') {
-      this.nakshboy[0] = 'Chitra'
-      this.nakshboy[1] = 'Swathi'
-      this.nakshboy[2] = 'Vishakha'
-    }
-    if (this.rasiBoy === '8') {
-      this.nakshboy[0] = 'Vishakha'
-      this.nakshboy[1] = 'Anuradha'
-      this.nakshboy[2] = 'Jyestha'
-    }
-    if (this.rasiBoy === '9') {
-      this.nakshboy[0] = 'Molla'
-      this.nakshboy[1] = 'Purva Ashadha'
-      this.nakshboy[2] = 'Uttra Ashdha'
-    }
-    if (this.rasiBoy === '10') {
-      this.nakshboy[0] = 'Uttra Ashdha'
-      this.nakshboy[1] = 'Shravana'
-      this.nakshboy[2] = 'Dhanishta'
-    }
-    if (this.rasiBoy === '11') {
-      this.nakshboy[0] = 'Dhanishta'
-      this.nakshboy[1] = 'Shatabhisha'
-      this.nakshboy[2] = 'Purva Bhadrapada'
-    }
-    if (this.rasiBoy === '12') {
-      this.nakshboy[0] = 'Purva Bhadrapada'
-      this.nakshboy[1] = 'Uttra Bhadrapada'
-      this.nakshboy[2] = 'Revathi'
-    }
-    console.log(this.nakshOp1B)
-    console.log(this.nakshOp2B)
-    console.log(this.nakshOp3B)
-    */
   }
 
-  /*   get eleboy1 () {
-    return this.nakshboy[0]
+  get nakBoy1 (): string {
+    return `${this.nkb1}`
   }
 
-  get eleboy2 () {
-    return this.nakshboy[1]
+  get nakBoy2 (): string {
+    return `${this.nkb2}`
   }
 
-  get eleboy3 () {
-    return this.nakshboy[2]
+  get nakBoy3 (): string {
+    return `${this.nkb3}`
   }
 
-  @Emit('change')
-  getnakB1 () {
-    return this.nakshOp1B
-  }
-
-  @Emit('change')
-  getnakB2 () {
-    return this.nakshOp2B
-  }
-
-  @Emit('change')
-  getnakB3 () {
-    return this.nakshOp3B
-  }
-  */
-
-  calcgirl () {
-    console.log(this.rasiGirl)
-    /* Vue.set(this.nakshgirl, this.nakshgirl[1], 'startUpdating')
+  calcGirl () {
     if (this.rasiGirl === '1') {
-      this.nakshOp1G = 'Ashwini'
-      this.nakshOp2G = 'Bharani'
-      this.nakshOp3G = 'Kirthika'
+      this.nkg1 = 'Ashwini'
+      this.nkg2 = 'Bharani'
+      this.nkg3 = 'Kirthika'
+    } else if (this.rasiGirl === '2') {
+      this.nkg1 = 'Kirthika'
+      this.nkg2 = 'Rohini'
+      this.nkg3 = 'Mrigasira'
+    } else if (this.rasiGirl === '3') {
+      this.nkg1 = 'Mrigsira'
+      this.nkg2 = 'Ardra'
+      this.nkg3 = 'Punarvasu'
+    } else if (this.rasiGirl === '4') {
+      this.nkg1 = 'Punarvasu'
+      this.nkg2 = 'Pushyami'
+      this.nkg3 = 'Ashlesha'
+    } else if (this.rasiGirl === '5') {
+      this.nkg1 = 'Magha'
+      this.nkg2 = 'Purva Phalguni'
+      this.nkg3 = 'Uttra Phalguni'
+    } else if (this.rasiGirl === '6') {
+      this.nkg1 = 'Uttra Phalguni'
+      this.nkg2 = 'Hastra'
+      this.nkg3 = 'Chitra'
+    } else if (this.rasiGirl === '7') {
+      this.nkg1 = 'Chitra'
+      this.nkg2 = 'Swathi'
+      this.nkg3 = 'Vishakha'
+    } else if (this.rasiGirl === '8') {
+      this.nkg1 = 'Vishakha'
+      this.nkg2 = 'Anuradha'
+      this.nkg3 = 'Jyestha'
+    } else if (this.rasiGirl === '9') {
+      this.nkg1 = 'Moola'
+      this.nkg2 = 'Purva Ashadha'
+      this.nkg3 = 'Uttra Ashdha'
+    } else if (this.rasiGirl === '10') {
+      this.nkg1 = 'Uttra Ashadha'
+      this.nkg2 = 'Shravana'
+      this.nkg3 = 'Dhanishta'
+    } else if (this.rasiGirl === '11') {
+      this.nkg1 = 'Dhanishta'
+      this.nkg2 = 'Shatabhisha'
+      this.nkg3 = 'Purva Bhadrapada'
+    } else if (this.rasiGirl === '12') {
+      this.nkg1 = 'Purva Bhadrapada'
+      this.nkg2 = 'Uttra Bhadrapada'
+      this.nkg3 = 'Revathi'
     }
-    if (this.rasiGirl === '2') {
-      this.nakshOp1G = 'Kirthika'
-      this.nakshOp2G = 'Rohini'
-      this.nakshOp3G = 'Mrigasira'
-    }
-    if (this.rasiGirl === '3') {
-      this.nakshOp1G = 'Mrigsira'
-      this.nakshOp2G = 'Ardra'
-      this.nakshOp3G = 'Punarvasu'
-    }
-    if (this.rasiGirl === '4') {
-      this.nakshOp1G = 'Punarvasu'
-      this.nakshOp2G = 'Pushyami'
-      this.nakshOp3G = 'Ashlesha'
-    }
-    if (this.rasiGirl === '5') {
-      this.nakshgirl[0] = 'Magha'
-      this.nakshgirl[1] = 'Purva Phalguni'
-      this.nakshgirl[2] = 'Uttra Phalguni'
-    }
-    if (this.rasiGirl === '6') {
-      this.nakshgirl[0] = 'Uttra Phalguni'
-      this.nakshgirl[1] = 'Hastra'
-      this.nakshgirl[2] = 'Chitra'
-    }
-    if (this.rasiGirl === '7') {
-      this.nakshgirl[0] = 'Chitra'
-      this.nakshgirl[1] = 'Swathi'
-      this.nakshgirl[2] = 'Vishakha'
-    }
-    if (this.rasiGirl === '8') {
-      this.nakshgirl[0] = 'Vishakha'
-      this.nakshgirl[1] = 'Anuradha'
-      this.nakshgirl[2] = 'Jyestha'
-    }
-    if (this.rasiGirl === '9') {
-      this.nakshgirl[0] = 'Molla'
-      this.nakshgirl[1] = 'Purva Ashadha'
-      this.nakshgirl[2] = 'Uttra Ashdha'
-    }
-    if (this.rasiGirl === '10') {
-      this.nakshgirl[0] = 'Uttra Ashdha'
-      this.nakshgirl[1] = 'Shravana'
-      this.nakshgirl[2] = 'Dhanishta'
-    }
-    if (this.rasiGirl === '11') {
-      this.nakshgirl[0] = 'Dhanishta'
-      this.nakshgirl[1] = 'Shatabhisha'
-      this.nakshgirl[2] = 'Purva Bhadrapada'
-    }
-    if (this.rasiGirl === '12') {
-      this.nakshgirl[0] = 'Purva Bhadrapada'
-      this.nakshgirl[1] = 'Uttra Bhadrapada'
-      this.nakshgirl[2] = 'Revathi'
-    }
-    */
   }
 
-  get elegirl1 () {
-    return this.nakshgirl[0]
+  get nakGirl1 (): string {
+    return `${this.nkg1}`
   }
 
-  get elegirl2 () {
-    return this.nakshgirl[1]
+  get nakGirl2 (): string {
+    return `${this.nkg2}`
   }
 
-  get elegirl3 () {
-    return this.nakshgirl[2]
+  get nakGirl3 (): string {
+    return `${this.nkg3}`
   }
 
-  nakshboy=['', '', '']
+  calculate () {
+    this.fetchData()
+  }
 
-  nakshgirl=['', '', '']
+  nakshatraNum (val1: string, val2: string) {
+    /* return ((parseInt(val1) - 1) * 3) + parseInt(val2) */
+    let val = 1
+    if (parseInt(val1) === 1) {
+      val = 0
+    } else if (parseInt(val1) <= 4) {
+      val = (parseInt(val1) - 1) * 2
+    } else if (parseInt(val1) === 5) {
+      val = 9
+    } else if (parseInt(val1) <= 8) {
+      val = 9 + (parseInt(val1) - 5) * 2
+    } else if (parseInt(val1) === 9) {
+      val = 18
+    } else {
+      val = 18 + (parseInt(val1) - 9) * 2
+    }
+    return val + parseInt(val2)
+  }
+
+  async fetchData () {
+    const body = {
+      boy: {
+        rasiNum: parseInt(this.rasiBoy),
+        nakshatraNum: this.nakshatraNum(this.rasiBoy, this.nakshatraBoy)
+      },
+      girl: {
+        rasiNum: parseInt(this.rasiGirl),
+        nakshatraNum: this.nakshatraNum(this.rasiGirl, this.nakshatraGirl)
+      }
+    }
+    const resp = await this.$axios.$post('https://api.innovativeastrosolutions.com/v0/compatibility', body)
+    console.log(body)
+    console.log(resp)
+    this.allocate(resp)
+    this.valuesVisibility = true
+  }
+
+  allocate (resp: any) {
+    this.resp = resp
+  }
+
+  get valuesVisible (): boolean {
+    return !!`${this.valuesVisibility}`
+  }
 }
 </script>
-
 <style scoped>
 
 .planet-pos {
@@ -323,7 +351,6 @@ h1 {
 
 .form-inputs {
     max-width: 30rem;
-    border: 1px solid black;
     display: flex;
     align-items: stretch;
 }
@@ -340,15 +367,6 @@ h1 {
     width: 50%;
 }
 
-select {
-    border: 1px solid black;
-    background-color: cornsilk;
-}
-
-input {
-    border: 1px solid black;
-    background-color: cornsilk;
-}
 button {
     align-items: center;
 }
