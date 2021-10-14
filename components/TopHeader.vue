@@ -31,7 +31,7 @@
             </li>
             <li :class="isMenuActive('nakshatra')">
               <nuxt-link to="/nakshatra">
-                Nakshatra
+                Nakshatra compatibility
               </nuxt-link>
             </li>
             <li :class="isMenuActive('panchang')">

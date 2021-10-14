@@ -1,13 +1,12 @@
 <template>
   <section class="center">
     <b-loading :active.sync="isLoading" />
-    <form class="nakshatra-form">
-      <div class="form-inputs max-w-xl card p-4 mt-10 self-center">
+    <form class="nakshatra-form p-4 mt-10 mb-10 max-w-xl card center is-align-content-center">
+      <div class="form-inputs content">
       <div class="boy">
         <h1> Boy Details</h1>
-        <label class="label text-gray-600">Name</label><input class="card" type="text"><br>
         <label class="label text-gray-600">Rasi</label>
-        <select v-model="rasiBoy" @change="calcBoy()" class="rasiBoy card">
+        <select v-model="rasiBoy" @change="calcBoy()" class="rasiBoy card mb-5">
         <option disabled value="0">Please select one</option>
         <option value="1">Mesh</option>
         <option value="2">Vrishabha</option>
@@ -24,18 +23,16 @@
         </select>
         <br>
         <label class="label text-gray-600">Nakshatra</label>
-        <select v-model="nakshatraBoy" name="NakshatraValBoy" class="card">
-        <option disabled value="0">Please select one</option>
+        <select v-model="nakshatraBoy" name="NakshatraValBoy" @change="shouldDisable()" class="card">
         <option value="1">{{nakBoy1}}</option>
         <option value="2">{{nakBoy2}}</option>
         <option value="3">{{nakBoy3}}</option>
         </select>
       </div>
-      <div class="girl">
+      <div class="girl is-align-content-center">
         <h1> Girl Details</h1>
-        <label class="label text-gray-600">Name</label><input class="card" type="text"><br>
         <label class="label text-gray-600">Rasi</label>
-        <select v-model="rasiGirl" @change="calcGirl()" class="card">
+        <select v-model="rasiGirl" @change="calcGirl()" class="card mb-5">
         <option disabled value="0">Please select one</option>
         <option value="1">Mesh</option>
         <option value="2">Vrishabha</option>
@@ -52,8 +49,7 @@
         </select>
         <br>
         <label class="label text-gray-600">Nakshatra</label>
-        <select v-model="nakshatraGirl" class="card">
-        <option disabled value="">Please select one</option>
+        <select v-model="nakshatraGirl" @change="shouldDisable()" class="card">
         <option value="1">{{nakGirl1}}</option>
         <option value="2">{{nakGirl2}}</option>
         <option value="3">{{nakGirl3}}</option>
@@ -64,36 +60,35 @@
           class="button is-info m-2"
           type="button"
           v-on:click="calculate()"
+          :disabled="!allset"
         >
           Calculate
         </button>
     </form>
-    <div v-if="valuesVisibility">
-        girl nashatra = {{resp.girl.nakshatra}}<br>
-        girl rasi = {{resp.girl.rasi}}<br>
-        boy nakshatra = {{resp.boy.nakshatra}}<br>
-        boy rasi = {{resp.boy.rasi}}<br>
-        kutas dina gained = {{resp.kutas.Dina.gained}}<br>
-        kutas dina max = {{resp.kutas.Dina.max}}<br>
-        kutas dina gained = {{resp.kutas.Dina.gained}}<br>
-        Nadi max= {{resp.kutas.Nadi.max}}<br>
-        Nadi gained = {{resp.kutas.Nadi.gained}}<br>
-        Rajju max= {{resp.kutas.Rajju.max}}<br>
-        Rajju gained = {{resp.kutas.Rajju.gained}}<br>
-        Rasi max= {{resp.kutas.Rasi.max}}<br>
-        Rasi gained = {{resp.kutas.Rasi.gained}}<br>
-        RasiAdhipathi max= {{resp.kutas.RasiAdhipathi.max}}<br>
-        RasiAdhipathi gained = {{resp.kutas.RasiAdhipathi.gained}}<br>
-        StreeDeergha max= {{resp.kutas.StreeDeergha.max}}<br>
-        StreeDeergha gained = {{resp.kutas.StreeDeergha.gained}}<br>
-        Varna max= {{resp.kutas.Varna.max}}<br>
-        Varna gained = {{resp.kutas.Varna.gained}}<br>
-        Vasya max= {{resp.kutas.Vasya.max}}<br>
-        Vasya gained = {{resp.kutas.Vasya.gained}}<br>
-        Vedha max= {{resp.kutas.Vedha.max}}<br>
-        Vedha gained = {{resp.kutas.Vedha.gained}}<br>
-        Yoni max= {{resp.kutas.Yoni.max}}<br>
-        Yoni gained = {{resp.kutas.Yoni.gained}}<br>
+    <div v-if="valuesVisibility" class="p-4 mt-10 mb-10 content max-w-xl">
+        <table class="table is-striped is-bordered is-hoverable card">
+            <tr class="bg-green-400 text-gray-900">
+                <th>Kutas</th>
+                <th>Gained</th>
+                <th>Max</th>
+            </tr>
+            <tr v-for="(value, propertyName,index) in resp.kutas" :key="index">
+               <td>{{propertyName}}</td>
+               <td>{{value.gained}}</td>
+               <td>{{value.max}}</td>
+            </tr>
+            <tr class="has-text-weight-bold">
+                <td>Total</td>
+                <td>{{resp.totalKutasGained.gained}}</td>
+                <td>{{resp.totalKutasGained.max}}</td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                Important Note: The star matching is just the first step, don't assume that only star matching is sufficient and fail to check the
+                 overall horoscope for other factors(childbirth, happy family life, divorce possibilities, progeny, financial status, etc).
+                </td>
+            </tr>
+        </table>
     </div>
   </section>
 </template>
@@ -105,16 +100,10 @@ import { getCurrentPageUrl } from '~/mixins/AppUtils'
 @Component
 export default class NakshatraVue extends Vue {
   @Prop({ type: Object, required: true })
-  key1 = 0
+  rasiBoy = '0'
 
   @Prop({ type: Object, required: true })
-  key2 =0
-
-  @Prop({ type: Object, required: true })
-  rasiBoy = ''
-
-  @Prop({ type: Object, required: true })
-  rasiGirl = ''
+  rasiGirl = '0'
 
   @Prop({ type: Object, required: true })
   nkb1 = ''
@@ -135,10 +124,10 @@ export default class NakshatraVue extends Vue {
   nkg3 = ''
 
   @Prop({ type: Object, required: true })
-  nakshatraGirl = ''
+  nakshatraGirl = '1'
 
   @Prop({ type: Object, required: true })
-  nakshatraBoy = ''
+  nakshatraBoy = '1'
 
   @Prop({ type: Object, required: true })
   resp = {
@@ -150,6 +139,12 @@ export default class NakshatraVue extends Vue {
 
   @Prop({ type: Boolean, required: true })
   valuesVisibility = false
+
+  @Prop({ type: Object, required: true })
+  allset = false
+
+  @Prop({ type: Object, required: true })
+  isLoading = false
 
   head () {
     return {
@@ -211,6 +206,7 @@ export default class NakshatraVue extends Vue {
       this.nkb2 = 'Uttra Bhadrapada'
       this.nkb3 = 'Revathi'
     }
+    this.shouldDisable()
   }
 
   get nakBoy1 (): string {
@@ -275,6 +271,15 @@ export default class NakshatraVue extends Vue {
       this.nkg2 = 'Uttra Bhadrapada'
       this.nkg3 = 'Revathi'
     }
+    this.shouldDisable()
+  }
+
+  shouldDisable () {
+    if (this.rasiBoy !== '0' && this.rasiGirl !== '0') {
+      this.allset = true
+    } else {
+      this.allset = false
+    }
   }
 
   get nakGirl1 (): string {
@@ -313,6 +318,7 @@ export default class NakshatraVue extends Vue {
   }
 
   async fetchData () {
+    this.isLoading = true
     const body = {
       boy: {
         rasiNum: parseInt(this.rasiBoy),
@@ -328,6 +334,7 @@ export default class NakshatraVue extends Vue {
     console.log(resp)
     this.allocate(resp)
     this.valuesVisibility = true
+    this.isLoading = false
   }
 
   allocate (resp: any) {
@@ -350,7 +357,6 @@ h1 {
 }
 
 .form-inputs {
-    max-width: 30rem;
     display: flex;
     align-items: stretch;
 }
