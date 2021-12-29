@@ -1,6 +1,30 @@
 <template>
   <section class="content">
     <section class="hero card">
+        <img class="1stProduct image p-4" src="@/assets/1stCourse.png" alt="fundamentals-of-vedic-astrology-beginner-to-intermediate">
+        <div class="container.is-widescreen">
+        <a class="buy-button button is-info m-2 " href="https://www.udemy.com/course/fundamentals-of-vedic-astrology-beginner-to-intermediate/?referralCode=1A32186812D5F72E7911" target="_blank">
+          Buy
+        </a>
+        </div>
+        <img class="1stProduct image p-4 has-background-info-light" src="@/assets/2ndCourse.png" alt="fundamentals-of-vedic-astrology-in-tamil-beginner-level">
+        <div class="container.is-widescreen">
+        <a class="buy-button button is-info m-2" href="https://www.udemy.com/course/fundamentals-of-vedic-astrology-in-tamil-beginner-level/?referralCode=EF0B756A12DDD9899952" target="_blank">
+          Buy
+        </a>
+        </div>
+        <img class="1stProduct image" src="@/assets/3rdCourse.png" alt="astrological-study-of-modern-careers">
+        <div class="container.is-widescreen">
+        <a class="buy-button button is-info m-2" href="https://www.udemy.com/course/astrological-study-of-modern-careers/?referralCode=630B5DB3EB2F60B9AB0C" target="_blank">
+          Buy
+        </a>
+        </div>
+        <img class="1stProduct image" src="@/assets/4thCourse.png" alt="astrological-study-of-modern-careers-in-tamil">
+        <div class="container.is-widescreen">
+        <a class="buy-button button is-info m-2" href="https://www.udemy.com/course/astrological-study-of-modern-careers-in-tamil/?referralCode=E8B398D188F7FAA8132D" target="_blank">
+          Buy
+        </a>
+        </div>
       <div class="hero-body bg-green-500 text-gray-900">
         <div class="container">
           <blockquote class="text-xl font-bold italic p-5">
@@ -177,6 +201,9 @@ export default class extends Vue {
 </script>
 
 <style scoped>
+img {
+  width: 100%;
+}
 
 .course-body {
   background-color: #4A586F;
@@ -234,6 +261,9 @@ h3 {
 
 .check-list li:before {
   content: "\274F    ";
+}
+.buy-button{
+  margin-left: 48%;
 }
 
 </style>

@@ -29,6 +29,11 @@
                 Ephemeris
               </nuxt-link>
             </li>
+            <li :class="isMenuActive('nakshatra')">
+              <nuxt-link to="/nakshatra">
+                Nakshatra compatibility
+              </nuxt-link>
+            </li>
             <li :class="isMenuActive('panchang')">
               <nuxt-link to="/panchang">
                 Panchang
